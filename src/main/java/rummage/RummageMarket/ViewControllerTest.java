@@ -16,5 +16,10 @@ public class ViewControllerTest {
 		return "auth/signin";
 	}
 	
+	@GetMapping("/post/upload")
+	public String upload() {
+		return "post/upload";
+	}
+	
 	// test
 }
