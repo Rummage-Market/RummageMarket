@@ -1,9 +1,10 @@
 package rummage.RummageMarket.Service;
 
-import javax.transaction.Transactional;
+
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Domain.User.User;
