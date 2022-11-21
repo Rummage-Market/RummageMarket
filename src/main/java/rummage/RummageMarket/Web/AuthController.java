@@ -49,8 +49,7 @@ public class AuthController {
 				System.out.println(error.getDefaultMessage());
 				System.out.println("=================================");
 			}
-			
-			return "오류터짐";
+			throw new RuntimeException("유효성검사 실패!");
 		} else {
 			log.info(signupDto.toString());
 			User user = signupDto.toEntity();
