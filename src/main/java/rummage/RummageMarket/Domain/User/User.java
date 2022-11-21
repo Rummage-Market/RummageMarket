@@ -33,7 +33,7 @@ public class User {
 	
 	private LocalDateTime createDate;
 	
-	@PrePersist // DB에 insert 되기 직전에 실행, 나중에 DB에 값을 넣을 때 위에 값만 넣어주면 createDate는 자동으로 들어감.
+	@PrePersist
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
