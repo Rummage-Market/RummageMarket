@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Domain.User.User;
+import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 import rummage.RummageMarket.Service.AuthService;
 import rummage.RummageMarket.Web.Dto.Auth.SignupDto;
 
@@ -49,7 +50,7 @@ public class AuthController {
 				System.out.println(error.getDefaultMessage());
 				System.out.println("=================================");
 			}
-			throw new RuntimeException("유효성검사 실패!");
+			throw new CustomValidationException("유효성검사 실패!", errorMap);
 		} else {
 			log.info(signupDto.toString());
 			User user = signupDto.toEntity();
