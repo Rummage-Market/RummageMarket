@@ -17,17 +17,22 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data // Getter, Setter
-@Entity // DB에 테이블을 생성
+@Data
+@Entity
 public class User {
+	
+	// 전처리는 Validation(유효성 검사)을 체크
+	// 후처리는 exceptionhandler로 처리
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(unique=true)
+	@Column(nullable = false, length=30, unique = true)
 	private String username;
+	@Column(nullable = false)
 	private String password;
+	@Column(nullable = false)
 	private String nickname;
 	private String bio;
 	private String email;
