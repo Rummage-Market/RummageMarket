@@ -62,10 +62,24 @@
   align-items: center;
 }
 
+/*업로드 폼*/
+.upload .upload-form .upload-form-detailform {
+  flex-direction: column;
+  align-items: center;
+}
+
 /*업로드 인풋*/
 .upload .upload-form input[type="file"] {
   margin: 30px 0;
   text-align: left;
+}upload-form-detail-si
+
+/*테스트*/
+.upload .upload-form .upload-form-detail .upload-form-detail-si{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  heigt: 80px
 }
 
 /*업로드 이미지 박스*/
@@ -83,6 +97,13 @@
 
 /*이미지에 대한 설명박스*/
 .upload .upload-form .upload-form-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*이미지에 대한 설명박스*/
+.upload .upload-form .upload-form-more-detail {
   display: flex;
   flex-direction: column;
   align-items: center;
