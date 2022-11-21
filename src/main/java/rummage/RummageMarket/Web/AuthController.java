@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Domain.User.User;
@@ -27,6 +28,11 @@ public class AuthController {
 	private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 	
 	private final AuthService authService;
+	
+	@GetMapping("/")
+	public @ResponseBody String main() {
+		return "로그인 잘되었는지 테스트!";
+	}
 
 	@GetMapping("/auth/signin")
 	public String signinForm() {

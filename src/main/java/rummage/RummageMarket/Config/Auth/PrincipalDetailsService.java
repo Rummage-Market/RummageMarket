@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import rummage.RummageMarket.Domain.User.User;
 import rummage.RummageMarket.Domain.User.UserRepository;
 
 @RequiredArgsConstructor
@@ -17,8 +18,15 @@ public class PrincipalDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// password는 시큐리티가 비교
+		// 리턴이 잘되면 자동으로 세션을 만듬 -> UserDetails로 리턴해야된다.
 		
-		return null;
+		User userEntity = userRepository.findByUsername(username);
+		
+		if(userEntity == null) {
+			return null;
+		} else {
+			return new PrincipalDetails(userEntity);
+		}
 	}
 
 }
