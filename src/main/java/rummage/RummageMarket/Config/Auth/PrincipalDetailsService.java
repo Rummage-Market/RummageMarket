@@ -16,6 +16,7 @@ public class PrincipalDetailsService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// password는 시큐리티가 비교
 		
 		return null;
 	}
