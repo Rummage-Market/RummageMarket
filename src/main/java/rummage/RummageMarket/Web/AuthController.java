@@ -7,13 +7,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Domain.User.User;
+import rummage.RummageMarket.Service.AuthService;
 import rummage.RummageMarket.Web.Dto.Auth.SignupDto;
 
+@RequiredArgsConstructor
 @Controller
 public class AuthController {
 	
 	private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+	
+	private final AuthService authService;
 
 	@GetMapping("/auth/signin")
 	public String signinForm() {
