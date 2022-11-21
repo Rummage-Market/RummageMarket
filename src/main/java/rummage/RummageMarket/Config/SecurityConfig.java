@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 			.formLogin()
 			.loginPage("/auth/signin")
-			.loginProcessingUrl("/auth/signin")
+			.loginProcessingUrl("/auth/signin") // 로그인 요청인지 아닌지 판단 -> 로그인 요청이면 UserDetailsService가 낚아챔.
 			.defaultSuccessUrl("/");
 	}
 }
