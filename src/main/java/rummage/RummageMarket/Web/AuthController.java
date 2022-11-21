@@ -35,6 +35,8 @@ public class AuthController {
 		log.info(signupDto.toString());
 		User user = signupDto.toEntity();
 		log.info(user.toString());
+		User userEntity = authService.signUp(user);
+		log.info(userEntity.toString());
 		return "auth/signin";
 	}
 }
