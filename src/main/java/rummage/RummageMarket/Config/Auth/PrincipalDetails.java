@@ -1,5 +1,6 @@
 package rummage.RummageMarket.Config.Auth;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +22,9 @@ public class PrincipalDetails implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		Collection<GrantedAuthority> collector = new ArrayList<>();
+		collector.add(() -> {return user.getRole();});
+		return collector;
 	}
 
 	@Override

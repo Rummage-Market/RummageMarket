@@ -37,6 +37,7 @@ public class User {
 	private String bio;
 	private String email;
 	private String profileImage;
+	private String role;
 	
 	private LocalDateTime createDate;
 	
