@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  outline: none;
+  font-family: 'Gowun Batang', serif;
+}
+
+.container {
+  width: 100%;
+  min-height: 100%;
+}
+
+.loginMain {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(var(--b3f, 250, 250, 250), 1);
+}
+
+button {
+  cursor: pointer;
+}
+
+.login {
+  width: 100%;
+  max-width: 935px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__form__container {
+  width: 350px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login__form,
+.login__register {
+  padding: 10px 0 20px;
+  text-align: center;
+  border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  background-color: #fff;
+}
+
+.login__form h1 {
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Caveat', cursive;
+  font-size: 33px;
+}
+
+.login__form h1 img {
+  width: 175px;
+}
+
+.login__input input {
+  display: block;
+}
+
+.login__input input[type="text"],
+.login__input input[type="password"] {
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  width: 319px;
+  nnnheight: 40px;
+  text-align: center;
+  margin: 20px auto;
+  background: #efefef;
+  border: 0;
+  border-radius: 11px;
+  outline: none;
+}
+
+.login__input input[type="text"]:focus,
+.login__input input[type="password"]:focus {
+  border-color: black;
+  box-shadow: 0 0 0 1.2px black;
+}
+
+.login__input input::placeholder {
+  font-family: 'Gowun Batang', serif;
+}
+
+.login__input button {
+  font-family: Montserrat;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 0px;
+  margin-left: 5px;
+  margin-top: 20px;
+  padding: 10px;
+  width: 319px;
+  height: 40px;
+  background-color: #2f2d2d;
+  border-radius: 11px;
+  border: 0;
+  color: white;
+}
+
+.login__horizon {
+  display: flex;
+  margin-top: 20px;
+  padding: 0 40px;
+  align-items: center;
+}
+
+.login__horizon .br {
+  width: 40%;
+  height: 1px;
+  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+}
+
+.login__horizon .or {
+  width: 20%;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+}
+
+
+.login__facebook {
+  padding: 0 40px;
+  margin-top: 15px;
+}
+
+.login__facebook button {
+  background-color: #fff;
+  width: 100%;
+  height: 30px;
+  border: 0;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.login__facebook button i,
+span {
+  color: #385185;
+}
+
+.login__register {
+  margin-top: 10px;
+  line-height: 60px;
+  padding: 0;
+}
+
+.login__register span {
+  font-size: 14px;
+  font-weight: 200;
+}
+
+.login__register a {
+    font-size: 16px;
+  	text-decoration: none;
+  	color: #000000;
+}
+
