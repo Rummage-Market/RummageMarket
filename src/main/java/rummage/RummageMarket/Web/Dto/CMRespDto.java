@@ -1,7 +1,5 @@
 package rummage.RummageMarket.Web.Dto;
 
-import java.util.Map;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
