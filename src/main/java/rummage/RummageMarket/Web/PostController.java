@@ -7,23 +7,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
+import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 import rummage.RummageMarket.Service.PostService;
 import rummage.RummageMarket.Web.Dto.Post.PostUploadDto;
 
 @RequiredArgsConstructor
 @Controller
 public class PostController {
-	
+
 	@Autowired
 	PostService postService;
-	
+
 	@PostMapping("/post")
-	public String imageUpload(PostUploadDto postUploadDto,@AuthenticationPrincipal PrincipalDetails principalDetails) {
-				
-		//서비스 호출
+	public String imageUpload(PostUploadDto postUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+		if (postUploadDto.getFile().isEmpty()) {
+			throw new CustomValidationException("이미지는 반드시 첨부해주세요.", null);
+		}
+
 		postService.upload(postUploadDto, principalDetails);
-		
-		return "성공";
-//		return "redirect:/user/"+principalDetails.getUser().getId();
+
+		return "redirect:/user/" + principalDetails.getUser().getId();
 	}
 }
