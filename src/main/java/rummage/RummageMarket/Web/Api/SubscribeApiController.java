@@ -8,16 +8,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
-import rummage.RummageMarket.Service.SubScribeService;
+import rummage.RummageMarket.Service.SubscribeService;
 import rummage.RummageMarket.Web.Dto.CMRespDto;
 
 @RestController
-public class SubScribeApiController {
+public class SubscribeApiController {
 	
 	@Autowired
-	SubScribeService subScribeService; 
+	SubscribeService subScribeService; 
 	
 	@PostMapping("/api/subscribe/{toUserId}")
 	public ResponseEntity<?> subscribe(@AuthenticationPrincipal PrincipalDetails principalDetails,@PathVariable int toUserId){

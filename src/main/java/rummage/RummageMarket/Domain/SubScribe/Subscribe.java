@@ -23,7 +23,7 @@ import rummage.RummageMarket.Domain.User.User;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(uniqueConstraints = { @UniqueConstraint(name = "subscribe_uk", columnNames = { "fromUserId", "toUserId" }) })
-public class SubScribe {
+public class Subscribe {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
