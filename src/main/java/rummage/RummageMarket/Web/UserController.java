@@ -23,4 +23,15 @@ public class UserController {
 		model.addAttribute("user",userEntity);
 		return "user/profile";
 	}
+  
+  @GetMapping("/user/profile")
+	public String profile() {
+		return "user/profile";
+	}
+ 
+	@GetMapping("/user/update")
+	public String update() {
+		return "user/update";
+	}
 }
+
