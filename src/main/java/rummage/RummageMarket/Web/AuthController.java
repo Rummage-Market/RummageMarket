@@ -30,8 +30,8 @@ public class AuthController {
 	private final AuthService authService;
 	
 	@GetMapping("/")
-	public @ResponseBody String main() {
-		return "로그인 잘되었는지 테스트!";
+	public String main() {
+		return "user/profile";
 	}
 
 	@GetMapping("/auth/signin")

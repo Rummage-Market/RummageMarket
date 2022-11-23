@@ -26,6 +26,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Gowun+Batang&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -33,18 +36,18 @@
 	<header class="header">
 		<div class="container">
 			<a href="/image/story" class="logo">
-				<img src="/images/logo.jpg" alt="">
+				<h1>RummageMarket</h1>
 			</a>
 			<nav class="navi">
 				<ul class="navi-list">
-					<li class="navi-item"><a href="/image/story">
-							<i class="fas fa-home"></i>
-						</a></li>
-					<li class="navi-item"><a href="/image/popular">
-							<i class="far fa-compass"></i>
+					<li class="navi-item"><a href="?">
+							<i class="fas fa-store"></i>
 						</a></li>
 					<li class="navi-item"><a href="/user/profile">
-							<i class="far fa-user"></i>
+							<i class="fas fa-user"></i>
+						</a></li>
+					<li class="navi-item"><a href="/logout">
+							<i class="fas fa-sign-out-alt"></i>
 						</a></li>
 				</ul>
 			</nav>
