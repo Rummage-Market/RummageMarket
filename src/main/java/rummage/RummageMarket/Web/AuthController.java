@@ -43,7 +43,7 @@ public class AuthController {
 	public String signupForm() {
 		return "auth/signup";
 	}
-	
+		
 	@PostMapping("/auth/signup")
 	public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {
 		
@@ -65,7 +65,5 @@ public class AuthController {
 			log.info(userEntity.toString());
 			return "auth/signin";
 		}
-		
-		
 	}
 }
