@@ -28,11 +28,6 @@ public class AuthController {
 	private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 	
 	private final AuthService authService;
-	
-	@GetMapping("/")
-	public String main() {
-		return "user/profile";
-	}
 
 	@GetMapping("/auth/signin")
 	public String signinForm() {
