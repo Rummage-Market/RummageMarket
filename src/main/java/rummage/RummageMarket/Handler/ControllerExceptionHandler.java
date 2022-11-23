@@ -1,11 +1,10 @@
 package rummage.RummageMarket.Handler;
 
-import java.util.Map;
-
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+import rummage.RummageMarket.Handler.Ex.CustomException;
 import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 import rummage.RummageMarket.Util.Script;
 
@@ -16,6 +15,11 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(CustomValidationException.class)
 	public String validationException(CustomValidationException e) {
 		return Script.back(e.getErrorMap().toString());
+	}
+	
+	@ExceptionHandler(CustomException.class)
+	public String exception(CustomException e) {
+		return Script.back(e.getMessage());
 	}
 
 }

@@ -23,7 +23,6 @@ public class PostController {
 		//서비스 호출
 		postService.upload(postUploadDto, principalDetails);
 		
-		return "성공";
-//		return "redirect:/user/"+principalDetails.getUser().getId();
+		return "redirect:/user/"+principalDetails.getUser().getId();
 	}
 }
