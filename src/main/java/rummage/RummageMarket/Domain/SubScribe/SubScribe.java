@@ -24,6 +24,7 @@ import rummage.RummageMarket.Domain.User.User;
 @AllArgsConstructor
 @Table(uniqueConstraints = { @UniqueConstraint(name = "subscribe_uk", columnNames = { "fromUserId", "toUserId" }) })
 public class SubScribe {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
