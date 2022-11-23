@@ -23,5 +23,4 @@ public class UserController {
 		model.addAttribute("user",userEntity);
 		return "user/profile";
 	}
-
 }
