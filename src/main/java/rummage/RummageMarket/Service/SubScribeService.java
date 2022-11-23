@@ -23,4 +23,14 @@ public class SubScribeService {
 		}
 		
 	}
+
+	@Transactional
+	public void unsubscribe(int fromUserId, int toUserId) {
+		try {
+			subScribeRepository.unsubscribe(fromUserId,toUserId);
+		} catch (Exception e) {
+			throw new CustomApiException("이미 구독한 상태입니다.");
+		}
+		
+	}
 }

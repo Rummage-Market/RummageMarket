@@ -10,4 +10,8 @@ public interface SubScribeRepository extends JpaRepository<SubScribe, Integer>{
 	@Query(value = "INSERT INTO subscribe(fromUserId,toUserId,createDate) VALUES(:fromUserId,:toUserId,now())", nativeQuery = true)
 	void subscribe(int fromUserId, int toUserId);
 
+	@Modifying
+	@Query(value = "DELETE FROM subscribe WHERE fromUserId = :fromUserId AND toUserId = :toUserId", nativeQuery = true)
+	void unsubscribe(int fromUserId, int toUserId);
+
 }
