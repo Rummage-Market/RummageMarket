@@ -26,10 +26,10 @@
 		<!--유저정보 및 사진등록 구독하기-->
 		<div class="profile-right">
 			<div class="name-group">
-				<h2>유저이름</h2>
+				<h2>${dto.user.nickname}</h2>
 
-				<button class="cta" onclick="location.href='/image/upload'">게시글 등록</button>
-				<button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+				<button class="cta" onclick="location.href='/post/upload'">게시글 등록</button>
+				<button class="cta" onclick="toggleSubscribe(this)">이웃맺기</button>
 				<button class="modi" onclick="popup('.modal-info')">
 					<i class="fas fa-user-cog"></i>
 				</button>
@@ -37,7 +37,7 @@
 
 			<div class="subscribe">
 				<ul>
-					<li><a href=""> <i class="fas fa-th-large"></i> <span>4</span>
+					<li><a href=""> <i class="fas fa-th-large"></i> <span>${dto.imageCount}</span>
 					</a></li>
 					<li><a href="javascript:subscribeInfoModalOpen();"> <i class="fas fa-users"> </i> <span>2</span>
 					</a></li>
@@ -63,57 +63,21 @@
 
 				<!--아이템들-->
 
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class="">
-							<div><h4><b>게시글제목</b></h4></div>
-						    <div><p>시 구 거래장소</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>					    
-						</a>
-					</div>
-				</div>
 				
+				<c:forEach var="post" items="${dto.user.posts}">
 				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
+					<a href=""> <img src="/upload/${post.imageUrl}" />
 					</a>
 					<div class="comment">
 						<a href="#" class="">
-							<div><h4><b>게시글제목</b></h4></div>
-						    <div><p>시 구 거래장소</p></div>
+							<div><h4><b>${post.title}</b></h4></div>
+						    <div><p>${post.address1} ${post.address2}</p></div>
 						    <i class="far fa-heart"></i><span>0</span>	
 						    <i class="far fa-comments"></i><span>0</span>					    
 						</a>
 					</div>
 				</div>
-				
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class="">
-							<div><h4><b>게시글제목</b></h4></div>
-						    <div><p>시 구 거래장소</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>					    
-						</a>
-					</div>
-				</div>
-				
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class="">
-							<div><h4><b>게시글제목</b></h4></div>
-						    <div><p>시 구 거래장소</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>					    
-						</a>
-					</div>
-				</div>
+				</c:forEach>
 
 				<!--아이템들end-->
 			</div>

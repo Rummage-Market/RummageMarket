@@ -14,4 +14,8 @@ import rummage.RummageMarket.Domain.User.User;
 @Data
 public class UserProfileDto {
 	private User user;
+	private boolean pageOwnerState;
+    private int imageCount;
+    private boolean subscribeState;
+    private int subscribeCount;
 }

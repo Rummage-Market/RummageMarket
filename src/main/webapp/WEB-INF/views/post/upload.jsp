@@ -17,7 +17,7 @@
 		<!--사진업로드 로고 end-->
 		<br>
 		<!--사진업로드 Form-->
-		<form class="upload-form">
+		<form class="upload-form" action="/post" method="post" enctype="multipart/form-data">
 			<input type="file" name="file" onchange="imageChoose(this)" />
 			<div class="upload-img">
 				<img src="/images/person.jpeg" alt="" id="imageUploadPreview" />
@@ -33,9 +33,9 @@
 			<br>
 			<div class="upload-form-detailform">
 				<div>거래할 지역을 선택해주세요</div>
-				<select name="addressRegion" id="addressRegion1"></select> <select
-					name="address1" id="address1"></select> <select name="address2"
-					id="address2"></select>
+				<select name="addressRegion" id="addressRegion1"></select> 
+				<select	name="address1" id="address1"></select> 
+				<select name="address2"	id="address2"></select>
 			</div>
 			<br>
 			<div class="upload-form-detail">

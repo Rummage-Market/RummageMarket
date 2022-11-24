@@ -3,6 +3,7 @@ package rummage.RummageMarket.Web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,13 @@ public class PostController {
 		}
 
 		postService.upload(postUploadDto, principalDetails);
+		System.out.println("controller 호출");
 
 		return "redirect:/user/" + principalDetails.getUser().getId();
+	}
+	
+	@GetMapping("/post/upload")
+	public String upload() {
+		return "post/upload";
 	}
 }
