@@ -1,5 +1,7 @@
 package rummage.RummageMarket.Web.Dto.Post;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -9,9 +11,17 @@ import rummage.RummageMarket.Domain.User.User;
 @Data
 public class PostUploadDto {
 	private MultipartFile file;
-	private String title; 
-	private String content; 
-	private String address1; 
+	
+	@NotBlank
+	private String title;
+	
+	@NotBlank
+	private String content;
+	
+	@NotBlank
+	private String address1;
+	
+	@NotBlank
 	private String address2; 
 	private String place; 
 	private String item; 
