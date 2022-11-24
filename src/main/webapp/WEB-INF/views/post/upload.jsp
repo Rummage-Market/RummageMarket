@@ -25,17 +25,17 @@
 
 			<!--사진설명 + 업로드버튼-->
 			<div class="upload-form-detail">
-				<input type="text" placeholder="제목" name="title"><input
-					type="text" placeholder="상품명" name="item"> <input
-					type="number" placeholder="가격" name="price"><input
-					type="text" placeholder="내용" name="content">
+				<input type="text" placeholder="제목" name="title" required="required"><input
+					type="text" placeholder="상품명" name="item" required="required"> <input
+					type="number" placeholder="가격" name="price" required="required"><input
+					type="text" placeholder="내용" name="content" required="required">
 			</div>
 			<br>
 			<div class="upload-form-detailform">
 				<div>거래할 지역을 선택해주세요</div>
-				<select name="addressRegion" id="addressRegion1"></select> 
-				<select	name="address1" id="address1"></select> 
-				<select name="address2"	id="address2"></select>
+				<select name="addressRegion" id="addressRegion1" required="required"></select> 
+				<select	name="address1" id="address1" required="required"></select> 
+				<select name="address2"	id="address2" required="required"></select>
 			</div>
 			<br>
 			<div class="upload-form-detail">
