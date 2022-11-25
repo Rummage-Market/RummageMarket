@@ -1,7 +1,6 @@
 
 function update(userId) {
-	event.preventDefault();
-	
+	event.preventDefault(); 
 	let data = $("#profileUpdate").serialize();
 	console.log(data);
 	$.ajax({
@@ -19,7 +18,7 @@ function update(userId) {
 		}else{
 			alert(JSON.stringify(error.responseJSON.data));
 		}
-	
+		
 	});
 	
 }

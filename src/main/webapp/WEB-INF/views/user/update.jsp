@@ -22,7 +22,7 @@
 			<!--프로필셋팅 아이디영역end-->
 
 			<!--프로필 수정-->
-			<form id="profileUpdate" onsubmit="update(${principal.user.id}, event)">
+			<form id="profileUpdate" onsubmit="update(${principal.user.id})">
 				<div class="content-item__01">
 					<div class="item__title">유저네임</div>
 					<div class="item__input">
@@ -39,7 +39,7 @@
 				<div class="content-item__03">
 					<div class="item__title">닉네임</div>
 					<div class="item__input">
-						<input type="text" name="name" placeholder="닉네임"
+						<input type="text" name="nickname" placeholder="닉네임"
 							value="${principal.user.nickname}" required="required"/>
 					</div>
 				</div>
@@ -53,7 +53,7 @@
 					<div class="item__title">이메일</div>
 					<div class="item__input">
 						<input type="text" name="email" placeholder="이메일"
-							value="${principal.user.email}" readonly="readonly" />
+							value="${principal.user.email}" />
 					</div>
 				</div>
 

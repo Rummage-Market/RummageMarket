@@ -1,6 +1,7 @@
 package rummage.RummageMarket.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +10,7 @@ import rummage.RummageMarket.Domain.User.User;
 import rummage.RummageMarket.Domain.User.UserRepository;
 import rummage.RummageMarket.Handler.Ex.CustomException;
 import rummage.RummageMarket.Web.Dto.User.UserProfileDto;
+import rummage.RummageMarket.Web.Dto.User.UserUpdateDto;
 
 @Service
 public class UserService {
@@ -18,6 +20,9 @@ public class UserService {
 	
 	@Autowired
 	SubscribeRepository subscribeRepository;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Transactional(readOnly = true)
 	public UserProfileDto userprofile(int pageUserId, int principalId) {
@@ -39,4 +44,17 @@ public class UserService {
 
         return dto;
     }
+	
+	@Transactional
+	public User updateUser(int id, User user) {
+	    User userEntity = userRepository.findById(id).get();
+	    userEntity.setUsername(user.getUsername());
+	    String rawPassword = user.getPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+        userEntity.setPassword(encPassword);
+	    userEntity.setNickname(user.getNickname());
+	    userEntity.setBio(user.getBio());
+	    userEntity.setEmail(user.getEmail());
+	    return userEntity;
+	}
 }
