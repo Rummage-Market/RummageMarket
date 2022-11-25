@@ -1,4 +1,4 @@
-package rummage.RummageMarket.Web.Dto.SubScribe;
+package rummage.RummageMarket.Web.Dto.Neighbor;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class SubscribeDto {
-	private Integer userId;
-	private String Username;
+public class NeighborDto {
+	private int id;
+	private String nickname;
 	private String profileImageUrl;
-	private Integer subscribeState; 
+	private Integer neighborState; 
 	private Integer equalUserState;
 }

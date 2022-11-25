@@ -5,13 +5,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import rummage.RummageMarket.Domain.SubScribe.SubscribeRepository;
+import rummage.RummageMarket.Domain.Neighbor.NeighborRepository;
 import rummage.RummageMarket.Domain.User.User;
 import rummage.RummageMarket.Domain.User.UserRepository;
 import rummage.RummageMarket.Handler.Ex.CustomException;
 import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
 import rummage.RummageMarket.Web.Dto.User.UserProfileDto;
-import rummage.RummageMarket.Web.Dto.User.UserUpdateDto;
 
 @Service
 public class UserService {
@@ -20,7 +19,7 @@ public class UserService {
 	UserRepository userRepository;
 	
 	@Autowired
-	SubscribeRepository subscribeRepository;
+	NeighborRepository neighborRepository;
 	
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -35,14 +34,15 @@ public class UserService {
 
         dto.setUser(userEntity);
         dto.setPageOwnerState(pageUserId == principalId);
-        dto.setImageCount(userEntity.getPosts().size());
+        dto.setPostCount(userEntity.getPosts().size());
+               
+        int neighborState = neighborRepository.neighborState(principalId, pageUserId);
+        int neighborCount = neighborRepository.neighborCount(pageUserId);
+        
+        dto.setNeighborCount(neighborCount);
+        dto.setNeighborState(neighborState == 1);
 
-        int subscribeState = subscribeRepository.subscribeState(principalId, pageUserId);
-        int subscribeCount = subscribeRepository.subscribeCount(pageUserId);
-
-        dto.setSubscribeState(subscribeState == 1);
-        dto.setSubscribeCount(subscribeCount);
-
+        
         return dto;
     }
 	

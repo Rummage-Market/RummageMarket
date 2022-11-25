@@ -1,8 +1,8 @@
 /**
   1. 유저 프로파일 페이지
-  (1) 유저 프로파일 페이지 구독하기, 구독취소
+  (1) 유저 프로파일 페이지 이웃맺기, 이웃취소
   (2) 구독자 정보 모달 보기
-  (3) 구독자 정보 모달에서 구독하기, 구독취소
+  (3) 구독자 정보 모달에서 이웃맺기, 이웃취소
   (4) 유저 프로필 사진 변경
   (5) 사용자 정보 메뉴 열기 닫기
   (6) 사용자 정보(회원정보, 로그아웃, 닫기) 모달
@@ -10,81 +10,80 @@
   (8) 구독자 정보 모달 닫기
  */
 
-// (1) 유저 프로파일 페이지 구독하기, 구독취소
-// obj는 현재 이벤트! = this
+// (1) 유저 프로파일 페이지 이웃맺기, 이웃취소
 function toggleSubscribe(toUserId, obj) {
-	if ($(obj).text() === "구독취소") {
-		
+	if ($(obj).text() === "이웃취소") {
+
 		$.ajax({
-		type: "delete",
-		url:"/api/subscribe/"+toUserId,
-		dataType: "json",
-	}).done(res=>{
-		$(obj).text("구독하기");
-		$(obj).toggleClass("blue"); // toggleClass는 클래스 이름에 blue가 있으면 제거하고 없으면 추가하는 것이다.
-	}).fail(error=>{
-		console.log("구독취소실패", error);
-	});
-		
+			type: "delete",
+			url: "/api/neighbor/" + toUserId,
+			dataType: "json"
+		}).done(res => {
+			$(obj).text("이웃맺기");
+			$(obj).toggleClass("blue");
+		}).fail(error => {
+			console.log("이웃취소실패", error)
+		});
 	} else {
-		
 		$.ajax({
-		type: "post",
-		url:"/api/subscribe/"+toUserId,
-		dataType: "json",
-	}).done(res=>{
-		$(obj).text("구독취소");
-		$(obj).toggleClass("blue"); // toggleClass는 클래스 이름에 blue가 있으면 제거하고 없으면 추가하는 것이다.
-	}).fail(error=>{
-		console.log("구독하기실패", error);
-	});
-		
+			type: "post",
+			url: "/api/neighbor/" + toUserId,
+			dataType: "json"
+		}).done(res => {
+			$(obj).text("이웃취소");
+			$(obj).toggleClass("blue");
+		}).fail(error => {
+			console.log("이웃실패", error)
+		});
 	}
 }
 
 // (2) 구독자 정보  모달 보기
 function subscribeInfoModalOpen(pageUserId) {
 	$(".modal-subscribe").css("display", "flex");
-	
+
 	$.ajax({
-		url:`/api/user/${pageUserId}/subscribe`,
+		url: `/api/user/${pageUserId}/neighbor`,
 		dataType: "json"
-	}).done(res=>{
+	}).done(res => {
 		console.log(res.data);
-		
-		res.data.forEach((u)=>{
+
+		res.data.forEach((u) => {
 			let item = getSubscribeModalItem(u);
-			$("#subscribeModalList").append(item); // id값을 적어야한다.
+			$("#subscribeModalList").append(item);
 		});
-	}).fail(error=>{
+	}).fail(error => {
 		console.log("구독정보 불러오기 오류", error);
 	});
 }
 
 function getSubscribeModalItem(u) {
+
 	let item = `<div class="subscribe__item" id="subscribeModalItem-${u.id}">
 	<div class="subscribe__img">
 		<img src="/upload/${u.profileImageUrl}" onerror="this.src='/images/person.jpeg'" />
 	</div>
 	<div class="subscribe__text">
-		<h2>${u.username}</h2>
+		<h2>${u.nickname}</h2>
 	</div>
 	<div class="subscribe__btn">`;
-	if(!u.equalUserState){// 동일 유저가 아닐때 버튼이 만들어져야 함
-		if(u.subscribeState){// 구독한 상태
-			item +=`<button class="cta blue" onclick="toggleSubscribe(${u.id}, this)">구독취소</button>`;
-		}else{// 구독안한 상태
-			item +=`<button class="cta" onclick="toggleSubscribe(${u.id}, this)">구독하기</button>`;
+
+	
+	if (!u.equalUserState) { // 동일 유저가 아닐 때 버튼이 만들이 만들어져야함
+		if (u.neighborState) { // 구독한 상태
+			item += `<button class="cta blue" onclick="toggleSubscribe(${u.id}, this)">이웃취소</button>`;
+		} else { // 구독안한 상태
+			item += `<button class="cta" onclick="toggleSubscribe(${u.id}, this)">이웃맺기</button>`;
 		}
 	}
-		item +=`
+	
+	item += `
 	</div>
 </div>`;
 
+	console.log(item);
 	return item;
 }
-
-
 
 // (3) 유저 프로파일 사진 변경 (완)
 function profileImageUpload(pageUserId, principalId) {
@@ -134,8 +133,6 @@ function profileImageUpload(pageUserId, principalId) {
 		}).fail(error=>{
 			console.log("오류", error);
 		});
-
-
 	});
 }
 
