@@ -43,6 +43,8 @@ public class UserApiController {
 		return new ResponseEntity<>(new CMRespDto<>(1,"구독자 정보 리스트 불러오기 성공",neighborDto),HttpStatus.OK);
 	}
 	
+	
+	
     @PutMapping("/api/user/{id}")
     public CMRespDto<?> update(@PathVariable int id, @Valid UserUpdateDto userUpdateDto, BindingResult bindingResult, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         if(bindingResult.hasErrors()) {

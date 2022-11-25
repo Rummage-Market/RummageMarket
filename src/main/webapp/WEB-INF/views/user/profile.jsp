@@ -23,13 +23,14 @@
 		</div>
 		<!--유저이미지end-->
 
-		<!--유저정보 및 사진등록 구독하기-->
+		<!--유저정보 및 사진등록 이웃맺기-->
 		<div class="profile-right">
 			<div class="name-group">
 				<h2>${dto.user.nickname}</h2>
+				
 				<c:choose>
 					<c:when test="${dto.pageOwnerState}">
-						<button class="cta" onclick="location.href='/post/upload'">중고물 등록</button>
+						<button class="cta" onclick="location.href='/post/upload'">사진등록</button>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
@@ -49,7 +50,7 @@
 
 			<div class="subscribe">
 				<ul>
-					<li><a href=""> 게시물<span>${dto.postCount}</span>
+					<li><a href="">게시물<span>${dto.postCount}</span>
 					</a></li>
 					<li><a href="javascript:subscribeInfoModalOpen(${dto.user.id});"> 구독정보<span>${dto.neighborCount}</span>
 					</a></li>
@@ -59,7 +60,7 @@
 				<h4>${dto.user.bio}</h4>
 			</div>
 		</div>
-		<!--유저정보 및 사진등록 구독하기-->
+		<!--유저정보 및 사진등록 이웃맺기-->
 
 	</div>
 </section>
@@ -129,30 +130,6 @@
 
 		<div class="subscribe-list" id="subscribeModalList">
 
-			<div class="subscribe__item" id="subscribeModalItem-1">
-				<div class="subscribe__img">
-					<img src="#" onerror="this.src='/images/person.jpeg'"/>
-				</div>
-				<div class="subscribe__text">
-					<h2>love</h2>
-				</div>
-				<div class="subscribe__btn">
-					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
-				</div>
-			</div>
-
-
-			<div class="subscribe__item" id="subscribeModalItem-2">
-				<div class="subscribe__img">
-					<img src="#" onerror="this.src='/images/person.jpeg'"/>
-				</div>
-				<div class="subscribe__text">
-					<h2>ssar</h2>
-				</div>
-				<div class="subscribe__btn">
-					<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>
-				</div>
-			</div>
 		</div>
 	</div>
 

@@ -35,9 +35,13 @@ public class UserService {
         dto.setUser(userEntity);
         dto.setPageOwnerState(pageUserId == principalId);
         dto.setPostCount(userEntity.getPosts().size());
-        
+               
         int neighborState = neighborRepository.neighborState(principalId, pageUserId);
         int neighborCount = neighborRepository.neighborCount(pageUserId);
+        
+        dto.setNeighborCount(neighborCount);
+        dto.setNeighborState(neighborState == 1);
+
         
         return dto;
     }

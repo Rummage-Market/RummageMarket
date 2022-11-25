@@ -48,7 +48,7 @@ public class NeighborService {
 		
 		// 쿼리준비
 		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT u.id, u.username, u.profileImage, ");
+		sb.append("SELECT u.id, u.nickname, u.profileImage, ");
 		sb.append("if ((SELECT 1 FROM neighbor WHERE fromUserId = ? AND toUserId = u.id), 1, 0) neighborState, ");
 		sb.append("if ((?=u.id), 1, 0) equalUserState ");
 		sb.append("FROM user u INNER JOIN neighbor s ");
