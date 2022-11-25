@@ -16,7 +16,7 @@
 					<img src="#" onerror="this.src='/images/person.jpeg'" />
 				</div>
 				<div class="item__username">
-					<h2>유저네임</h2>
+					<h2>${principal.user.username}</h2>
 				</div>
 			</div>
 			<!--프로필셋팅 아이디영역end-->
@@ -27,7 +27,7 @@
 					<div class="item__title">유저네임</div>
 					<div class="item__input">
 						<input type="text" name="username" placeholder="유저네임"
-							value="" readonly="readonly" />
+							value="${principal.user.username}" readonly="readonly" />
 					</div>
 				</div>
 				<div class="content-item__02">
@@ -40,20 +40,20 @@
 					<div class="item__title">닉네임</div>
 					<div class="item__input">
 						<input type="text" name="name" placeholder="닉네임"
-							value="" required="required"/>
+							value="${principal.user.nickname}" required="required"/>
 					</div>
 				</div>
 				<div class="content-item__04">
 					<div class="item__title">소개</div>
 					<div class="item__input">
-						<textarea name="bio" id="" rows="3" placeholder="소개글을 작성하세요!" ></textarea>
+						<textarea name="bio" id="" rows="3" placeholder="소개글을 작성하세요!" >${principal.user.bio}</textarea>
 					</div>
 				</div>
 				<div class="content-item__05">
 					<div class="item__title">이메일</div>
 					<div class="item__input">
 						<input type="text" name="email" placeholder="이메일"
-							value="" readonly="readonly" />
+							value="${principal.user.email}" readonly="readonly" />
 					</div>
 				</div>
 

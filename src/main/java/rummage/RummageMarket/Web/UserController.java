@@ -26,13 +26,8 @@ public class UserController {
 		return "user/profile";
 	}
 
-	@GetMapping("/user/profile")
-	public String profile() {
-		return "user/profile";
-	}
-
-	@GetMapping("/user/update")
-	public String update() {
+	@GetMapping("/user/{pageUserId}/update")
+	public String update(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		return "user/update";
 	}
 }
