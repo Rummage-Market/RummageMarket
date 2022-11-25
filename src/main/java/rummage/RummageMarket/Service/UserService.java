@@ -48,8 +48,8 @@ public class UserService {
 	
 	@Transactional
 	public User updateUser(int id, User user) {
-        User userEntity = userRepository.findById(id).orElseThrow(() -> {
-            return new CustomValidationApiException("찾을 수 없는 id입니다.");
+	    User userEntity = userRepository.findById(id).orElseThrow(() -> {
+            throw new CustomValidationApiException("찾을 수 없는 id입니다.");
         });
 	    userEntity.setUsername(user.getUsername());
 	    String rawPassword = user.getPassword();

@@ -13,12 +13,12 @@ function update(userId) {
 		console.log("update 성공", res)
 		location.href=`/user/${userId}`;
 	}).fail(error=>{
-		if(error.data==null){
+		console.log(error);
+		if(error.responseJSON.data==null){
 			alert(error.responseJSON.message)
 		}else{
 			alert(JSON.stringify(error.responseJSON.data));
 		}
-		
 	});
 	
 }
