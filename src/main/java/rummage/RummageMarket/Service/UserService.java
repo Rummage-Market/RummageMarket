@@ -11,7 +11,6 @@ import rummage.RummageMarket.Domain.User.UserRepository;
 import rummage.RummageMarket.Handler.Ex.CustomException;
 import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
 import rummage.RummageMarket.Web.Dto.User.UserProfileDto;
-import rummage.RummageMarket.Web.Dto.User.UserUpdateDto;
 
 @Service
 public class UserService {
@@ -35,14 +34,11 @@ public class UserService {
 
         dto.setUser(userEntity);
         dto.setPageOwnerState(pageUserId == principalId);
-        dto.setImageCount(userEntity.getPosts().size());
-
-        int neighborState = neighborRepository.subscribeState(principalId, pageUserId);
-        int neighborCount = neighborRepository.subscribeCount(pageUserId);
-
-        dto.setNeighborState(neighborState == 1);
-        dto.setNeighborCount(neighborCount);
-
+        dto.setPostCount(userEntity.getPosts().size());
+        
+        int neighborState = neighborRepository.neighborState(principalId, pageUserId);
+        int neighborCount = neighborRepository.neighborCount(pageUserId);
+        
         return dto;
     }
 	

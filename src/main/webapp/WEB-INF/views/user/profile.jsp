@@ -27,19 +27,31 @@
 		<div class="profile-right">
 			<div class="name-group">
 				<h2>${dto.user.nickname}</h2>
-
-				<button class="cta" onclick="location.href='/post/upload'">게시글 등록</button>
-				<button class="cta" onclick="toggleSubscribe(this)">이웃맺기</button>
+				<c:choose>
+					<c:when test="${dto.pageOwnerState}">
+						<button class="cta" onclick="location.href='/post/upload'">중고물 등록</button>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${dto.neighborState}">
+								<button class="cta blue" onclick="toggleSubscribe(${dto.user.id},this)">이웃취소</button>
+							</c:when>
+							<c:otherwise>
+								<button class="cta" onclick="toggleSubscribe(${dto.user.id},this)">이웃맺기</button>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
 				<button class="modi" onclick="popup('.modal-info')">
-					<i class="fas fa-user-cog"></i>
+					<i class="fas fa-cog"></i>
 				</button>
 			</div>
 
 			<div class="subscribe">
 				<ul>
-					<li><a href=""> <i class="fas fa-th-large"></i> <span>${dto.imageCount}</span>
+					<li><a href=""> 게시물<span>${dto.postCount}</span>
 					</a></li>
-					<li><a href="javascript:subscribeInfoModalOpen();"> <i class="fas fa-users"> </i> <span>2</span>
+					<li><a href="javascript:subscribeInfoModalOpen(${dto.user.id});"> 구독정보<span>${dto.neighborCount}</span>
 					</a></li>
 				</ul>
 			</div>
@@ -88,7 +100,8 @@
 <!--로그아웃, 회원정보변경 모달-->
 <div class="modal-info" onclick="modalInfo()">
 	<div class="modal">
-		<button onclick="location.href='/user/${dto.user.id}/update'">회원정보 변경</button>
+		<button onclick="location.href='/user/1/update'">회원정보 변경</button>
+		<button onclick="location.href='/logout'">로그아웃</button>
 		<button onclick="closePopup('.modal-info')">취소</button>
 	</div>
 </div>

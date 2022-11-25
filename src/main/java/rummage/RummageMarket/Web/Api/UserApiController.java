@@ -30,17 +30,17 @@ import rummage.RummageMarket.Web.Dto.User.UserUpdateDto;
 public class UserApiController {
 	
 	@Autowired
-	NeighborService subscribeService;
+	NeighborService neighborService;
 	
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/api/user/{pageUserId}/subscribe")
-	public ResponseEntity<?> subscribeList(@PathVariable int pageUserId,@AuthenticationPrincipal PrincipalDetails principalDetails){
+	@GetMapping("/api/user/{pageUserId}/neighbor")
+	public ResponseEntity<?> neighborList(@PathVariable int pageUserId,@AuthenticationPrincipal PrincipalDetails principalDetails){
 		
-		List<NeighborDto> subscribeDto = subscribeService.subScribeList(principalDetails.getUser().getId(),pageUserId);
+		List<NeighborDto> neighborDto = neighborService.neighborList(principalDetails.getUser().getId(),pageUserId);
 		
-		return new ResponseEntity<>(new CMRespDto<>(1,"구독자 정보 리스트 불러오기 성공",subscribeDto),HttpStatus.OK);
+		return new ResponseEntity<>(new CMRespDto<>(1,"구독자 정보 리스트 불러오기 성공",neighborDto),HttpStatus.OK);
 	}
 	
     @PutMapping("/api/user/{id}")

@@ -18,15 +18,15 @@ import rummage.RummageMarket.Web.Dto.Neighbor.NeighborDto;
 public class NeighborService {
 
 	@Autowired
-	NeighborRepository subScribeRepository;
+	NeighborRepository neighborRepository;
 	
 	@Autowired
 	EntityManager em;
 
 	@Transactional
-	public void subscribe(int fromUserId, int toUserId) {
+	public void neighbor(int fromUserId, int toUserId) {
 		try {
-			subScribeRepository.subscribe(fromUserId, toUserId);
+		    neighborRepository.neighbor(fromUserId, toUserId);
 		} catch (Exception e) {
 			throw new CustomApiException("이미 구독한 상태입니다.");
 		}
@@ -34,9 +34,9 @@ public class NeighborService {
 	}
 
 	@Transactional
-	public void unsubscribe(int fromUserId, int toUserId) {
+	public void unNeighbor(int fromUserId, int toUserId) {
 		try {
-			subScribeRepository.unsubscribe(fromUserId, toUserId);
+		    neighborRepository.unNeighbor(fromUserId, toUserId);
 		} catch (Exception e) {
 			throw new CustomApiException("이미 구독한 상태입니다.");
 		}
@@ -44,14 +44,14 @@ public class NeighborService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<NeighborDto> subScribeList(int principalId, int pageUserId) {
+	public List<NeighborDto> neighborList(int principalId, int pageUserId) {
 		
 		// 쿼리준비
 		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT u.id, u.username, u.profileImage, ");
-		sb.append("if ((SELECT 1 FROM subscribe WHERE fromUserId = ? AND toUserId = u.id), 1, 0) subscribeState, ");
+		sb.append("if ((SELECT 1 FROM neighbor WHERE fromUserId = ? AND toUserId = u.id), 1, 0) neighborState, ");
 		sb.append("if ((?=u.id), 1, 0) equalUserState ");
-		sb.append("FROM user u INNER JOIN subscribe s ");
+		sb.append("FROM user u INNER JOIN neighbor s ");
 		sb.append("ON u.id = s.toUserId ");
 		sb.append("WHERE s.fromUserId = ?");// 세미콜론 첨부하면 안됨
 		
@@ -64,8 +64,8 @@ public class NeighborService {
 		
 		// 쿼리실행(qlrm 라이브러리 필요 = Dto에 결과를 매핑하기 위해서)
 		JpaResultMapper result = new JpaResultMapper();
-		List<NeighborDto> subscribeDtos = result.list(query, NeighborDto.class);
+		List<NeighborDto> neighborDtos = result.list(query, NeighborDto.class);
 
-		return subscribeDtos;
+		return neighborDtos;
 	}
 }

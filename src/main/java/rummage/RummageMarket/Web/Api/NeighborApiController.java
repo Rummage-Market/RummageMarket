@@ -16,18 +16,18 @@ import rummage.RummageMarket.Web.Dto.CMRespDto;
 public class NeighborApiController {
 	
 	@Autowired
-	NeighborService subScribeService; 
+	NeighborService neighborService; 
 	
-	@PostMapping("/api/subscribe/{toUserId}")
-	public ResponseEntity<?> subscribe(@AuthenticationPrincipal PrincipalDetails principalDetails,@PathVariable int toUserId){
-		subScribeService.subscribe(principalDetails.getUser().getId(),toUserId);
+	@PostMapping("/api/neighbor/{toUserId}")
+	public ResponseEntity<?> neighbor(@AuthenticationPrincipal PrincipalDetails principalDetails,@PathVariable int toUserId){
+	    neighborService.neighbor(principalDetails.getUser().getId(),toUserId);
 		return null;
 	}
 	
-	@DeleteMapping("/api/subscribe/{toUserId}")
-	public ResponseEntity<?> unSubscribe(@AuthenticationPrincipal PrincipalDetails principalDetails,
+	@DeleteMapping("/api/neighbor/{toUserId}")
+	public ResponseEntity<?> unNeighbor(@AuthenticationPrincipal PrincipalDetails principalDetails,
 			@PathVariable int toUserId) {
-		subScribeService.unsubscribe(principalDetails.getUser().getId(), toUserId);
+	    neighborService.unNeighbor(principalDetails.getUser().getId(), toUserId);
 		return new ResponseEntity<>(new CMRespDto<>(1, "구독취소하기 성공", null), HttpStatus.OK);
 	}
 }

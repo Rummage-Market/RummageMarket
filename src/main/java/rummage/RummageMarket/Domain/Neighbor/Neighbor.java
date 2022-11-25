@@ -22,7 +22,7 @@ import rummage.RummageMarket.Domain.User.User;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(uniqueConstraints = { @UniqueConstraint(name = "subscribe_uk", columnNames = { "fromUserId", "toUserId" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(name = "neighbor_uk", columnNames = { "fromUserId", "toUserId" }) })
 public class Neighbor {
 	
 	@Id

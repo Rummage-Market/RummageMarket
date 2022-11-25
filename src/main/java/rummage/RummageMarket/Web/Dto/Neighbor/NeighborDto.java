@@ -13,6 +13,6 @@ public class NeighborDto {
 	private Integer userId;
 	private String Username;
 	private String profileImageUrl;
-	private Integer subscribeState; 
+	private Integer neighborState; 
 	private Integer equalUserState;
 }
