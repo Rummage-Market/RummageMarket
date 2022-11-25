@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rummage.RummageMarket.Handler.Ex.CustomApiException;
 import rummage.RummageMarket.Handler.Ex.CustomException;
+import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
 import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 import rummage.RummageMarket.Util.Script;
 import rummage.RummageMarket.Web.Dto.CMRespDto;
@@ -24,6 +25,11 @@ public class ControllerExceptionHandler {
 			return Script.back(e.getErrorMap().toString());
 		}
 	}
+	
+    @ExceptionHandler(CustomValidationApiException.class)
+    public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
+        return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
+    }
 
 	@ExceptionHandler(CustomException.class)
 	public String exception(CustomException e) {
