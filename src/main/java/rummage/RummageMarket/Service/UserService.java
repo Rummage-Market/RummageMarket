@@ -9,6 +9,7 @@ import rummage.RummageMarket.Domain.SubScribe.SubscribeRepository;
 import rummage.RummageMarket.Domain.User.User;
 import rummage.RummageMarket.Domain.User.UserRepository;
 import rummage.RummageMarket.Handler.Ex.CustomException;
+import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
 import rummage.RummageMarket.Web.Dto.User.UserProfileDto;
 import rummage.RummageMarket.Web.Dto.User.UserUpdateDto;
 
@@ -47,7 +48,9 @@ public class UserService {
 	
 	@Transactional
 	public User updateUser(int id, User user) {
-	    User userEntity = userRepository.findById(id).get();
+        User userEntity = userRepository.findById(id).orElseThrow(() -> {
+            return new CustomValidationApiException("찾을 수 없는 id입니다.");
+        });
 	    userEntity.setUsername(user.getUsername());
 	    String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
