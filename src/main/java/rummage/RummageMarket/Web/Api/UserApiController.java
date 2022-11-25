@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.User.User;
+import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
 import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 import rummage.RummageMarket.Service.SubscribeService;
 import rummage.RummageMarket.Service.UserService;
@@ -54,7 +55,7 @@ public class UserApiController {
                 System.out.println(error.getDefaultMessage());
                 System.out.println("=================================");
             }
-            throw new CustomValidationException("유효성검사 실패함", errorMap);
+            throw new CustomValidationApiException("유효성검사 실패함", errorMap);
         } else {
             User userEntity = userService.updateUser(id, userUpdateDto.toEntity());
             principalDetails.setUser(userEntity);
