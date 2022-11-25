@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
-import rummage.RummageMarket.Service.SubscribeService;
+import rummage.RummageMarket.Service.NeighborService;
 import rummage.RummageMarket.Web.Dto.CMRespDto;
 
 @RestController
-public class SubscribeApiController {
+public class NeighborApiController {
 	
 	@Autowired
-	SubscribeService subScribeService; 
+	NeighborService subScribeService; 
 	
 	@PostMapping("/api/subscribe/{toUserId}")
 	public ResponseEntity<?> subscribe(@AuthenticationPrincipal PrincipalDetails principalDetails,@PathVariable int toUserId){

@@ -1,10 +1,10 @@
-package rummage.RummageMarket.Domain.SubScribe;
+package rummage.RummageMarket.Domain.Neighbor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-public interface SubscribeRepository extends JpaRepository<Subscribe, Integer>{
+public interface NeighborRepository extends JpaRepository<Neighbor, Integer>{
 
 	@Modifying
 	@Query(value = "INSERT INTO subscribe(fromUserId,toUserId,createDate) VALUES(:fromUserId,:toUserId,now())", nativeQuery = true)

@@ -16,6 +16,6 @@ public class UserProfileDto {
 	private User user;
 	private boolean pageOwnerState;
     private int imageCount;
-    private boolean subscribeState;
-    private int subscribeCount;
+    private boolean neighborState;
+    private int neighborCount;
 }

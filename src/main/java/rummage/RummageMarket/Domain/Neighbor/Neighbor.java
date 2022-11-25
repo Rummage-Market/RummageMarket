@@ -1,4 +1,4 @@
-package rummage.RummageMarket.Domain.SubScribe;
+package rummage.RummageMarket.Domain.Neighbor;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +23,7 @@ import rummage.RummageMarket.Domain.User.User;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(uniqueConstraints = { @UniqueConstraint(name = "subscribe_uk", columnNames = { "fromUserId", "toUserId" }) })
-public class Subscribe {
+public class Neighbor {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

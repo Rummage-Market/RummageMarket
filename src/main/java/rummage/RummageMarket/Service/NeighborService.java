@@ -10,15 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import rummage.RummageMarket.Domain.SubScribe.SubscribeRepository;
+import rummage.RummageMarket.Domain.Neighbor.NeighborRepository;
 import rummage.RummageMarket.Handler.Ex.CustomApiException;
-import rummage.RummageMarket.Web.Dto.SubScribe.SubscribeDto;
+import rummage.RummageMarket.Web.Dto.Neighbor.NeighborDto;
 
 @Service
-public class SubscribeService {
+public class NeighborService {
 
 	@Autowired
-	SubscribeRepository subScribeRepository;
+	NeighborRepository subScribeRepository;
 	
 	@Autowired
 	EntityManager em;
@@ -44,7 +44,7 @@ public class SubscribeService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<SubscribeDto> subScribeList(int principalId, int pageUserId) {
+	public List<NeighborDto> subScribeList(int principalId, int pageUserId) {
 		
 		// 쿼리준비
 		StringBuffer sb = new StringBuffer();
@@ -64,7 +64,7 @@ public class SubscribeService {
 		
 		// 쿼리실행(qlrm 라이브러리 필요 = Dto에 결과를 매핑하기 위해서)
 		JpaResultMapper result = new JpaResultMapper();
-		List<SubscribeDto> subscribeDtos = result.list(query, SubscribeDto.class);
+		List<NeighborDto> subscribeDtos = result.list(query, NeighborDto.class);
 
 		return subscribeDtos;
 	}

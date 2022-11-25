@@ -20,18 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.User.User;
 import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
-import rummage.RummageMarket.Handler.Ex.CustomValidationException;
-import rummage.RummageMarket.Service.SubscribeService;
+import rummage.RummageMarket.Service.NeighborService;
 import rummage.RummageMarket.Service.UserService;
 import rummage.RummageMarket.Web.Dto.CMRespDto;
-import rummage.RummageMarket.Web.Dto.SubScribe.SubscribeDto;
+import rummage.RummageMarket.Web.Dto.Neighbor.NeighborDto;
 import rummage.RummageMarket.Web.Dto.User.UserUpdateDto;
 
 @RestController
 public class UserApiController {
 	
 	@Autowired
-	SubscribeService subscribeService;
+	NeighborService subscribeService;
 	
 	@Autowired
 	UserService userService;
@@ -39,7 +38,7 @@ public class UserApiController {
 	@GetMapping("/api/user/{pageUserId}/subscribe")
 	public ResponseEntity<?> subscribeList(@PathVariable int pageUserId,@AuthenticationPrincipal PrincipalDetails principalDetails){
 		
-		List<SubscribeDto> subscribeDto = subscribeService.subScribeList(principalDetails.getUser().getId(),pageUserId);
+		List<NeighborDto> subscribeDto = subscribeService.subScribeList(principalDetails.getUser().getId(),pageUserId);
 		
 		return new ResponseEntity<>(new CMRespDto<>(1,"구독자 정보 리스트 불러오기 성공",subscribeDto),HttpStatus.OK);
 	}
