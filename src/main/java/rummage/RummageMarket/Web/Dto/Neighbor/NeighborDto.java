@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class NeighborDto {
-	private Integer userId;
+	private int id;
 	private String nickname;
 	private String profileImageUrl;
 	private Integer neighborState; 
