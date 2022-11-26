@@ -51,7 +51,7 @@
 
 	<header class="header">
 		<div class="container">
-			<a href="/image/story" class="logo">
+			<a href="/" class="logo">
 				<h1>RummageMarket</h1>
 			</a>
 			<nav class="navi">

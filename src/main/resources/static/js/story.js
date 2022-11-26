@@ -58,29 +58,32 @@ function getStoryItem(post) {
 			<p>${post.content}</p>
 		</div>
 
-		<div id="storyCommentList-${post.id}">
+		<div id="storyCommentList-${post.id}">`;
 
-			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
+	post.comments.forEach((comment) => {
+		item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 				<p>
-					<b>Lovely :</b> 부럽습니다.
-				</p>
+					<b>${comment.user.username} :</b> ${comment.content}
+				</p>`;
 
-				<button>
-					<i class="fas fa-times"></i>
-				</button>
-
-			</div>
-
+		if (principalId == comment.user.id) {
+			item += `	<button onclick="deleteComment(${comment.id})">
+										<i class="fas fa-times"></i>
+									</button>`;
+		}
+		item += `	
+			</div>`;
+	});
+	item += `
 		</div>
 
 		<div class="sl__item__input">
-			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-1" />
+			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${post.id}" />
 			<button type="button" onClick="addComment(${post.id})">게시</button>
 		</div>
 
 	</div>
-</div>`
-
+</div>`;
 	return item;
 }
 
