@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.Post.Post;
 import rummage.RummageMarket.Service.InterestService;
@@ -32,8 +31,8 @@ public class PostApiController {
     
     //필터링 없이 제일 최신순의 게시글
     @GetMapping("/api/post")
-    public ResponseEntity<?> postStory(@PageableDefault(size = 3) Pageable pageable) {
-        Page<Post> posts= postService.postList(pageable);
+    public ResponseEntity<?> postStory(@PageableDefault(size = 3) Pageable pageable, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Page<Post> posts= postService.postList(pageable, principalDetails.getUser().getId());
         return new ResponseEntity<>(new CMRespDto<>(1, "게시글 불러오기 성공", posts), HttpStatus.OK);
     }
     

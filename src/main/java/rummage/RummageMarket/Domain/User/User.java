@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,6 +48,7 @@ public class User {
 	private String profileImage;
 	private String role;
 	
+	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
 	private List<Post> posts;
 	

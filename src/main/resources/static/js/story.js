@@ -45,11 +45,18 @@ function getStoryItem(post) {
 	<div class="sl__item__contents">
 		<div class="sl__item__contents__icon">
 
-			<button>
-				<i class="far fa-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>
+			
+			<button>`;
+				if(post.interestState){
+					item +=`<i class="fas fa-heart active" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
+				}else{
+					item +=`<i class="far fa-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
+				}
+			item +=`	
+				
 			</button>
 			
-			<span class="interest"><b id="storyInterestCount-1">3 </b>interests</span>
+			<span class="interest"><b id="storyInterestCount-${post.id}">${post.interestCount} </b>interests</span>
 		</div>
 
 		<div class="sl__item__contents__content">
@@ -96,15 +103,22 @@ $(window).scroll(() => {
 // (3) 하트, 하트X
 function toggleInterest(postId){
 	let interestIcon = $(`#storyInterestIcon-${postId}`);
-	if (interestIcon.hasClass("far fa-heart")) { 
+	if (interestIcon.hasClass("far")) { 
 		
 		$.ajax({
 		type: "post",
 		url: `/api/post/${postId}/interest`,
 		dataType: "json"
 	}).done(res => {
-		interestIcon.removeClass("far fa-heart");
-		interestIcon.addClass("fas fa-heart");	
+	
+		let interestCountStr = $(`#storyInterestCount-${postId}`).text();
+		let interestCount = Number(interestCountStr) +1;
+		$(`#storyInterestCount-${postId}`).text(interestCount);
+	
+		interestIcon.addClass("fas");
+		interestIcon.addClass("active");
+		interestIcon.removeClass("far");
+		
 	}).fail(error => {
 		console.log("오류", error);
 	});
@@ -116,8 +130,15 @@ function toggleInterest(postId){
 		url: `/api/post/${postId}/interest`,
 		dataType: "json"
 	}).done(res => {
-		interestIcon.removeClass("fas fa-heart");
-		interestIcon.addClass("far fa-heart");
+	
+		let interestCountStr = $(`#storyInterestCount-${postId}`).text();
+		let interestCount = Number(interestCountStr) -1;
+		$(`#storyInterestCount-${postId}`).text(interestCount);	
+	
+		interestIcon.removeClass("fas");
+		interestIcon.removeClass("active");
+		interestIcon.addClass("far");
+		
 	}).fail(error => {
 		console.log("오류", error);
 	});

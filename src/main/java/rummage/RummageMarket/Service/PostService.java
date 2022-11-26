@@ -44,9 +44,23 @@ public class PostService {
 		postRepository.save(post);
 	}
 
-	@Transactional(readOnly = true)//영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영)
-    public Page<Post> postList(Pageable pageable){
+	@Transactional(readOnly = true)
+    public Page<Post> postList(Pageable pageable, int principalId){
+	    
 	    Page<Post> posts= postRepository.findPostList(pageable);
+	    
+       posts.forEach((post)->{
+            
+           post.setInterestCount(post.getInterest().size());
+            
+           post.getInterest().forEach((interest) -> {
+                if(interest.getUser().getId() == principalId) {
+                    post.setInterestState(true);
+                }
+            });
+        });
+	    
+	    
         return posts;
     }
 }
