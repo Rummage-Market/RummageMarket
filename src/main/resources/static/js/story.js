@@ -7,9 +7,10 @@
 	(5) 댓글삭제
  */
  
- // (0) 현재 로긴한 사용자 아이디
- 
- // (1) 스토리 로드하기
+// (0) 현재 로긴한 사용자 아이디
+let principalId = $("#principalId").val();
+
+// (1) 스토리 로드하기
 let page = 0;
 
 function storyLoad() {
@@ -17,7 +18,8 @@ function storyLoad() {
 		url: `/api/post?page=${page}`,
 		dataType: "json"
 	}).done(res => {
-		res.data.content.forEach((post)=>{
+		//console.log(res);
+		res.data.content.forEach((post) => {
 			let storyItem = getStoryItem(post);
 			$("#storyList").append(storyItem);
 		});
@@ -60,32 +62,43 @@ function getStoryItem(post) {
 		</div>
 
 		<div class="sl__item__contents__content">
+			<h1>${post.title}</h1><br/>
 			<p>${post.content}</p>
+			<br/>
+			<div>
+					<div><b>중고물품 :</b> ${post.item}</div>
+					<div><b>거래지역 :</b> ${post.address1} ${post.address2}</div>
+					<div><b>거래가격 :</b> ${post.price} 원</div>
+				</div>
+				<br/>
 		</div>
 
-		<div id="storyCommentList-1">
+		<div id="storyCommentList-${post.id}">`;
 
-			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
+	post.comments.forEach((comment) => {
+		item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 				<p>
-					<b>Lovely :</b> 부럽습니다.
-				</p>
+					<b>${comment.user.username} :</b> ${comment.content}
+				</p>`;
 
-				<button>
-					<i class="fas fa-times"></i>
-				</button>
-
-			</div>
-
+		if (principalId == comment.user.id) {
+			item += `	<button onclick="deleteComment(${comment.id})">
+										<i class="fas fa-times"></i>
+									</button>`;
+		}
+		item += `	
+			</div>`;
+	});
+	item += `
 		</div>
 
 		<div class="sl__item__input">
-			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-1" />
-			<button type="button" onClick="addComment()">게시</button>
+			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${post.id}" />
+			<button type="button" onClick="addComment(${post.id})">게시</button>
 		</div>
 
 	</div>
-</div>`
-
+</div>`;
 	return item;
 }
 
@@ -145,3 +158,63 @@ function toggleInterest(postId){
 
 	}
 }
+
+function addComment(postId) {
+
+	let commentInput = $(`#storyCommentInput-${postId}`);
+	let commentList = $(`#storyCommentList-${postId}`);
+
+	let data = {
+		postId: postId,
+		content: commentInput.val()
+	}
+
+	if (data.content === "") {
+		alert("댓글을 작성해주세요!");
+		return;
+	}
+
+	$.ajax({
+		type: "post",
+		url: "/api/comment",
+		data: JSON.stringify(data),
+		contentType: "application/json;charset=utf-8",
+		dataType: "json"
+	}).done(res => {
+		console.log("성공", res);
+
+		let comment = res.data;
+
+		let content = `
+			  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 
+			    <p>
+			      <b>${comment.user.nickname} :</b>
+			      ${comment.content}
+			    </p>
+			    
+			    <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>		    
+			  </div>
+	`;
+		commentList.prepend(content);
+	}).fail(error => {
+		console.log("오류", error.responseJSON.data.content	);
+		alert(error.responseJSON.data.content)
+	});
+
+	commentInput.val("");
+}
+
+ 
+function deleteComment(commentId) {
+	$.ajax({
+		type: "delete",
+		url: `/api/comment/${commentId}`,
+		dataType: "json"
+	}).done(res => {
+		console.log("성공", res);
+		$(`#storyCommentItem-${commentId}`).remove();
+	}).fail(error => {
+		console.log("오류", error);
+	});
+}
+

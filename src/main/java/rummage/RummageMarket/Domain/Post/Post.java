@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
@@ -21,6 +22,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import rummage.RummageMarket.Domain.Interest.Interest;
+import rummage.RummageMarket.Domain.Comment.Comment;
 import rummage.RummageMarket.Domain.User.User;
 
 @Builder
@@ -38,6 +40,11 @@ public class Post {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({ "posts" })
 	private User user;
+	
+	@OrderBy("id DESC")
+	@JsonIgnoreProperties({"post"})
+	@OneToMany(mappedBy = "post")
+	private List<Comment> Comments;
 
 	private String imageUrl;
 	
@@ -53,11 +60,11 @@ public class Post {
 	@OneToMany(mappedBy = "post")
 	private List<Interest> interest; 
 	
-   @Transient
-    private boolean interestState;
+  @Transient
+  private boolean interestState;
 	
-   @Transient
-    private int interestCount;
+  @Transient
+  private int interestCount;
 	
 	private LocalDateTime createDate;
 

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +37,7 @@ public class Comment {
     
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"posts"})
     private User user;
     
     @JoinColumn(name = "postId")
