@@ -1,9 +1,23 @@
+/**
+	2. 스토리 페이지
+	(1) 스토리 로드하기
+	(2) 스토리 스크롤 페이징하기
+	(3) 좋아요, 안좋아요
+	(4) 댓글쓰기
+	(5) 댓글삭제
+ */
+ 
+ // (0) 현재 로긴한 사용자 아이디
+ 
+ // (1) 스토리 로드하기
+let page = 0;
+
 function storyLoad() {
 	$.ajax({
-		url: `/api/post`,
+		url: `/api/post?page=${page}`,
 		dataType: "json"
 	}).done(res => {
-		res.data.forEach((post)=>{
+		res.data.content.forEach((post)=>{
 			let storyItem = getStoryItem(post);
 			$("#storyList").append(storyItem);
 		});
@@ -67,3 +81,14 @@ function getStoryItem(post) {
 
 	return item;
 }
+
+// (2) 스토리 스크롤 페이징하기
+$(window).scroll(() => {
+
+	let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
+
+	if (checkNum < 1 && checkNum > -1) {
+		page++;
+		storyLoad();
+	}
+});

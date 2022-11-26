@@ -1,6 +1,5 @@
 package rummage.RummageMarket.Service;
 
-import java.awt.Image;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,6 +8,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
@@ -45,8 +45,8 @@ public class PostService {
 	}
 
 	@Transactional(readOnly = true)//영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영)
-    public List<Post> postList(Pageable pageable){
-        List<Post> posts= postRepository.findAllIdDesc(pageable);
+    public Page<Post> postList(Pageable pageable){
+	    Page<Post> posts= postRepository.findPostList(pageable);
         return posts;
     }
 }
