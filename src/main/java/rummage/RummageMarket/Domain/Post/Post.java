@@ -1,6 +1,7 @@
 package rummage.RummageMarket.Domain.Post;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -17,6 +20,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import rummage.RummageMarket.Domain.Comment.Comment;
 import rummage.RummageMarket.Domain.User.User;
 
 @Builder
@@ -34,6 +38,11 @@ public class Post {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({ "posts" })
 	private User user;
+	
+	@OrderBy("id DESC")
+	@JsonIgnoreProperties({"post"})
+	@OneToMany(mappedBy = "post")
+	private List<Comment> Comments;
 
 	private String imageUrl;
 	
