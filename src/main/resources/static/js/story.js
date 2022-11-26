@@ -7,9 +7,10 @@
 	(5) 댓글삭제
  */
  
- // (0) 현재 로긴한 사용자 아이디
- 
- // (1) 스토리 로드하기
+// (0) 현재 로긴한 사용자 아이디
+let principalId = $("#principalId").val();
+
+// (1) 스토리 로드하기
 let page = 0;
 
 function storyLoad() {
@@ -17,7 +18,8 @@ function storyLoad() {
 		url: `/api/post?page=${page}`,
 		dataType: "json"
 	}).done(res => {
-		res.data.content.forEach((post)=>{
+		//console.log(res);
+		res.data.content.forEach((post) => {
 			let storyItem = getStoryItem(post);
 			$("#storyList").append(storyItem);
 		});
@@ -56,7 +58,7 @@ function getStoryItem(post) {
 			<p>${post.content}</p>
 		</div>
 
-		<div id="storyCommentList-1">
+		<div id="storyCommentList-${post.id}">
 
 			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
 				<p>
@@ -73,7 +75,7 @@ function getStoryItem(post) {
 
 		<div class="sl__item__input">
 			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-1" />
-			<button type="button" onClick="addComment()">게시</button>
+			<button type="button" onClick="addComment(${post.id})">게시</button>
 		</div>
 
 	</div>
@@ -92,3 +94,49 @@ $(window).scroll(() => {
 		storyLoad();
 	}
 });
+
+// (3) 댓글쓰기
+function addComment(postId) {
+
+	let commentInput = $(`#storyCommentInput-${postId}`);
+	let commentList = $(`#storyCommentList-${postId}`);
+
+	let data = {
+		postId: postId,
+		content: commentInput.val()
+	}
+
+	if (data.content === "") {
+		alert("댓글을 작성해주세요!");
+		return;
+	}
+
+	$.ajax({
+		type: "post",
+		url: "/api/comment",
+		data: JSON.stringify(data),
+		contentType: "application/json;charset=utf-8",
+		dataType: "json"
+	}).done(res => {
+		console.log("성공", res);
+
+		let comment = res.data;
+
+		let content = `
+			  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 
+			    <p>
+			      <b>${comment.user.nickname} :</b>
+			      ${comment.content}
+			    </p>
+			    
+			    <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>		    
+			  </div>
+	`;
+		commentList.prepend(content);
+	}).fail(error => {
+		console.log("오류", error.responseJSON.data.content	);
+		alert(error.responseJSON.data.content)
+	});
+
+	commentInput.val("");
+}
