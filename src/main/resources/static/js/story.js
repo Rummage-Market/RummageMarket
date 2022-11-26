@@ -46,13 +46,12 @@ function getStoryItem(post) {
 		<div class="sl__item__contents__icon">
 
 			<button>
-				<i class="fas fa-hand-holding-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>
+				<i class="far fa-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>
 			</button>
 			
 			<span class="interest"><b id="storyInterestCount-1">3 </b>interests</span>
 		</div>
 
-		
 		<div class="sl__item__contents__content">
 			<p>${post.content}</p>
 		</div>
@@ -97,20 +96,19 @@ $(window).scroll(() => {
 // (3) 하트, 하트X
 function toggleInterest(postId){
 	let interestIcon = $(`#storyInterestIcon-${postId}`);
-	if (interestIcon.hasClass("fas fa-hand-holding")) { 
+	if (interestIcon.hasClass("far fa-heart")) { 
 		
 		$.ajax({
 		type: "post",
 		url: `/api/post/${postId}/interest`,
 		dataType: "json"
 	}).done(res => {
-		interestIcon.removeClass("fas fa-hand-holding");
-		interestIcon.addClass("fas fa-hand-holding-heart");	
+		interestIcon.removeClass("far fa-heart");
+		interestIcon.addClass("fas fa-heart");	
 	}).fail(error => {
 		console.log("오류", error);
 	});
-	
-	
+
 	} else {
 	
 		$.ajax({
@@ -118,8 +116,8 @@ function toggleInterest(postId){
 		url: `/api/post/${postId}/interest`,
 		dataType: "json"
 	}).done(res => {
-		interestIcon.removeClass("fas fa-hand-holding-heart");
-		interestIcon.addClass("fas fa-hand-holding");
+		interestIcon.removeClass("fas fa-heart");
+		interestIcon.addClass("far fa-heart");
 	}).fail(error => {
 		console.log("오류", error);
 	});
