@@ -41,7 +41,10 @@ public class UserService {
         
         dto.setNeighborCount(neighborCount);
         dto.setNeighborState(neighborState == 1);
-
+        
+        userEntity.getPosts().forEach((post)->{
+            post.setInterestCount(post.getInterest().size());
+        });
         
         return dto;
     }

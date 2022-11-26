@@ -2,7 +2,7 @@
 	2. 스토리 페이지
 	(1) 스토리 로드하기
 	(2) 스토리 스크롤 페이징하기
-	(3) 좋아요, 안좋아요
+	(3) 하트, 하트X
 	(4) 댓글쓰기
 	(5) 댓글삭제
  */
@@ -47,12 +47,19 @@ function getStoryItem(post) {
 	<div class="sl__item__contents">
 		<div class="sl__item__contents__icon">
 
-			<button>
-				<i class="fas fa-heart active" id="storyLikeIcon-1" onclick="toggleLike()"></i>
+			
+			<button>`;
+				if(post.interestState){
+					item +=`<i class="fas fa-heart active" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
+				}else{
+					item +=`<i class="far fa-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
+				}
+			item +=`	
+				
 			</button>
+			
+			<span class="interest"><b id="storyInterestCount-${post.id}">${post.interestCount} </b>interests</span>
 		</div>
-
-		<span class="like"><b id="storyLikeCount-1">3 </b>likes</span>
 
 		<div class="sl__item__contents__content">
 			<h1>${post.title}</h1><br/>
@@ -106,7 +113,52 @@ $(window).scroll(() => {
 	}
 });
 
-// (3) 댓글쓰기
+// (3) 하트, 하트X
+function toggleInterest(postId){
+	let interestIcon = $(`#storyInterestIcon-${postId}`);
+	if (interestIcon.hasClass("far")) { 
+		
+		$.ajax({
+		type: "post",
+		url: `/api/post/${postId}/interest`,
+		dataType: "json"
+	}).done(res => {
+	
+		let interestCountStr = $(`#storyInterestCount-${postId}`).text();
+		let interestCount = Number(interestCountStr) +1;
+		$(`#storyInterestCount-${postId}`).text(interestCount);
+	
+		interestIcon.addClass("fas");
+		interestIcon.addClass("active");
+		interestIcon.removeClass("far");
+		
+	}).fail(error => {
+		console.log("오류", error);
+	});
+
+	} else {
+	
+		$.ajax({
+		type: "delete",
+		url: `/api/post/${postId}/interest`,
+		dataType: "json"
+	}).done(res => {
+	
+		let interestCountStr = $(`#storyInterestCount-${postId}`).text();
+		let interestCount = Number(interestCountStr) -1;
+		$(`#storyInterestCount-${postId}`).text(interestCount);	
+	
+		interestIcon.removeClass("fas");
+		interestIcon.removeClass("active");
+		interestIcon.addClass("far");
+		
+	}).fail(error => {
+		console.log("오류", error);
+	});
+
+	}
+}
+
 function addComment(postId) {
 
 	let commentInput = $(`#storyCommentInput-${postId}`);
@@ -152,7 +204,7 @@ function addComment(postId) {
 	commentInput.val("");
 }
 
-// (4) 댓글삭제 
+ 
 function deleteComment(commentId) {
 	$.ajax({
 		type: "delete",
@@ -165,3 +217,4 @@ function deleteComment(commentId) {
 		console.log("오류", error);
 	});
 }
+

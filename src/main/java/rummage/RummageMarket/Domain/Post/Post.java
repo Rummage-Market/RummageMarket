@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import rummage.RummageMarket.Domain.Interest.Interest;
 import rummage.RummageMarket.Domain.Comment.Comment;
 import rummage.RummageMarket.Domain.User.User;
 
@@ -52,7 +54,17 @@ public class Post {
 	private String address2; 
 	private String place; 
 	private String item; 
-	private int price; 
+	private int price;
+	
+	@JsonIgnoreProperties({"post"})
+	@OneToMany(mappedBy = "post")
+	private List<Interest> interest; 
+	
+  @Transient
+  private boolean interestState;
+	
+  @Transient
+  private int interestCount;
 	
 	private LocalDateTime createDate;
 
