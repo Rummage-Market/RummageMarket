@@ -128,7 +128,7 @@
   .container
   .story-list
   .story-list__item
-  .sl__item__contents .like{
+  .sl__item__contents .interest{
 	background-color: transparent;
 	border: 0;
 	color: #aaa;
@@ -141,7 +141,7 @@
   .container
   .story-list
   .story-list__item
-.sl__item__contents .like b{
+.sl__item__contents .interest b{
 	margin-right: 5px;
 }
 

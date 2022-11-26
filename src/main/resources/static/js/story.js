@@ -2,7 +2,7 @@
 	2. 스토리 페이지
 	(1) 스토리 로드하기
 	(2) 스토리 스크롤 페이징하기
-	(3) 좋아요, 안좋아요
+	(3) 하트, 하트X
 	(4) 댓글쓰기
 	(5) 댓글삭제
  */
@@ -46,12 +46,13 @@ function getStoryItem(post) {
 		<div class="sl__item__contents__icon">
 
 			<button>
-				<i class="fas fa-heart active" id="storyLikeIcon-1" onclick="toggleLike()"></i>
+				<i class="fas fa-hand-holding-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>
 			</button>
+			
+			<span class="interest"><b id="storyInterestCount-1">3 </b>interests</span>
 		</div>
 
-		<span class="like"><b id="storyLikeCount-1">3 </b>likes</span>
-
+		
 		<div class="sl__item__contents__content">
 			<p>${post.content}</p>
 		</div>
@@ -92,3 +93,15 @@ $(window).scroll(() => {
 		storyLoad();
 	}
 });
+
+// (3) 하트, 하트X
+function toggleInterest(postId){
+	let interestIcon = $(`#storyInterestIcon-${postId}`);
+	if (interestIcon.hasClass("fas fa-hand-holding-heart")) { 
+		interestIcon.removeClass("fas fa-hand-holding-heart");
+		interestIcon.addClass("fas fa-hand-holding");
+	} else {
+		interestIcon.removeClass("fas fa-hand-holding");
+		interestIcon.addClass("fas fa-hand-holding-heart");
+	}
+}
