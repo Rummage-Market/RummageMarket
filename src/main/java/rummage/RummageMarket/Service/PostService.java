@@ -3,12 +3,16 @@ package rummage.RummageMarket.Service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.Post.Post;
@@ -39,4 +43,10 @@ public class PostService {
 		Post post= postUploadDto.toEntity(imageFileName, principalDetails.getUser());
 		postRepository.save(post);
 	}
+
+	@Transactional(readOnly = true)//영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영)
+    public Page<Post> postList(Pageable pageable){
+	    Page<Post> posts= postRepository.findPostList(pageable);
+        return posts;
+    }
 }

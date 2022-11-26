@@ -32,6 +32,7 @@ public class Post {
 	
 	@JoinColumn(name = "user_id")
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({ "posts" })
 	private User user;
 
 	private String imageUrl;
