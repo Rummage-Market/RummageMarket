@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 public interface InterestRepostiory extends JpaRepository<Interest, Integer>{
     
     @Modifying
-    @Query(value = "INSERT INTO likes(postId, userId) VALUES(:postId, :principalId)", nativeQuery = true)
-    int mInterest(int imageId, int principalId);
+    @Query(value = "INSERT INTO likes(postId, userId, createDate) VALUES(:postId, :principalId, now())", nativeQuery = true)
+    int mInterest(int postId, int principalId);
     
     @Modifying
     @Query(value = "DELETE FROM likes WHERE postId = :postId AND userId = :principalId", nativeQuery = true)
-    int mDisinterest(int imageId, int principalId);
+    int mDisinterest(int postId, int principalId);
 }
