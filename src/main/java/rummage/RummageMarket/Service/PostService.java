@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,8 +45,8 @@ public class PostService {
 	}
 
 	@Transactional(readOnly = true)//영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영)
-    public List<Post> postList(){
-        List<Post> posts= postRepository.findAllIdDesc();
+    public List<Post> postList(Pageable pageable){
+        List<Post> posts= postRepository.findAllIdDesc(pageable);
         return posts;
     }
 }
