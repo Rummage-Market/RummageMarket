@@ -55,7 +55,15 @@ function getStoryItem(post) {
 		<span class="like"><b id="storyLikeCount-1">3 </b>likes</span>
 
 		<div class="sl__item__contents__content">
+			<h1>${post.title}</h1><br/>
 			<p>${post.content}</p>
+			<br/>
+			<div>
+					<div><b>중고물품 :</b> ${post.item}</div>
+					<div><b>거래지역 :</b> ${post.address1} ${post.address2}</div>
+					<div><b>거래가격 :</b> ${post.price} 원</div>
+				</div>
+				<br/>
 		</div>
 
 		<div id="storyCommentList-${post.id}">`;
