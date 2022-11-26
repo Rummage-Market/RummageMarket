@@ -97,11 +97,32 @@ $(window).scroll(() => {
 // (3) 하트, 하트X
 function toggleInterest(postId){
 	let interestIcon = $(`#storyInterestIcon-${postId}`);
-	if (interestIcon.hasClass("fas fa-hand-holding-heart")) { 
+	if (interestIcon.hasClass("fas fa-hand-holding")) { 
+		
+		$.ajax({
+		type: "post",
+		url: `/api/post/${postId}/interest`,
+		dataType: "json"
+	}).done(res => {
+		interestIcon.removeClass("fas fa-hand-holding");
+		interestIcon.addClass("fas fa-hand-holding-heart");	
+	}).fail(error => {
+		console.log("오류", error);
+	});
+	
+	
+	} else {
+	
+		$.ajax({
+		type: "delete",
+		url: `/api/post/${postId}/interest`,
+		dataType: "json"
+	}).done(res => {
 		interestIcon.removeClass("fas fa-hand-holding-heart");
 		interestIcon.addClass("fas fa-hand-holding");
-	} else {
-		interestIcon.removeClass("fas fa-hand-holding");
-		interestIcon.addClass("fas fa-hand-holding-heart");
+	}).fail(error => {
+		console.log("오류", error);
+	});
+
 	}
 }
