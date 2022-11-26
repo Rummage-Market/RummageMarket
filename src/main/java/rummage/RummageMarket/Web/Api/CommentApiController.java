@@ -26,16 +26,15 @@ public class CommentApiController {
     
     @PostMapping("/api/comment")
     public ResponseEntity<?> commentSave(@RequestBody CommentDto commentDto,@AuthenticationPrincipal PrincipalDetails principalDetails){
-        System.out.println("======controller 에서 CommentDto");
-        System.out.println(commentDto);
         
         Comment comment = commentService.commentSave(commentDto.getContent(),commentDto.getPostId(),principalDetails.getUser().getId());
         return new ResponseEntity<>(new CMRespDto<>(1, "댓글쓰기 성공",comment), HttpStatus.CREATED);
     }
     
     @DeleteMapping("/api/comment/{id}")
-    public ResponseEntity<?> commentDelete(@PathVariable int id){
-        return null;
+    public ResponseEntity<?> commentDelete(@PathVariable int id) {
+        commentService.commentDelete(id);
+        return new ResponseEntity<>(new CMRespDto<>(1, "댓글삭제 성공", null), HttpStatus.CREATED);
     }
 
 }

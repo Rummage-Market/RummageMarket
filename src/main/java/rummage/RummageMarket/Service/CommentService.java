@@ -23,16 +23,6 @@ public class CommentService {
     UserRepository userRepository;
     
     @Transactional
-    public Comment 댓글쓰기() {
-        return null;
-    }
-    
-    @Transactional
-    public Comment 댓글삭제() {
-        return null;
-    }
-
-    @Transactional
     public Comment commentSave(String content, int postId, int UserId) {
 
         Post post= new Post();
@@ -53,4 +43,7 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
+    public void commentDelete(int id) {
+        commentRepository.deleteById(id); 
+    }
 }

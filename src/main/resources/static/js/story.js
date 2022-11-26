@@ -143,3 +143,17 @@ function addComment(postId) {
 
 	commentInput.val("");
 }
+
+// (4) 댓글삭제 
+function deleteComment(commentId) {
+	$.ajax({
+		type: "delete",
+		url: `/api/comment/${commentId}`,
+		dataType: "json"
+	}).done(res => {
+		console.log("성공", res);
+		$(`#storyCommentItem-${commentId}`).remove();
+	}).fail(error => {
+		console.log("오류", error);
+	});
+}
