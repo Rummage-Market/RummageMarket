@@ -25,6 +25,11 @@ public class PostController {
 
     @Autowired
     PostService postService;
+    
+    @GetMapping({ "/", "post/story" })
+    public String story() {
+        return "post/story";
+    }
 
     @PostMapping("/post")
     public String imageUpload(@Valid PostUploadDto postUploadDto, BindingResult bindingResult,
