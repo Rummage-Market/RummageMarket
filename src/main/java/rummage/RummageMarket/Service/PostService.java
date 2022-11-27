@@ -66,7 +66,7 @@ public class PostService {
 	
 	   @Transactional(readOnly = true)
 	    public Page<Post> searchPostList(Pageable pageable, int principalId, String address1, String address2, String item){
-	        
+	       
 	        Page<Post> searchedPosts= postRepository.searchPostList(pageable, address1, address2, item);
 	        
 	        searchedPosts.forEach((post)->{
@@ -79,6 +79,10 @@ public class PostService {
 	                }
 	            });
 	        });
+	        System.out.println(address1);
+	        System.out.println(address2);
+	        System.out.println(item);
+	        System.out.println(searchedPosts);
 	        
 	        
 	        return searchedPosts;
