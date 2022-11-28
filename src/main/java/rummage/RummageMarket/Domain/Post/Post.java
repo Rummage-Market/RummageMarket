@@ -21,8 +21,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import rummage.RummageMarket.Domain.Interest.Interest;
 import rummage.RummageMarket.Domain.Comment.Comment;
+import rummage.RummageMarket.Domain.Interest.Interest;
 import rummage.RummageMarket.Domain.User.User;
 
 @Builder
@@ -31,45 +31,47 @@ import rummage.RummageMarket.Domain.User.User;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@JoinColumn(name = "user_id")
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({ "posts" })
-	private User user;
-	
-	@OrderBy("id DESC")
-	@JsonIgnoreProperties({"post"})
-	@OneToMany(mappedBy = "post")
-	private List<Comment> Comments;
 
-	private String imageUrl;
-	
-	private String title; 
-	private String content; 
-	private String address1; 
-	private String address2; 
-	private String place; 
-	private String item; 
-	private int price;
-	
-	@JsonIgnoreProperties({"post"})
-	@OneToMany(mappedBy = "post")
-	private List<Interest> interest; 
-	
-  @Transient
-  private boolean interestState;
-	
-  @Transient
-  private int interestCount;
-	
-	private LocalDateTime createDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@PrePersist
-	public void createDate() {
-		this.createDate = LocalDateTime.now();
-	}
+    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({ "posts" })
+    private User user;
+
+    private String imageUrl;
+    private String title;
+    private String content;
+    private String address1;
+    private String address2;
+    private String place;
+    private String item;
+    private int price;
+
+    @JsonIgnoreProperties({ "post" })
+    @OneToMany(mappedBy = "post")
+    private List<Interest> interest;
+
+    @Transient
+    private boolean interestState;
+
+    @Transient
+    private int interestCount;
+    
+    @OrderBy("id DESC")
+    @JsonIgnoreProperties({ "post" })
+    @OneToMany(mappedBy = "post")
+    private List<Comment> Comments;
+    
+    @Transient
+    private int commentCount;
+
+    private LocalDateTime createDate;
+
+    @PrePersist
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
+    }
 }
