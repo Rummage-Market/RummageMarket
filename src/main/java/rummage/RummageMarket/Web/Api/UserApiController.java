@@ -29,49 +29,38 @@ import rummage.RummageMarket.Web.Dto.User.UserUpdateDto;
 
 @RestController
 public class UserApiController {
-	
-	@Autowired
-	NeighborService neighborService;
-	
-	@Autowired
-	UserService userService;
-	
-	//회원 프로필사진 변경
-	@PutMapping("/api/user/{principalId}/profileImage")
-    public ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile,@AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+    @Autowired
+    NeighborService neighborService;
+
+    @Autowired
+    UserService userService;
+
+    // 회원 프로필사진 변경
+    @PutMapping("/api/user/{principalId}/profileImage")
+    public ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
         User userEntity = userService.profileImageUrlUpdate(principalId, profileImageFile);
         principalDetails.setUser(userEntity); // 세션 변경
         return new ResponseEntity<>(new CMRespDto<>(1, "프로필사진변경 성공", null), HttpStatus.OK);
     }
-	
-	@GetMapping("/api/user/{pageUserId}/neighbor")
-	public ResponseEntity<?> neighborList(@PathVariable int pageUserId,@AuthenticationPrincipal PrincipalDetails principalDetails){
-		
-		List<NeighborDto> neighborDto = neighborService.neighborList(principalDetails.getUser().getId(),pageUserId);
-		
-		return new ResponseEntity<>(new CMRespDto<>(1,"구독자 정보 리스트 불러오기 성공",neighborDto),HttpStatus.OK);
-	}
-	
-	
-	
-    @PutMapping("/api/user/{id}")
-    public CMRespDto<?> update(@PathVariable int id, @Valid UserUpdateDto userUpdateDto, BindingResult bindingResult, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        if(bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<>();
-            
-            for(FieldError error:bindingResult.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-                System.out.println("=================================");
-                System.out.println(error.getDefaultMessage());
-                System.out.println("=================================");
-            }
-            throw new CustomValidationApiException("유효성검사 실패함", errorMap);
-        } else {
-            User userEntity = userService.updateUser(id, userUpdateDto.toEntity());
-            principalDetails.setUser(userEntity);
-            return new CMRespDto<>(1, "회원수정완료", userEntity);
-        }
 
+    @GetMapping("/api/user/{pageUserId}/neighbor")
+    public ResponseEntity<?> neighborList(@PathVariable int pageUserId,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        List<NeighborDto> neighborDto = neighborService.neighborList(principalDetails.getUser().getId(), pageUserId);
+
+        return new ResponseEntity<>(new CMRespDto<>(1, "구독자 정보 리스트 불러오기 성공", neighborDto), HttpStatus.OK);
+    }
+
+    @PutMapping("/api/user/{id}")
+    public CMRespDto<?> update(@PathVariable int id, @Valid UserUpdateDto userUpdateDto, BindingResult bindingResult,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        User userEntity = userService.updateUser(id, userUpdateDto.toEntity());
+        principalDetails.setUser(userEntity);
+        return new CMRespDto<>(1, "회원수정완료", userEntity);
 
     }
 }
