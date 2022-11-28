@@ -7,9 +7,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import lombok.RequiredArgsConstructor;
+import rummage.RummageMarket.Config.Oauth.OAuth2DetailsService;
+
+@RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+    
+    public final OAuth2DetailsService oAuth2DetailsService;
 	
 	@Bean
 	public BCryptPasswordEncoder encode() {
