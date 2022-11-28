@@ -38,7 +38,7 @@ function getStoryItem(post) {
 			<img class="profile-image" src="/upload/${post.user.profileImage}"
 				onerror="this.src='/images/person.jpeg'" />
 		</div>
-		<div>${post.user.nickname}</div>
+		<div OnClick="location.href ='/user/${post.user.id}'" style="cursor:pointer">${post.user.nickname}</div>
 	</div>
 
 	<div class="sl__item__img">
