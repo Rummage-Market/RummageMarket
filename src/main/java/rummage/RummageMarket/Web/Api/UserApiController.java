@@ -37,7 +37,7 @@ public class UserApiController {
 	UserService userService;
 	
 	//회원 프로필사진 변경
-	@PutMapping("/api/user/{principalId}/profileImageUrl")
+	@PutMapping("/api/user/{principalId}/profileImage")
     public ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile,@AuthenticationPrincipal PrincipalDetails principalDetails) {
         User userEntity = userService.profileImageUrlUpdate(principalId, profileImageFile);
         principalDetails.setUser(userEntity); // 세션 변경
