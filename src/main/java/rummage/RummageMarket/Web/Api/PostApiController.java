@@ -47,4 +47,16 @@ public class PostApiController {
         interestService.haveNoInterest(postId,  principalDetails.getUser().getId());
         return new ResponseEntity<>(new CMRespDto<>(1, "disinterest 성공", null), HttpStatus.OK);
     }
+    
+    @GetMapping("/api/post/search")
+    public ResponseEntity<?> searchPost(
+            @PageableDefault(size = 3) Pageable pageable, 
+            @AuthenticationPrincipal PrincipalDetails principalDetails,
+            String address1,
+            String address2,
+            String item
+            ) {
+        Page<Post> searchedposts= postService.searchPostList(pageable, principalDetails.getUser().getId(), address1, address2, item);
+        return new ResponseEntity<>(new CMRespDto<>(1, "검색된 게시글 불러오기 성공", searchedposts), HttpStatus.OK);
+    }
 }

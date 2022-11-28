@@ -395,6 +395,48 @@
   color: #fff !important;
 }
 
+.ctas {
+  margin-right: 10px;
+  padding: 5px 5px;
+  border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+  border-radius: 4px;
+  color: #262626;
+  font-weight: bold;
+  background: black !important;
+  color: #fff !important;
+  width: 50px;
+}
+
+.searchPost {
+	padding: 10px 0px 40px;
+	text-align: center;
+}
+
+select {
+  box-sizing: border-box;
+  width: 100px;
+  padding: 4px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+option {
+  padding: 4px;
+  font-size: 14px;
+  color: #fff;
+  background: #272822;
+}
+
+.item {
+  box-sizing: border-box;
+  width: 300px;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 6px;
+  border-width: thin;
+}
+
+
 .modal-info {
   position: fixed;
   top: 0;

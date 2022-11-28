@@ -9,4 +9,7 @@ public interface PostRepository extends JpaRepository<Post, Integer>{
     
     @Query(value = "SELECT * FROM post ORDER BY id DESC", nativeQuery = true)
     Page<Post> findPostList(Pageable pageable);
+    
+    @Query(value = "SELECT * FROM post WHERE address1 LIKE %:address1% AND address2 LIKE %:address2% AND item LIKE %:item% ORDER BY id DESC", nativeQuery = true)
+    Page<Post> searchPostList(Pageable pageable, String address1, String address2, String item);
 }

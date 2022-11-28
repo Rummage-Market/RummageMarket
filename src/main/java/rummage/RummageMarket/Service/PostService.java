@@ -63,4 +63,23 @@ public class PostService {
 	    
         return posts;
     }
+	
+	   @Transactional(readOnly = true)
+	    public Page<Post> searchPostList(Pageable pageable, int principalId, String address1, String address2, String item){
+	       
+	        Page<Post> searchedPosts= postRepository.searchPostList(pageable, address1, address2, item);
+	        
+	        searchedPosts.forEach((post)->{
+	            
+	           post.setInterestCount(post.getInterest().size());
+	            
+	           post.getInterest().forEach((interest) -> {
+	                if(interest.getUser().getId() == principalId) {
+	                    post.setInterestState(true);
+	                }
+	            });
+	        });
+	        
+	        return searchedPosts;
+	    }
 }
