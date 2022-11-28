@@ -79,11 +79,6 @@ public class PostService {
 	                }
 	            });
 	        });
-	        System.out.println(address1);
-	        System.out.println(address2);
-	        System.out.println(item);
-	        System.out.println(searchedPosts);
-	        
 	        
 	        return searchedPosts;
 	    }
