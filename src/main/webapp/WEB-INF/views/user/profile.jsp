@@ -86,7 +86,7 @@
 							<div><h4><b>${post.title}</b></h4></div>
 						    <div><p>${post.address1} ${post.address2}</p></div>
 						    <i class="far fa-heart"></i><span>${post.interestCount}</span>	
-						    <i class="far fa-comments"></i><span>0</span>					    
+						    <i class="far fa-comments"></i><span>${post.commentCount}</span>					    
 						</a>
 					</div>
 				</div>
