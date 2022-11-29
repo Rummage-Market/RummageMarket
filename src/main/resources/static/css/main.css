@@ -1,0 +1,159 @@
+@import "header.css";
+@import "footer.css";
+
+.introduce{
+	background-color: #ddd;
+	background-position: center;
+	background-size: cover;
+	height:700px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.introduce .title{
+	text-align: center;
+}
+
+.introduce .title h1{
+	font-size:40px;
+	font-family: 'Caveat', cursive;
+	color: #262626;
+	margin-bottom: 0;
+}
+
+.introduce .title p{
+	color: #444;
+	margin-top: 0px;
+	margin-bottom: 30px;
+}
+
+.introduce .title button{
+	  font-family: Montserrat;
+	  grid-template-columns: 1fr 1fr;
+	  grid-gap: 20px;
+	  font-style: normal;
+	  font-weight: 400;
+	  font-size: 20px;
+	  line-height: 0px;
+	  padding: 10px 30px;
+	  width: 200px;
+	  height: 40px;
+	  background-color: #2f2d2d;
+	  border-radius: 11px;
+	  border: 0;
+	  color: white;
+	  transition: .5s ease;
+}
+
+.introduce .title button:hover{
+	  font-family: Montserrat;
+	  grid-template-columns: 1fr 1fr;
+	  grid-gap: 20px;
+	  font-style: normal;
+	  font-weight: 400;
+	  font-size: 20px;
+	  line-height: 0px;
+	  padding: 10px 30px;
+	  width: 200px;
+	  height: 40px;
+	  background-color: #2f2d2d;
+	  border-radius: 11px;
+	  border: 2px solid black;
+	  color: black;
+	  transition: .5s ease;
+	  background: transparent;
+}
+
+.service{
+	background: #393E46;
+}
+
+.service .service-introduce{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 1000px;
+	margin:auto;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.service .img{
+	height: 300px;
+}
+
+.service .img img{
+	height: 100%;
+	width: auto;
+}
+
+.service .text{
+	text-align: end;
+	color: #F7F7F7;
+	padding-left: 100px;
+}
+
+.service .text h1{
+	letter-spacing: 0.2em;
+}
+
+.service .text p{
+	word-wrap: break-word;
+	word-break: keep-all;
+	font-size:15px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.service .text button a{
+	color: #F7F7F7;
+}
+
+.service .text button{
+	  font-family: Montserrat;
+	  grid-template-columns: 1fr 1fr;
+	  grid-gap: 20px;
+	  font-style: normal;
+	  font-weight: 400;
+	  font-size: 14px;
+	  line-height: 0px;
+	  padding: 15px 15px;
+	  width: 100px;
+	  height: 20px;
+	  background-color: #2f2d2d;
+	  border-radius: 11px;
+	  border: 0;
+	  color: white;
+	  transition: .5s ease;
+}
+
+.service .text button:hover{
+	  font-family: Montserrat;
+	  grid-template-columns: 1fr 1fr;
+	  grid-gap: 20px;
+	  font-style: normal;
+	  font-weight: 400;
+	  font-size: 14px;
+	  line-height: 0px;
+	  padding: 15px 15px;
+	  width: 100px;
+	  height: 20px;
+	  background-color: #2f2d2d;
+	  border-radius: 11px;
+	  border: 2px solid black;
+	  color: black;
+	  transition: .5s ease;
+	  background: transparent;
+}
+
+.popular .popular-post-logo{
+	text-align: center;
+	padding-top:80px;
+	padding-bottom:50px;
+}
+
+.popular .text{
+	color: #393E46;
+	font-size: 25px;
+}

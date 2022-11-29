@@ -22,7 +22,12 @@ public class PostController {
     @Autowired
     PostService postService;
     
-    @GetMapping({ "/", "post/story" })
+    @GetMapping({"/","post/main"})
+    public String mainPage() {
+        return "post/main";
+    }
+    
+    @GetMapping("post/story")
     public String story() {
         return "post/story";
     }

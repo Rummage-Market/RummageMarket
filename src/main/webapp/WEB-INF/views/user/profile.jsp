@@ -30,7 +30,10 @@
 				
 				<c:choose>
 					<c:when test="${dto.pageOwnerState}">
-						<button class="cta" onclick="location.href='/post/upload'">사진등록</button>
+						<button class="cta" onclick="location.href='/post/upload'">게시글 작성</button>
+						<button class="modi" onclick="popup('.modal-info')">
+							<i class="fas fa-cog"></i>
+						</button>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
@@ -43,9 +46,6 @@
 						</c:choose>
 					</c:otherwise>
 				</c:choose>
-				<button class="modi" onclick="popup('.modal-info')">
-					<i class="fas fa-cog"></i>
-				</button>
 			</div>
 
 			<div class="subscribe">
@@ -98,15 +98,14 @@
 	</div>
 </section>
 
-<!--로그아웃, 회원정보변경 모달-->
+<!--회원정보변경 모달-->
 <div class="modal-info" onclick="modalInfo()">
 	<div class="modal">
-		<button onclick="location.href='/user/1/update'">회원정보 변경</button>
-		<button onclick="location.href='/logout'">로그아웃</button>
+		<button onclick="location.href='/user/${principal.user.id}/update'">회원정보 변경</button>
 		<button onclick="closePopup('.modal-info')">취소</button>
 	</div>
 </div>
-<!--로그아웃, 회원정보변경 모달 end-->
+<!--회원정보변경 모달 end-->
 
 <!--프로필사진 바꾸기 모달-->
 <div class="modal-image" onclick="modalImage()">

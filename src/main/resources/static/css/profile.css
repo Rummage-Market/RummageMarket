@@ -171,7 +171,8 @@
 /* Tab-content 1*/
 #tab-content #tab-1-content {
   width: 100%;
-  margin-bottom: 30px;
+  margin-top:20px;
+  margin-bottom: 50px;
 }
 #tab-content #tab-1-content .tab-1-content-inner {
   display: grid;

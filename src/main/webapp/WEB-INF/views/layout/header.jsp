@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="/css/profile.css">
 <link rel="stylesheet" href="/css/upload.css">
 <link rel="stylesheet" href="/css/update.css">
+<link rel="stylesheet" href="/css/main.css">
 <link rel="shortcut icon" href="/images/insta.svg">
 
 <!-- Fontawesome -->
@@ -58,7 +59,7 @@
 			</a>
 			<nav class="navi">
 				<ul class="navi-list">
-					<li class="navi-item"><a href="?"> <i class="fas fa-store"></i>
+					<li class="navi-item"><a href="/post/story"> <i class="fas fa-store"></i>
 					</a></li>
 					<li class="navi-item"><a href="/user/${principal.user.id}"> <i
 							class="fas fa-user"></i>
