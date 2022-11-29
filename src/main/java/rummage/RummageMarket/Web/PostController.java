@@ -5,12 +5,15 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
+import rummage.RummageMarket.Domain.Post.Post;
 import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 import rummage.RummageMarket.Service.PostService;
 import rummage.RummageMarket.Web.Dto.Post.PostUploadDto;
@@ -30,6 +33,17 @@ public class PostController {
     @GetMapping("post/story")
     public String story() {
         return "post/story";
+    }
+    
+    @GetMapping("/post/{postId}")
+    public String detailstory(@PathVariable int postId,Model model,@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        System.out.println("PostController 호출");
+        Post post = postService.detailpost(principalDetails.getUser().getId(),postId);
+        System.out.println(post.getId());
+        
+        model.addAttribute("post",post);
+        System.out.println("PostController 호출2");
+        return "post/detailstory";
     }
 
     @PostMapping("/post")
