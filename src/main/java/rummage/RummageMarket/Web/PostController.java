@@ -1,5 +1,7 @@
 package rummage.RummageMarket.Web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,9 @@ public class PostController {
     PostService postService;
     
     @GetMapping({"/","post/main"})
-    public String mainPage() {
+    public String mainPage(Model model) {
+        List<Post> posts = postService.popularPost();
+        model.addAttribute("posts", posts);
         return "post/main";
     }
     

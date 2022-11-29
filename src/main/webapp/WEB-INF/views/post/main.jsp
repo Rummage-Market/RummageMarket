@@ -18,7 +18,8 @@
 		</div>
 		<div class="text">
 			<h1>우리 서비스를 소개합니다</h1>
-			<p>원하는 지역에서 거래를 할 수 있어요!<p>
+			<p>원하는 지역에서 거래를 할 수 있어요!
+			<p>
 		</div>
 	</div>
 </section>
@@ -43,93 +44,31 @@
 
 				<!--아이템들-->
 
-								
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> 							
-							<div><h4><b>제목 넣기</b></h4></div>
-						    <div><p>서울시 노원구</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>		
-						</a>
-					</div>
-				</div>
 
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> 							
-							<div><h4><b>제목 넣기</b></h4></div>
-						    <div><p>서울시 노원구</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>		
+				<c:forEach var="post" items="${posts}">
+					<div class="img-box">
+						<a href=""> <img src="/upload/${post.imageUrl}" />
 						</a>
+						<div class="comment">
+							<a href="/post/${post.id} " class=""">
+								<div>
+									<h4>
+										<b>${post.title}</b>
+									</h4>
+								</div>
+								<div>
+									<p>${post.address1}${post.address2}</p>
+								</div> <i class="far fa-heart"></i><span>${post.interestCount}</span>
+								<i class="far fa-comments"></i><span>${post.commentCount}</span>
+							</a>
+						</div>
 					</div>
-				</div>
-
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> 							
-							<div><h4><b>제목 넣기</b></h4></div>
-						    <div><p>서울시 노원구</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>		
-						</a>
-					</div>
-				</div>
-
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> 							
-							<div><h4><b>제목 넣기</b></h4></div>
-						    <div><p>서울시 노원구</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>		
-						</a>
-					</div>
-				</div>
-				
-								<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> 							
-							<div><h4><b>제목 넣기</b></h4></div>
-						    <div><p>서울시 노원구</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>		
-						</a>
-					</div>
-				</div>
-				
-								<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> 							
-							<div><h4><b>제목 넣기</b></h4></div>
-						    <div><p>서울시 노원구</p></div>
-						    <i class="far fa-heart"></i><span>0</span>	
-						    <i class="far fa-comments"></i><span>0</span>		
-						</a>
-					</div>
-				</div>
-
+				</c:forEach>
 				<!--아이템들end-->
 			</div>
 		</div>
 	</div>
 </section>
-
-
-
 
 <script src="/js/main.js"></script>
 

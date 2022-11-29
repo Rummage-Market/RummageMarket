@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
+import rummage.RummageMarket.Domain.Post.Post;
 import rummage.RummageMarket.Service.UserService;
 import rummage.RummageMarket.Web.Dto.User.UserProfileDto;
 

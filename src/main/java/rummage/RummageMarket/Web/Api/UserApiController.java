@@ -1,8 +1,6 @@
 package rummage.RummageMarket.Web.Api;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -11,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.User.User;
-import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
 import rummage.RummageMarket.Service.NeighborService;
 import rummage.RummageMarket.Service.UserService;
 import rummage.RummageMarket.Web.Dto.CMRespDto;

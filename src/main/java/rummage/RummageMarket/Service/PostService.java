@@ -64,23 +64,34 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
+    public List<Post> popularPost() {
+
+        List<Post> posts = postRepository.findPopularPostList();
+
+        posts.forEach((post) -> {
+            post.setInterestCount(post.getInterest().size());
+        });
+        return posts;
+    }
+
+    @Transactional(readOnly = true)
     public Post detailpost(int principalId, int postId) {
 
         Post post = postRepository.findById(postId).orElseThrow(() -> {
             throw new CustomException("해당 게시글은 없는 게시글입니다.");
         });
-        
+
         System.out.println("service 호출 됨");
         System.out.println(post.getId());
 
         post.setInterestCount(post.getInterest().size());
 
         post.getInterest().forEach((interest) -> {
-                if (interest.getUser().getId() == principalId) {
-                    post.setInterestState(true);
-                }
-            });
-  
+            if (interest.getUser().getId() == principalId) {
+                post.setInterestState(true);
+            }
+        });
+
         return post;
     }
 
