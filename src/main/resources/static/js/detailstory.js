@@ -32,73 +32,72 @@ storyLoad();
 	
 function getStoryItem(post) {
 	let item = `<div class="story-list__item">
-	<div class="sl__item__header">
-		<div>
-			<img class="profile-image" src="/upload/${post.user.profileImage}"
-				onerror="this.src='/images/person.jpeg'" />
-		</div>
-		<div OnClick="location.href ='/user/${post.user.id}'" style="cursor:pointer">${post.user.nickname}</div>
-	</div>
-
-	<div class="sl__item__img">
-		<img src="/upload/${post.imageUrl}" />
-	</div>
-
-	<div class="sl__item__contents">
-		<div class="sl__item__contents__icon">
-
-			
-			<button>`;
-				if(post.interestState){
-					item +=`<i class="fas fa-heart active" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
-				}else{
-					item +=`<i class="far fa-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
-				}
-			item +=`	
-				
-			</button>
-			
-			<span class="interest"><b id="storyInterestCount-${post.id}">${post.interestCount} </b>interests</span>
-		</div>
-
-		<div class="sl__item__contents__content">
-			<h1>${post.title}</h1><br/>
-			<p>${post.content}</p>
-			<br/>
+		<div class="sl__item__header">
 			<div>
+				<img class="profile-image" src="/upload/${post.user.profileImage}"
+					onerror="this.src='/images/person.jpeg'" />
+			</div>
+			<div OnClick="location.href ='/user/${post.user.id}'" style="cursor:pointer">${post.user.nickname}</div>
+		</div>
+
+		<div class="sl__item__img">
+			<img src="/upload/${post.imageUrl}" />
+		</div>
+
+		<div class="sl__item__contents">
+
+			<div class="sl__item__contents__icon">
+
+				<button>`;
+					if(post.interestState){
+						item +=`<i class="fas fa-heart active" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
+					}else{
+						item +=`<i class="far fa-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
+					}
+				item +=`	
+					
+				</button>
+				
+				<span class="interest"><b id="storyInterestCount-${post.id}">${post.interestCount} </b>interests</span>
+
+			</div>
+
+			<div class="sl__item__contents__content">
+				<h1>${post.title}</h1><br/>
+				<p>${post.content}</p>
+				<br/>
+				<div>
 					<div><b>중고물품 :</b> ${post.item}</div>
 					<div><b>거래지역 :</b> ${post.address1} ${post.address2}</div>
 					<div><b>거래가격 :</b> ${post.price} 원</div>
 				</div>
 				<br/>
-				</div>
-				
-				<div id="storyCommentList-${post.id}">`;
+			</div>
 
-	post.comments.forEach((comment) => {
-		item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
-				<p>
-					<b>${comment.user.username} :</b> ${comment.content}
-				</p>`;
+			<div class="sl__item__contents__commentList" id="storyCommentList-${post.id}">`;
 
-		if (principalId == comment.user.id) {
-			item += `	<button onclick="deleteComment(${comment.id})">
-										<i class="fas fa-times"></i>
-									</button>`;
-		}
-		item += `	
-			</div>`;
-	});
-	item += `
+			post.comments.forEach((comment) => {
+				item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+						<p>
+							<b>${comment.user.username} :</b> ${comment.content}
+						</p>`;
+
+				if (principalId == comment.user.id) {
+					item += `<button onclick="deleteComment(${comment.id})">
+								<i class="fas fa-times"></i>
+							</button>`;
+				}
+				item += `</div>`;
+			});
+			item += `</div>
+
+			<div class="sl__item__input">
+				<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${post.id}" />
+				<button type="button" onClick="addComment(${post.id})">게시</button>
+			</div>
+
 		</div>
-
-		<div class="sl__item__input">
-			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${post.id}" />
-			<button type="button" onClick="addComment(${post.id})">게시</button>
-		</div>
-
-	</div>
-</div>`;
+	</div>`;
 	return item;
 }
 		

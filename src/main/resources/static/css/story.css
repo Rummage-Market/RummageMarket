@@ -142,6 +142,26 @@
   .story-list
   .story-list__item
   .sl__item__contents
+  .sl__item__contents__commentList{
+  padding-top: 10px;
+  padding-bottom: 10px;
+ }
+ 
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
+  .sl__item__contents__commentList
+  .sl__item__contents__comment{
+    margin: 0
+ }
+
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
   .sl__item__contents__content
   .sl__item__contents__content_hover {
   padding: 216516px 15px;
