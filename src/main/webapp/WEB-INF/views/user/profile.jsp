@@ -75,20 +75,18 @@
 			<div class="tab-1-content-inner">
 
 				<!--아이템들-->
-
-				
+	
 				<c:forEach var="post" items="${dto.user.posts}">
 				<div class="img-box">
-					<a href=""> <img src="/upload/${post.imageUrl}" />
+					<a href="/post/${post.id} " class="">
+						<img src="/upload/${post.imageUrl}" />
+						<div class="information">
+								<p><b>${post.title}</b><br/>
+							    ${post.address1} ${post.address2} <br/>
+							    <i class="far fa-heart"></i>&nbsp;&nbsp;<span>${post.interestCount}</span>&nbsp;&nbsp;
+							    <i class="far fa-comments"></i>&nbsp;&nbsp;<span>${post.commentCount}</span></p>			    
+						</div>
 					</a>
-					<div class="comment">
-						<a href="/post/${post.id} " class=""">
-							<div><h4><b>${post.title}</b></h4></div>
-						    <div><p>${post.address1} ${post.address2}</p></div>
-						    <i class="far fa-heart"></i><span>${post.interestCount}</span>	
-						    <i class="far fa-comments"></i><span>${post.commentCount}</span>			    
-						</a>
-					</div>
 				</div>
 				</c:forEach>
 
