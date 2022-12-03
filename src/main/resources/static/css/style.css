@@ -85,6 +85,10 @@ button {
   box-shadow: 0 0 0 1.2px black;
 }
 
+#username {
+	margin: 20px 14.5px 0 14.5px;
+}
+
 .login__input input::placeholder {
   font-family: 'Gowun Batang', serif;
 }
@@ -165,3 +169,14 @@ span {
   	color: #000000;
 }
 
+.username_ok{
+	color:#008000;
+	font-size: 15px;
+	display: none;
+}
+
+.username_already{
+	color:#6A82FB;
+	font-size: 15px;
+	display: none;
+}

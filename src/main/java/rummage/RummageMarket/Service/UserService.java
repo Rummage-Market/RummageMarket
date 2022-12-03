@@ -101,4 +101,9 @@ public class UserService {
 
         return userEntity;
     } // 더티체킹으로 업데이트 됨.
+    
+    @Transactional(readOnly = true)
+    public boolean usernameCheck(String username) {
+        return userRepository.existsByUsername(username);
+    }
 }

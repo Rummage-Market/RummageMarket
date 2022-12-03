@@ -1,0 +1,20 @@
+function checkUsername() {
+	let username = $('#username').val();
+	$.ajax({
+		url:'/auth/usernameCheck',
+		type:'post',
+		data:{username:username}
+    }).done(res=>{
+		if(res.data == false){ 
+	        $('#usernameOk').css("display","inline-block"); 
+	        $('#usernameAlready').css("display", "none");
+	    } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+            $('#usernameAlready').css("display","inline-block");
+            $('#usernameOk').css("display", "none");
+            $('#username').val('');
+            $('#username').focus();
+		}
+	}).fail(error=>{
+		console.log(error);
+	});
+};
