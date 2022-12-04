@@ -13,11 +13,19 @@
 	<artifactId>RummageMarket</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>RummageMarket</name>
+	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+
+		<!-- AWS S3 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-aws</artifactId>
+			<version>2.2.6.RELEASE</version>
+		</dependency>
 
 		<!-- qlrm -->
 		<dependency>
