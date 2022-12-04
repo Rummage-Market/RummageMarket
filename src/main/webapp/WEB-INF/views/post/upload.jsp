@@ -39,7 +39,7 @@
 			</div>
 			<br>
 			<div class="upload-form-detail">
-				<button class="cta blue">업로드</button>
+				<button class="ctas">업로드</button>
 			</div>
 			<!--사진설명end-->
 

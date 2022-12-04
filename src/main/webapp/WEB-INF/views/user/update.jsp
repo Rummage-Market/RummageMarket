@@ -61,7 +61,7 @@
 				<div class="content-item__6">
 					<div class="item__title"></div>
 					<div class="item__input">
-						<button onclick="update(${principal.user.id})">제출</button>
+						<button class=ctas>제출</button>
 					</div>
 				</div>
 				<!--제출버튼end-->
