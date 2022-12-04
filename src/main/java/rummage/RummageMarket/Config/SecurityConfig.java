@@ -2,20 +2,25 @@ package rummage.RummageMarket.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Config.Oauth.OAuth2DetailsService;
 
+@EnableGlobalMethodSecurity(prePostEnabled = true) //특정 주소로 접근하면 권한 및 인증을 미리 체크하겠다는 뜻
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     
     public final OAuth2DetailsService oAuth2DetailsService;
+    
+    private final AuthenticationFailureHandler customAuthFailureHandler;
 	
 	@Bean
 	public BCryptPasswordEncoder encode() {
@@ -34,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.loginPage("/auth/signin")
 			.loginProcessingUrl("/auth/signin") // 로그인 요청인지 아닌지 판단 -> 로그인 요청이면 UserDetailsService가 낚아챔.
 			.defaultSuccessUrl("/")
+			.failureHandler(customAuthFailureHandler)
 		    .and()
             .oauth2Login()
             .userInfoEndpoint()

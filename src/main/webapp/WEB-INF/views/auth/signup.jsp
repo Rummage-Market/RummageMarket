@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Gowun+Batang&display=swap" rel="stylesheet">
+	<!-- 제이쿼리 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -28,7 +30,10 @@
 
 
                         <form class="login__input" action="/auth/signup" method="post">
-                            <input type="text" name="username" placeholder="유저네임" required="required" />
+                            <input type="text" name="username" id="username" placeholder="유저네임" required="required" onchange="checkUsername()"/>
+                            <!-- id ajax 중복체크 -->
+								<span class="username_ok" id="usernameOk">사용 가능한 유저네임입니다.</span>
+								<span class="username_already" id="usernameAlready">누군가 이 유저네임을 사용하고 있어요.</span>
                             <input type="password" name="password" placeholder="패스워드" required="required" />
                             <input type="text" name="nickname" placeholder="닉네임" required="required" />
                             <button>
@@ -46,6 +51,7 @@
                 </article>
             </section>
         </main>
+        <script src="/js/signup.js"></script>
     </div>
 </body>
 

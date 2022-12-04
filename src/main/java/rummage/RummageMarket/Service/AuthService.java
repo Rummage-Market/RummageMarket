@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Domain.User.User;
 import rummage.RummageMarket.Domain.User.UserRepository;
+import rummage.RummageMarket.Handler.Ex.CustomException;
 
 @RequiredArgsConstructor
 @Service
@@ -26,4 +27,5 @@ public class AuthService {
 		User userEntity = userRepository.save(user);
 		return userEntity;
 	}
+	
 }
