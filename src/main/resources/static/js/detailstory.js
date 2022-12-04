@@ -41,7 +41,7 @@ function getStoryItem(post) {
 		</div>
 
 		<div class="sl__item__img">
-			<img src="${post.imageUrl}" />
+			<img src="${post.imageUrl}"/>
 		</div>
 
 		<div class="sl__item__contents">
