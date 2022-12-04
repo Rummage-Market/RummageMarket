@@ -2,9 +2,6 @@ package rummage.RummageMarket.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +35,12 @@ public class UserService {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-    
+
     @Autowired
     AmazonS3Client amazonS3Client;
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-
 
     @Transactional(readOnly = true)
     public UserProfileDto userprofile(int pageUserId, int principalId) {
@@ -89,16 +85,16 @@ public class UserService {
 
     @Transactional
     public User profileImageUrlUpdate(int principalId, MultipartFile profileImageFile, String userProfileUrl) {
-        
+
         if (userProfileUrl != null) {
             String key = userProfileUrl.substring(54);
             amazonS3Client.deleteObject(bucket, key);
         }
-        
+
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(profileImageFile.getContentType());
         objectMetadata.setContentLength(profileImageFile.getSize());
-        
+
         String originalFilename = profileImageFile.getOriginalFilename();// 김영광.jpg
         int index = originalFilename.lastIndexOf(".");// '.'이라는 문자가 발견되는 위치에 해당하는 index값(위치값) = 3
         String ext = originalFilename.substring(index + 1);// index + 1 = 4 -> jpg
@@ -112,9 +108,9 @@ public class UserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         String storeFileUrl = amazonS3Client.getUrl(bucket, key).toString();
-      
+
         User userEntity = userRepository.findById(principalId).orElseThrow(() -> {
             // throw -> return 으로 변경
             return new CustomApiException("유저를 찾을 수 없습니다.");
@@ -122,7 +118,7 @@ public class UserService {
         userEntity.setProfileImage(storeFileUrl);
 
         return userEntity;
-    } // 더티체킹으로 업데이트 됨.
+    }
 
     @Transactional(readOnly = true)
     public boolean usernameCheck(String username) {
