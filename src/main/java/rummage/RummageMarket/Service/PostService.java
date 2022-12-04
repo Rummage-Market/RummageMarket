@@ -1,8 +1,7 @@
 package rummage.RummageMarket.Service;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +12,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.Post.Post;
@@ -26,22 +31,36 @@ public class PostService {
     @Autowired
     PostRepository postRepository;
 
-    @Value("${file.path}")
-    private String uploadFolder;
+    @Autowired
+    AmazonS3Client amazonS3Client;
 
-    public void upload(PostUploadDto postUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        UUID uuid = UUID.randomUUID(); // 랜덤의 숫자생성
-        String imageFileName = uuid + "_" + postUploadDto.getFile().getOriginalFilename(); // 사진이름을 최대한 중복이 안되게끔 처리
-        System.out.println("서비스 호출");
-        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
 
-        try {
-            Files.write(imageFilePath, postUploadDto.getFile().getBytes());
-        } catch (Exception e) {
+    @Transactional
+    public void upload(MultipartFile file, PostUploadDto postUploadDto,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(file.getContentType());
+        objectMetadata.setContentLength(file.getSize());
+
+        String originalFilename = file.getOriginalFilename();// 김영광.jpg
+        int index = originalFilename.lastIndexOf(".");// '.'이라는 문자가 발견되는 위치에 해당하는 index값(위치값) = 3
+        String ext = originalFilename.substring(index + 1);// index + 1 = 4 -> jpg
+
+        String storeFileName = UUID.randomUUID() + "." + ext;// uuid.jpg
+        String key = "upload/" + storeFileName;
+
+        try (InputStream inputStream = file.getInputStream()) {
+            amazonS3Client.putObject(new PutObjectRequest(bucket, key, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Post post = postUploadDto.toEntity(imageFileName, principalDetails.getUser());
+        String storeFileUrl = amazonS3Client.getUrl(bucket, key).toString();
+        Post post = postUploadDto.toEntity(storeFileUrl, principalDetails.getUser());
         postRepository.save(post);
     }
 

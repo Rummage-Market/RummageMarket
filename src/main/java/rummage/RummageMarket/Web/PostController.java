@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
@@ -52,14 +54,14 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public String postUpload(@Valid PostUploadDto postUploadDto, BindingResult bindingResult,
+    public String postUpload(@RequestPart MultipartFile file,@Valid PostUploadDto postUploadDto, BindingResult bindingResult,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
         if (postUploadDto.getFile().isEmpty()) {
             throw new CustomValidationException("이미지는 반드시 첨부해주세요.", null);
         }
 
-        postService.upload(postUploadDto, principalDetails);
+        postService.upload(file,postUploadDto, principalDetails);
         return "redirect:/user/" + principalDetails.getUser().getId();
     }
 

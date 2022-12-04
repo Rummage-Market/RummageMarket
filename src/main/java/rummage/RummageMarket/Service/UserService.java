@@ -1,8 +1,7 @@
 package rummage.RummageMarket.Service;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import rummage.RummageMarket.Domain.Neighbor.NeighborRepository;
 import rummage.RummageMarket.Domain.User.User;
@@ -31,6 +35,12 @@ public class UserService {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    AmazonS3Client amazonS3Client;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
 
     @Transactional(readOnly = true)
     public UserProfileDto userprofile(int pageUserId, int principalId) {
@@ -73,32 +83,42 @@ public class UserService {
         return userEntity;
     }
 
-    @Value("${file.path}")
-    private String uploadFolder;
-
     @Transactional
-    public User profileImageUrlUpdate(int principalId, MultipartFile profileImageFile) {
-        UUID uuid = UUID.randomUUID(); // uuid
-        String imageFileName = uuid + "_" + profileImageFile.getOriginalFilename(); // 1.jpg
-        System.out.println("이미지 파일이름 : " + imageFileName);
+    public User profileImageUrlUpdate(int principalId, MultipartFile profileImageFile, String userProfileUrl) {
 
-        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+        if (userProfileUrl != null) {
+            String key = userProfileUrl.substring(54);
+            amazonS3Client.deleteObject(bucket, key);
+        }
 
-        // 통신, I/O -> 예외가 발생할 수 있다.
-        try {
-            Files.write(imageFilePath, profileImageFile.getBytes());
-        } catch (Exception e) {
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(profileImageFile.getContentType());
+        objectMetadata.setContentLength(profileImageFile.getSize());
+
+        String originalFilename = profileImageFile.getOriginalFilename();// 김영광.jpg
+        int index = originalFilename.lastIndexOf(".");// '.'이라는 문자가 발견되는 위치에 해당하는 index값(위치값) = 3
+        String ext = originalFilename.substring(index + 1);// index + 1 = 4 -> jpg
+
+        String storeFileName = UUID.randomUUID() + "." + ext;// uuid.jpg
+        String key = "upload/" + storeFileName;
+
+        try (InputStream inputStream = profileImageFile.getInputStream()) {
+            amazonS3Client.putObject(new PutObjectRequest(bucket, key, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+        String storeFileUrl = amazonS3Client.getUrl(bucket, key).toString();
 
         User userEntity = userRepository.findById(principalId).orElseThrow(() -> {
             // throw -> return 으로 변경
             return new CustomApiException("유저를 찾을 수 없습니다.");
         });
-        userEntity.setProfileImage(imageFileName);
+        userEntity.setProfileImage(storeFileUrl);
 
         return userEntity;
-    } // 더티체킹으로 업데이트 됨.
+    }
 
     @Transactional(readOnly = true)
     public boolean usernameCheck(String username) {
