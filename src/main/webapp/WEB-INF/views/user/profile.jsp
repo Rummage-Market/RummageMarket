@@ -79,7 +79,7 @@
 				<c:forEach var="post" items="${dto.user.posts}">
 				<div class="img-box">
 					<a href="/post/${post.id} " class="">
-						<img src="/upload/${post.imageUrl}" />
+						<img src="${post.imageUrl}" />
 						<div class="information">
 								<p><b>${post.title}</b><br/>
 							    ${post.address1} ${post.address2} <br/>
