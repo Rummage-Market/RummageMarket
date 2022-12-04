@@ -180,3 +180,12 @@ span {
 	font-size: 15px;
 	display: none;
 }
+
+.alert-danger{
+	background:#f6e3e3;
+	color:red;
+	font-size: 13px;
+	padding : 5px 16px 5px 16px;
+	margin: 20px 14.5px 0px 14.5px;
+	border-radius: 11px;
+}

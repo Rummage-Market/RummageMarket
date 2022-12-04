@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+import rummage.RummageMarket.Handler.Auth.customAuthFailureHandler;
 import rummage.RummageMarket.Handler.Ex.CustomApiException;
 import rummage.RummageMarket.Handler.Ex.CustomException;
 import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
@@ -40,4 +41,5 @@ public class ControllerExceptionHandler {
 	public ResponseEntity<?> apiException(CustomApiException e) {
 		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
 	}
+	
 }
