@@ -31,12 +31,16 @@
                         
                         <form class="login__input" action="/auth/signin" method="POST">
                             <input type="text" name="username" placeholder="유저네임" required="required" />
-                            <input type="password" id = "password" name="password" placeholder="비밀번호" required="required" />
+                            <input type="password" id = "password" name="password" placeholder="비밀번호" required="required" class="loginPasswordInput"/>
 							<span> 
 							    <c:if test="${error}">
 							        <p id="valid" class="alert-danger">${exception}</p>
 							    </c:if>
 							</span>
+							<div class="checks-remember-me">
+							  <input type="checkbox" id="remember-me" name="remember-me" class="rememberMe"/>
+							  <label for="remember-me" class=rememberMeLabel>로그인 유지</label>
+							</div>
                             <button>
                             	<div>로그인</div>
                             </button>

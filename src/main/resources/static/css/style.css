@@ -72,7 +72,7 @@ button {
   width: 319px;
   nnnheight: 40px;
   text-align: center;
-  margin: 20px auto;
+  margin: 20px 14.5px 20px 14.5px;
   background: #efefef;
   border: 0;
   border-radius: 11px;
@@ -102,7 +102,6 @@ button {
   font-size: 15px;
   line-height: 0px;
   margin-left: 5px;
-  margin-top: 20px;
   padding: 10px;
   width: 319px;
   height: 40px;
@@ -189,3 +188,21 @@ span {
 	margin: 20px 14.5px 0px 14.5px;
 	border-radius: 11px;
 }
+
+.checks-remember-me{
+	position: relative;
+	bottom: 2px;
+}
+
+.rememberMe {
+  margin-left: 28px;
+  position: relative;
+  top: 19px;
+  accent-color: #2f2d2d;
+}
+.rememberMeLabel {
+	position: relative;
+	right: 90px;
+	font-size: 15px;
+}
+
