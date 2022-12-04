@@ -68,7 +68,7 @@ function getSubscribeModalItem(u) {
 	</div>
 	<div class="subscribe__btn">`;
 
-	
+
 	if (!u.equalUserState) { // 동일 유저가 아닐 때 버튼이 만들이 만들어져야함
 		if (u.neighborState) { // 구독한 상태
 			item += `<button class="cta blue" onclick="toggleSubscribe(${u.id}, this)">이웃취소</button>`;
@@ -76,7 +76,7 @@ function getSubscribeModalItem(u) {
 			item += `<button class="cta" onclick="toggleSubscribe(${u.id}, this)">이웃맺기</button>`;
 		}
 	}
-	
+
 	item += `
 	</div>
 </div>`;
@@ -90,8 +90,8 @@ function profileImageUpload(pageUserId, principalId) {
 
 	// console.log("pageUserId",pageUserId);
 	// console.log("principalId",principalId);
-	
-	if(pageUserId != principalId){
+
+	if (pageUserId != principalId) {
 		alert("프로필 사진을 수정할 수 없는 유저입니다.");
 		return;
 	}
@@ -106,31 +106,31 @@ function profileImageUpload(pageUserId, principalId) {
 			alert("이미지를 등록해야 합니다.");
 			return;
 		}
-		
+
 		// 서버에 이미지를 전송
 		let profileImageForm = $("#userProfileImageForm")[0];
 		console.log(profileImageForm);
-		
+
 		// form 데이터를 전송하려면 formData 객체로 받는다.
 		// FormData 객체를 이용하면 form 태그의 필드와 그 값을 나타내는 일련의 key/value 쌍을 담을 수 있다.
 		let formData = new FormData(profileImageForm);
-		
+
 		$.ajax({
-			type:"put",
-			url:`/api/user/${principalId}/profileImage`,
+			type: "put",
+			url: `/api/user/${principalId}/profileImage`,
 			data: formData,
 			contentType: false, // 필수 : x-www-form-urlencoded로 파싱되는 것을 방지
 			processData: false, // 필수 : contentType을 false로 줬을 때 QueryString 자동 설정됨. 해제해야됨.
-			enctype:"multipart/form-data",
-			dataType:"json"
-		}).done(res=>{
+			enctype: "multipart/form-data",
+			dataType: "json"
+		}).done(res => {
 			// 사진 전송 성공시 이미지 변경
 			let reader = new FileReader();
 			reader.onload = (e) => {
 				$("#userProfileImage").attr("src", e.target.result);
 			}
 			reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
-		}).fail(error=>{
+		}).fail(error => {
 			console.log("오류", error);
 		});
 	});

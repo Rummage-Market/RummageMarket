@@ -27,29 +27,24 @@ import rummage.RummageMarket.Domain.User.User;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(
-        uniqueConstraints = {
-            @UniqueConstraint(
-                name="interest_uk",
-                columnNames = {"postId", "userId"}
-            )
-        }
-    )
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name = "interest_uk", columnNames = { "postId", "userId" })
+})
 public class Interest {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @JsonIgnoreProperties({"posts"})
+
+    @JsonIgnoreProperties({ "posts" })
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-    
+
     @JoinColumn(name = "postId")
     @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
-    
+
     private LocalDateTime createDate;
 
     @PrePersist

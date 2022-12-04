@@ -17,41 +17,40 @@ import rummage.RummageMarket.Domain.User.UserRepository;
 
 @RequiredArgsConstructor
 @Service
-public class OAuth2DetailsService extends DefaultOAuth2UserService{
-    
+public class OAuth2DetailsService extends DefaultOAuth2UserService {
+
     private final UserRepository userRepository;
-    
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        
+
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        
+
         Map<String, Object> userInfo = oAuth2User.getAttributes();
-        
-        String username = "facebook_"+(String) userInfo.get("id");
+
+        String username = "facebook_" + (String) userInfo.get("id");
         String password = new BCryptPasswordEncoder().encode(UUID.randomUUID().toString());
-        String email =  (String) userInfo.get("email");
-        String nickname =  (String) userInfo.get("name");
-        
+        String email = (String) userInfo.get("email");
+        String nickname = (String) userInfo.get("name");
+
         User userEntity = userRepository.findByUsername(username);
-         
-        if(userEntity==null) { // 페이스북 최초 로그인 
-                    
-                    User user = User.builder()
-                            .username(username)
-                            .password(password)
-                            .email(email)
-                            .nickname(nickname)
-                            .role("ROLE_USER")
-                            .build();
-                    
-                    return new PrincipalDetails(userRepository.save(user), oAuth2User.getAttributes());
-                    
-                }else {
-                    return new PrincipalDetails(userEntity);
-                }
-        
-        
+
+        if (userEntity == null) { // 페이스북 최초 로그인
+
+            User user = User.builder()
+                    .username(username)
+                    .password(password)
+                    .email(email)
+                    .nickname(nickname)
+                    .role("ROLE_USER")
+                    .build();
+
+            return new PrincipalDetails(userRepository.save(user), oAuth2User.getAttributes());
+
+        } else {
+            return new PrincipalDetails(userEntity);
+        }
+
     }
-    
+
 }

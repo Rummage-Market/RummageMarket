@@ -15,7 +15,7 @@ public class UserUpdateDto {
     private String nickname;
     private String bio;
     private String email;
-    
+
     public User toEntity() {
         return User.builder()
                 .username(username)

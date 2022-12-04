@@ -26,26 +26,27 @@ public class PostController {
 
     @Autowired
     PostService postService;
-    
-    @GetMapping({"/","post/main"})
+
+    @GetMapping({ "/", "post/main" })
     public String mainPage(Model model) {
         List<Post> posts = postService.popularPost();
         model.addAttribute("posts", posts);
         return "post/main";
     }
-    
+
     @GetMapping("post/story")
     public String story() {
         return "post/story";
     }
-    
+
     @GetMapping("/post/{postId}")
-    public String detailstory(@PathVariable int postId,Model model,@AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public String detailstory(@PathVariable int postId, Model model,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
         System.out.println("PostController 호출");
-        Post post = postService.detailpost(principalDetails.getUser().getId(),postId);
+        Post post = postService.detailpost(principalDetails.getUser().getId(), postId);
         System.out.println(post.getId());
-        
-        model.addAttribute("post",post);
+
+        model.addAttribute("post", post);
         System.out.println("PostController 호출2");
         return "post/detailstory";
     }
@@ -57,7 +58,7 @@ public class PostController {
         if (postUploadDto.getFile().isEmpty()) {
             throw new CustomValidationException("이미지는 반드시 첨부해주세요.", null);
         }
-        
+
         postService.upload(postUploadDto, principalDetails);
         return "redirect:/user/" + principalDetails.getUser().getId();
     }

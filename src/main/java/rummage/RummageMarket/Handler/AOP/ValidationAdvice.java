@@ -13,14 +13,14 @@ import org.springframework.validation.FieldError;
 import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
 import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 
-@Component 
+@Component
 @Aspect
 public class ValidationAdvice {
     @Around("execution(* rummage.RummageMarket.Web.Api.*Controller.*(..))")
     public Object apiAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
 //        System.out.println("web api 컨트롤러 =====================");
-        Object[] args = proceedingJoinPoint.getArgs ();
+        Object[] args = proceedingJoinPoint.getArgs();
         for (Object arg : args) {
             if (arg instanceof BindingResult) {
                 BindingResult bindingResult = (BindingResult) arg;

@@ -22,19 +22,19 @@ import rummage.RummageMarket.Web.Dto.User.UserProfileDto;
 
 @Service
 public class UserService {
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
-	NeighborRepository neighborRepository;
-	
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Transactional(readOnly = true)
-	public UserProfileDto userprofile(int pageUserId, int principalId) {
-	    UserProfileDto dto = new UserProfileDto();
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    NeighborRepository neighborRepository;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Transactional(readOnly = true)
+    public UserProfileDto userprofile(int pageUserId, int principalId) {
+        UserProfileDto dto = new UserProfileDto();
 
         User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> {
             throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
@@ -43,41 +43,39 @@ public class UserService {
         dto.setUser(userEntity);
         dto.setPageOwnerState(pageUserId == principalId);
         dto.setPostCount(userEntity.getPosts().size());
-               
+
         int neighborState = neighborRepository.neighborState(principalId, pageUserId);
         int neighborCount = neighborRepository.neighborCount(pageUserId);
-        
+
         dto.setNeighborCount(neighborCount);
         dto.setNeighborState(neighborState == 1);
-        
-        userEntity.getPosts().forEach((post)->{
+
+        userEntity.getPosts().forEach((post) -> {
             post.setInterestCount(post.getInterest().size());
             post.setCommentCount(post.getComments().size());
         });
-        
-        
-        
+
         return dto;
     }
-	
-	@Transactional
-	public User updateUser(int id, User user) {
-	    User userEntity = userRepository.findById(id).orElseThrow(() -> {
+
+    @Transactional
+    public User updateUser(int id, User user) {
+        User userEntity = userRepository.findById(id).orElseThrow(() -> {
             throw new CustomValidationApiException("찾을 수 없는 id입니다.");
         });
-	    userEntity.setUsername(user.getUsername());
-	    String rawPassword = user.getPassword();
+        userEntity.setUsername(user.getUsername());
+        String rawPassword = user.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         userEntity.setPassword(encPassword);
-	    userEntity.setNickname(user.getNickname());
-	    userEntity.setBio(user.getBio());
-	    userEntity.setEmail(user.getEmail());
-	    return userEntity;
-	}
+        userEntity.setNickname(user.getNickname());
+        userEntity.setBio(user.getBio());
+        userEntity.setEmail(user.getEmail());
+        return userEntity;
+    }
 
-	@Value("${file.path}")
+    @Value("${file.path}")
     private String uploadFolder;
-	
+
     @Transactional
     public User profileImageUrlUpdate(int principalId, MultipartFile profileImageFile) {
         UUID uuid = UUID.randomUUID(); // uuid
@@ -101,7 +99,7 @@ public class UserService {
 
         return userEntity;
     } // 더티체킹으로 업데이트 됨.
-    
+
     @Transactional(readOnly = true)
     public boolean usernameCheck(String username) {
         return userRepository.existsByUsername(username);

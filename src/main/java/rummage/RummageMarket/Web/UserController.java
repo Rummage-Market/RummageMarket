@@ -17,18 +17,19 @@ import rummage.RummageMarket.Web.Dto.User.UserProfileDto;
 @RequiredArgsConstructor
 public class UserController {
 
-	@Autowired
-	UserService userService;
+    @Autowired
+    UserService userService;
 
-	@GetMapping("/user/{pageUserId}")
-	public String profile(@PathVariable int pageUserId, Model model,@AuthenticationPrincipal PrincipalDetails principalDetails) {
-	    UserProfileDto dto = userService.userprofile(pageUserId,principalDetails.getUser().getId());
-		model.addAttribute("dto", dto);
-		return "user/profile";
-	}
+    @GetMapping("/user/{pageUserId}")
+    public String profile(@PathVariable int pageUserId, Model model,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        UserProfileDto dto = userService.userprofile(pageUserId, principalDetails.getUser().getId());
+        model.addAttribute("dto", dto);
+        return "user/profile";
+    }
 
-	@GetMapping("/user/{pageUserId}/update")
-	public String update(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		return "user/update";
-	}
+    @GetMapping("/user/{pageUserId}/update")
+    public String update(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return "user/update";
+    }
 }

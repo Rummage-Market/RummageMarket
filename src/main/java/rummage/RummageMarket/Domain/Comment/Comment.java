@@ -27,28 +27,28 @@ import rummage.RummageMarket.Domain.User.User;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comment {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @Column(length=100,nullable = false)
+
+    @Column(length = 100, nullable = false)
     private String content;
-    
+
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnoreProperties({"posts"})
+    @JsonIgnoreProperties({ "posts" })
     private User user;
-    
+
     @JoinColumn(name = "postId")
     @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
-    
+
     private LocalDateTime createDate;
 
     @PrePersist
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
-    
+
 }

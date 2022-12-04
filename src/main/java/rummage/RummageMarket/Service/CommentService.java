@@ -15,23 +15,23 @@ import rummage.RummageMarket.Handler.Ex.CustomApiException;
 @RequiredArgsConstructor
 @Service
 public class CommentService {
-    
+
     @Autowired
     CommentRepository commentRepository;
-    
+
     @Autowired
     UserRepository userRepository;
-    
+
     @Transactional
     public Comment commentSave(String content, int postId, int UserId) {
 
-        Post post= new Post();
+        Post post = new Post();
         post.setId(postId);
 
-        User userEntity = userRepository.findById(UserId).orElseThrow(()->{
+        User userEntity = userRepository.findById(UserId).orElseThrow(() -> {
             throw new CustomApiException("유저 아이디를 찾을 수 없습니다.");
         });
-        
+
         System.out.println("====content======");
         System.out.println(content);
 
@@ -44,6 +44,6 @@ public class CommentService {
     }
 
     public void commentDelete(int id) {
-        commentRepository.deleteById(id); 
+        commentRepository.deleteById(id);
     }
 }

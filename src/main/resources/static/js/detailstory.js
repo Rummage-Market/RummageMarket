@@ -7,11 +7,11 @@
 	(5) 댓글삭제
 	(6) 검색한 게시글 로드하기
  */
- 
+
 // (0) 현재 로긴한 사용자 아이디
 let principalId = $("#principalId").val();
 let postId = $("#postId").val();
-console.log("콘솔창"+postId);
+console.log("콘솔창" + postId);
 
 function storyLoad() {
 	$.ajax({
@@ -22,14 +22,14 @@ function storyLoad() {
 		console.log(post);
 		let storyItem = getStoryItem(post);
 		$("#storyList").append(storyItem);
-	
+
 	}).fail(error => {
 		console.log("오류", error);
 	});
 }
-	
+
 storyLoad();
-	
+
 function getStoryItem(post) {
 	let item = `<div class="story-list__item">
 		<div class="sl__item__header">
@@ -49,12 +49,12 @@ function getStoryItem(post) {
 			<div class="sl__item__contents__icon">
 
 				<button>`;
-					if(post.interestState){
-						item +=`<i class="fas fa-heart active" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
-					}else{
-						item +=`<i class="far fa-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
-					}
-				item +=`	
+	if (post.interestState) {
+		item += `<i class="fas fa-heart active" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
+	} else {
+		item += `<i class="far fa-heart" id="storyInterestIcon-${post.id}" onclick="toggleInterest(${post.id})"></i>`;
+	}
+	item += `	
 					
 				</button>
 				
@@ -76,20 +76,20 @@ function getStoryItem(post) {
 
 			<div class="sl__item__contents__commentList" id="storyCommentList-${post.id}">`;
 
-			post.comments.forEach((comment) => {
-				item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+	post.comments.forEach((comment) => {
+		item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 						<p>
 							<b>${comment.user.username} :</b> ${comment.content}
 						</p>`;
 
-				if (principalId == comment.user.id) {
-					item += `<button onclick="deleteComment(${comment.id})">
+		if (principalId == comment.user.id) {
+			item += `<button onclick="deleteComment(${comment.id})">
 								<i class="fas fa-times"></i>
 							</button>`;
-				}
-				item += `</div>`;
-			});
-			item += `</div>
+		}
+		item += `</div>`;
+	});
+	item += `</div>
 
 			<div class="sl__item__input">
 				<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${post.id}" />
@@ -100,49 +100,49 @@ function getStoryItem(post) {
 	</div>`;
 	return item;
 }
-		
+
 // (3) 하트, 하트X
-function toggleInterest(postId){
+function toggleInterest(postId) {
 	let interestIcon = $(`#storyInterestIcon-${postId}`);
-	if (interestIcon.hasClass("far")) { 
-		
+	if (interestIcon.hasClass("far")) {
+
 		$.ajax({
-		type: "post",
-		url: `/api/post/${postId}/interest`,
-		dataType: "json"
-	}).done(res => {
-	
-		let interestCountStr = $(`#storyInterestCount-${postId}`).text();
-		let interestCount = Number(interestCountStr) +1;
-		$(`#storyInterestCount-${postId}`).text(interestCount);
-	
-		interestIcon.addClass("fas");
-		interestIcon.addClass("active");
-		interestIcon.removeClass("far");
-		
-	}).fail(error => {
-		console.log("오류", error);
-	});
+			type: "post",
+			url: `/api/post/${postId}/interest`,
+			dataType: "json"
+		}).done(res => {
+
+			let interestCountStr = $(`#storyInterestCount-${postId}`).text();
+			let interestCount = Number(interestCountStr) + 1;
+			$(`#storyInterestCount-${postId}`).text(interestCount);
+
+			interestIcon.addClass("fas");
+			interestIcon.addClass("active");
+			interestIcon.removeClass("far");
+
+		}).fail(error => {
+			console.log("오류", error);
+		});
 
 	} else {
-	
+
 		$.ajax({
-		type: "delete",
-		url: `/api/post/${postId}/interest`,
-		dataType: "json"
-	}).done(res => {
-	
-		let interestCountStr = $(`#storyInterestCount-${postId}`).text();
-		let interestCount = Number(interestCountStr) -1;
-		$(`#storyInterestCount-${postId}`).text(interestCount);	
-	
-		interestIcon.removeClass("fas");
-		interestIcon.removeClass("active");
-		interestIcon.addClass("far");
-		
-	}).fail(error => {
-		console.log("오류", error);
-	});
+			type: "delete",
+			url: `/api/post/${postId}/interest`,
+			dataType: "json"
+		}).done(res => {
+
+			let interestCountStr = $(`#storyInterestCount-${postId}`).text();
+			let interestCount = Number(interestCountStr) - 1;
+			$(`#storyInterestCount-${postId}`).text(interestCount);
+
+			interestIcon.removeClass("fas");
+			interestIcon.removeClass("active");
+			interestIcon.addClass("far");
+
+		}).fail(error => {
+			console.log("오류", error);
+		});
 
 	}
 }
@@ -185,14 +185,14 @@ function addComment(postId) {
 	`;
 		commentList.prepend(content);
 	}).fail(error => {
-		console.log("오류", error.responseJSON.data.content	);
+		console.log("오류", error.responseJSON.data.content);
 		alert(error.responseJSON.data.content)
 	});
 
 	commentInput.val("");
 }
 
- 
+
 function deleteComment(commentId) {
 	$.ajax({
 		type: "delete",

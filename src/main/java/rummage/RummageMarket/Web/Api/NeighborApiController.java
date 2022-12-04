@@ -14,20 +14,21 @@ import rummage.RummageMarket.Web.Dto.CMRespDto;
 
 @RestController
 public class NeighborApiController {
-	
-	@Autowired
-	NeighborService neighborService; 
-	
-	@PostMapping("/api/neighbor/{toUserId}")
-	public ResponseEntity<?> neighbor(@AuthenticationPrincipal PrincipalDetails principalDetails,@PathVariable int toUserId){
-	    neighborService.neighbor(principalDetails.getUser().getId(),toUserId);
-	    return new ResponseEntity<>(new CMRespDto<>(1, "이웃맺기 성공", null), HttpStatus.OK);
-	}
-	
-	@DeleteMapping("/api/neighbor/{toUserId}")
-	public ResponseEntity<?> unNeighbor(@AuthenticationPrincipal PrincipalDetails principalDetails,
-			@PathVariable int toUserId) {
-	    neighborService.unNeighbor(principalDetails.getUser().getId(), toUserId);
-		return new ResponseEntity<>(new CMRespDto<>(1, "이웃취소하기 성공", null), HttpStatus.OK);
-	}
+
+    @Autowired
+    NeighborService neighborService;
+
+    @PostMapping("/api/neighbor/{toUserId}")
+    public ResponseEntity<?> neighbor(@AuthenticationPrincipal PrincipalDetails principalDetails,
+            @PathVariable int toUserId) {
+        neighborService.neighbor(principalDetails.getUser().getId(), toUserId);
+        return new ResponseEntity<>(new CMRespDto<>(1, "이웃맺기 성공", null), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/neighbor/{toUserId}")
+    public ResponseEntity<?> unNeighbor(@AuthenticationPrincipal PrincipalDetails principalDetails,
+            @PathVariable int toUserId) {
+        neighborService.unNeighbor(principalDetails.getUser().getId(), toUserId);
+        return new ResponseEntity<>(new CMRespDto<>(1, "이웃취소하기 성공", null), HttpStatus.OK);
+    }
 }

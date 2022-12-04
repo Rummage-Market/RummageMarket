@@ -51,13 +51,12 @@ public class AuthController {
 
         return "auth/signin";
     }
-    
-    
+
     @PostMapping("/auth/usernameCheck")
     @ResponseBody
     public ResponseEntity<?> usernameCheck(@RequestParam("username") String username) {
         boolean chq = userService.usernameCheck(username);
         return new ResponseEntity<>(new CMRespDto<>(1, "유저네임 중복 확인 성공!", chq), HttpStatus.OK);
     }
-    
+
 }

@@ -24,23 +24,23 @@ import rummage.RummageMarket.Domain.User.User;
 @AllArgsConstructor
 @Table(uniqueConstraints = { @UniqueConstraint(name = "neighbor_uk", columnNames = { "fromUserId", "toUserId" }) })
 public class Neighbor {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
 
-	@JoinColumn(name = "fromUserId")
-	@ManyToOne
-	private User fromUser;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@JoinColumn(name = "toUserId")
-	@ManyToOne
-	private User toUser;
+    @JoinColumn(name = "fromUserId")
+    @ManyToOne
+    private User fromUser;
 
-	private LocalDateTime createDate;
+    @JoinColumn(name = "toUserId")
+    @ManyToOne
+    private User toUser;
 
-	@PrePersist
-	public void createDate() {
-		this.createDate = LocalDateTime.now();
-	}
+    private LocalDateTime createDate;
+
+    @PrePersist
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
+    }
 }

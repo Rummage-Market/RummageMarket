@@ -26,37 +26,37 @@ import rummage.RummageMarket.Domain.Post.Post;
 @Data
 @Entity
 public class User {
-	
-	// 전처리는 Validation(유효성 검사)을 체크
-	// 후처리는 exceptionhandler로 처리
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@Column(nullable = false, length=30, unique = true)
-	private String username;
-	
-	@Column(nullable = false)
-	private String password;
-	
-	@Column(nullable = false)
-	private String nickname;
-	
-	private String bio;
-	private String email;
-	private String profileImage;
-	private String role;
-	
-	@JsonIgnoreProperties({"user"})
-	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
-	private List<Post> posts;
-	
-	private LocalDateTime createDate;
-	
-	@PrePersist
-	public void createDate() {
-		this.createDate = LocalDateTime.now();
-	}
-	
+
+    // 전처리는 Validation(유효성 검사)을 체크
+    // 후처리는 exceptionhandler로 처리
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false, length = 30, unique = true)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String nickname;
+
+    private String bio;
+    private String email;
+    private String profileImage;
+    private String role;
+
+    @JsonIgnoreProperties({ "user" })
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Post> posts;
+
+    private LocalDateTime createDate;
+
+    @PrePersist
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
+    }
+
 }
