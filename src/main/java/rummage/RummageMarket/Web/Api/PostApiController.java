@@ -40,9 +40,7 @@ public class PostApiController {
     @GetMapping("/api/post/{postId}")
     public ResponseEntity<?> postStory(@PathVariable int postId,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        System.out.println("PostAPIController 호출");
         Post post = postService.detailpost(principalDetails.getUser().getId(), postId);
-        System.out.println("PostAPIController 호출");
         return new ResponseEntity<>(new CMRespDto<>(1, "게시글 불러오기 성공", post), HttpStatus.OK);
     }
 

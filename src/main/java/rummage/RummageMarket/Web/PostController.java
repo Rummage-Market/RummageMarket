@@ -44,12 +44,9 @@ public class PostController {
     @GetMapping("/post/{postId}")
     public String detailstory(@PathVariable int postId, Model model,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        System.out.println("PostController 호출");
         Post post = postService.detailpost(principalDetails.getUser().getId(), postId);
-        System.out.println(post.getId());
 
         model.addAttribute("post", post);
-        System.out.println("PostController 호출2");
         return "post/detailstory";
     }
 

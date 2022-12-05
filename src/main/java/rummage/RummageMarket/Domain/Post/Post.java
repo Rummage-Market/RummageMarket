@@ -60,7 +60,6 @@ public class Post {
     @Transient
     private int interestCount;
 
-    @OrderBy("id DESC")
     @JsonIgnoreProperties({ "post" })
     @OneToMany(mappedBy = "post")
     private List<Comment> Comments;

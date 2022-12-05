@@ -79,7 +79,7 @@ function getStoryItem(post) {
 	post.comments.forEach((comment) => {
 		item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 						<p>
-							<b>${comment.user.username} :</b> ${comment.content}
+							<b OnClick="location.href ='/user/${comment.user.id}'" style="cursor:pointer">${comment.user.username} :</b> ${comment.content}
 						</p>`;
 
 		if (principalId == comment.user.id) {
@@ -183,7 +183,7 @@ function addComment(postId) {
 			    <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>		    
 			  </div>
 	`;
-		commentList.prepend(content);
+		commentList.append(content);
 	}).fail(error => {
 		console.log("오류", error.responseJSON.data.content);
 		alert(error.responseJSON.data.content)
