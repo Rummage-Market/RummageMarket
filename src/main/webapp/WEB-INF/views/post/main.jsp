@@ -16,7 +16,7 @@
 		<div class="img">
 			<img src="/images/logo.jpg" alt="">
 			<img src="/images/person.jpeg" alt="">
-			<img src="/images/sell.jpg" alt="">
+			<img src="/images/main.jpg" alt="">
 		</div>
 		<div class="text">
 			<h1>우리 서비스를 소개합니다</h1>
