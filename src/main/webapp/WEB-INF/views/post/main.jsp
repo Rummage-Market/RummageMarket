@@ -14,6 +14,8 @@
 <section class="service">
 	<div class="service-introduce">
 		<div class="img">
+			<img src="/images/logo.jpg" alt="">
+			<img src="/images/person.jpeg" alt="">
 			<img src="/images/sell.jpg" alt="">
 		</div>
 		<div class="text">
