@@ -89,6 +89,7 @@ public class PostService {
 
         posts.forEach((post) -> {
             post.setInterestCount(post.getInterest().size());
+            post.setCommentCount(post.getComments().size());
         });
         return posts;
     }
