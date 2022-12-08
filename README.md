@@ -160,7 +160,7 @@ Branch에 Merge 할 시, **Pull Request**를 활용하여 **팀원과의 코드�
 
 - [🚨 시연영상](https://www.youtube.com/watch?v=eK0QM0AJMwg)
 
-- [🚩 배포주소](www.rummagemarket.tk)
+- [🚩 배포주소](https://www.rummagemarket.tk)
 
 
 # 13. Rummage Market 최종회고
