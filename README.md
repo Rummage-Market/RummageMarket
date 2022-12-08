@@ -146,7 +146,7 @@ Branch에 Merge 할 시, **Pull Request**를 활용하여 **팀원과의 코드�
     
 # 11. 아키텍쳐
 
-![Untitled (6)](https://user-images.githubusercontent.com/102516088/205916441-5e37ca81-ccee-401a-9850-26a55427caf2.png)
+![아키텍처 수정](https://user-images.githubusercontent.com/102306268/206428253-14403394-8722-4e4b-a091-a1c043fcbe7b.JPG)
 
 # 12. 시연영상
 
