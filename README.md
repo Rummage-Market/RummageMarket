@@ -27,7 +27,7 @@
 
 # 04. 기술스택
 
-![Untitled (3)](https://user-images.githubusercontent.com/102516088/205914356-3e21b5a6-d91e-4bb4-a6f5-dc7af4fb83f2.png)
+![기술](https://user-images.githubusercontent.com/102306268/206454001-3d125e12-0a9f-4a88-9e28-5175fe8325f8.JPG)
 
 
 # 05.  포지션별 목표
@@ -157,6 +157,10 @@ Branch에 Merge 할 시, **Pull Request**를 활용하여 **팀원과의 코드�
 ![아키텍처 수정](https://user-images.githubusercontent.com/102306268/206428253-14403394-8722-4e4b-a091-a1c043fcbe7b.JPG)
 
 # 12. 시연영상
+
+- [🚨 시연영상](https://www.youtube.com/watch?v=eK0QM0AJMwg)
+
+- [🚩 배포주소](www.rummagemarket.tk)
 
 
 # 13. Rummage Market 최종회고
