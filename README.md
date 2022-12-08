@@ -137,11 +137,19 @@ Branch에 Merge 할 시, **Pull Request**를 활용하여 **팀원과의 코드�
 
 - [SQL Query 문법](https://velog.io/@iamhayoung/MySQL-%EC%BF%BC%EB%A6%AC%EB%AC%B8-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%AA%A8%EC%9D%8C)
 
+- [OAuth2 Redirect uri 오류](https://shanepark.tistory.com/386)
+
 ## [DevOps]
 
 - [EC2를 사용한 배포](https://lotuus.tistory.com/93)    
 
 - [S3](https://velog.io/@louie/S3%EB%A5%BC-%EC%97%B0%EB%8F%99%ED%95%9C-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C)
+ 
+- [도메인 연결](https://developer111.tistory.com/20)
+
+- [Https 적용](https://juyeonglee.tistory.com/39)
+
+- [iptables port 번호 없이 접속할 수 있도록 설정](https://eng-sohee.tistory.com/105)
     
     
 # 11. 아키텍쳐
