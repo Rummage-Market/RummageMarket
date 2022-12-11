@@ -63,7 +63,7 @@ function getStoryItem(post) {
 	post.comments.forEach((comment) => {
 		item += `<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 						<p>
-							<b OnClick="location.href ='/user/${comment.user.id}'" style="cursor:pointer">${comment.user.username} :</b> ${comment.content}
+							<b OnClick="location.href ='/user/${comment.user.id}'" style="cursor:pointer">${comment.user.nickname} :</b> ${comment.content}
 						</p>`;
 
 		if (principalId == comment.user.id) {
