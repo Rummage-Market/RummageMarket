@@ -40,7 +40,12 @@ public class PostController {
     public String story() {
         return "post/story";
     }
-
+    
+    @GetMapping("post/search")
+    public String search() {
+        return "post/search";
+    }
+    
     @GetMapping("/post/{postId}")
     public String detailstory(@PathVariable int postId, Model model,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {

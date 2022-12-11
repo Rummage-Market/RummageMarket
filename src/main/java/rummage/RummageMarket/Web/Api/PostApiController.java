@@ -60,7 +60,7 @@ public class PostApiController {
 
     @GetMapping("/api/post/search")
     public ResponseEntity<?> searchPost(
-            @PageableDefault(size = 3) Pageable pageable,
+            @PageableDefault(size = 100) Pageable pageable,
             @AuthenticationPrincipal PrincipalDetails principalDetails,
             String address1,
             String address2,
