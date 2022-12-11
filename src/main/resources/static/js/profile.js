@@ -64,7 +64,7 @@ function getSubscribeModalItem(u) {
 		<img src="${u.profileImageUrl}" onerror="this.src='/images/person.jpeg'" />
 	</div>
 	<div class="subscribe__text">
-		<h2>${u.nickname}</h2>
+		<h2 OnClick="location.href ='/user/${u.id}'" style="cursor:pointer">${u.nickname}</h2>
 	</div>
 	<div class="subscribe__btn">`;
 
@@ -162,9 +162,3 @@ function modalClose() {
 	$(".modal-subscribe").css("display", "none");
 	location.reload();
 }
-
-
-
-
-
-
