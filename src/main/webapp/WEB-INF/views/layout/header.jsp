@@ -64,6 +64,9 @@
 					<li class="navi-item"><a href="/user/${principal.user.id}">
 							<i class="fas fa-user"></i>
 					</a></li>
+					<li class="navi-item"><a href="/post/search">
+							<i class="fas fa-search"></i>
+					</a></li>
 					<li class="navi-item"><a href="/logout"> <i
 							class="fas fa-sign-out-alt"></i>
 					</a></li>
