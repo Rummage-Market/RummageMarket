@@ -1,5 +1,7 @@
 package rummage.RummageMarket.Web.Api;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,17 +9,23 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.Post.Post;
+import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 import rummage.RummageMarket.Service.InterestService;
 import rummage.RummageMarket.Service.PostService;
 import rummage.RummageMarket.Web.Dto.CMRespDto;
+import rummage.RummageMarket.Web.Dto.Post.PostUploadDto;
 
 @RestController
 public class PostApiController {
@@ -27,6 +35,17 @@ public class PostApiController {
 
     @Autowired
     InterestService interestService;
+    
+    @PutMapping("/api/post/{postid}")
+    public CMRespDto<?> postUpdate(@PathVariable int postid,@RequestPart MultipartFile file,@Valid PostUploadDto postUploadDto, BindingResult bindingResult,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        if (postUploadDto.getFile().isEmpty()) {
+            throw new CustomValidationException("이미지는 반드시 첨부해주세요.", null);
+        }
+        Post post = postService.update(postid,file,postUploadDto, principalDetails);
+        return new CMRespDto<>(1, "게시글수정 성공", post);
+    }
 
     // 필터링 없이 제일 최신순의 게시글
     @GetMapping("/api/post")

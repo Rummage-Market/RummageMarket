@@ -109,7 +109,7 @@ function getStoryItem(post) {
 	
 	<div class="modal-info" onclick="modalInfo()">
 					<div class="modal">
-						<button>게시글 수정</button>
+						<button onclick="location.href='/post/${post.id}/update'">게시글 수정</button>
 						<button>게시글 삭제</button>
 						<button onclick="closePopup('.modal-info')">취소</button>
 					</div>
