@@ -1,3 +1,29 @@
+function update(postId, userId) {
+	event.preventDefault();
+	
+	let profileImageForm = $("#postUpdateForm")[0];
+	let formData = new FormData(profileImageForm);
+
+	$.ajax({
+		type: "put",
+		url: `/api/post/${postId}`,
+		data: formData,
+		contentType: false, // 필수 : x-www-form-urlencoded로 파싱되는 것을 방지
+		processData: false, // 필수 : contentType을 false로 줬을 때 QueryString 자동 설정됨. 해제해야됨.
+		enctype: "multipart/form-data",
+		dataType: "json"
+	}).done(res => {
+		console.log("update 성공", res)
+		location.href = `/user/1`;
+		console.log("수정완료");
+	}).fail(error => {
+		console.log("오류", error);
+	});
+
+
+}
+
+
 // (1) 스토리 이미지 업로드를 위한 사진 선택 로직
 function imageChoose(obj) {
 	let f = obj.files[0];

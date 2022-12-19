@@ -37,7 +37,15 @@ function getStoryItem(post) {
 				<img class="profile-image" src="${post.user.profileImage}"
 					onerror="this.src='/images/person.jpeg'" />
 			</div>
-			<div OnClick="location.href ='/user/${post.user.id}'" style="cursor:pointer">${post.user.nickname}</div>
+			<div OnClick="location.href ='/user/${post.user.id}'" style="cursor:pointer">${post.user.nickname}</div>`
+
+	if (principalId == post.user.id) {
+		item += `<button class="update" onclick="popup('.modal-info')">
+					<i class="fas fa-cog"></i>
+				</button>`
+	}
+
+	item += `	
 		</div>
 
 		<div class="sl__item__img">
@@ -97,9 +105,34 @@ function getStoryItem(post) {
 			</div>
 
 		</div>
-	</div>`;
+	</div>
+	
+	<div class="modal-info" onclick="modalInfo()">
+					<div class="modal">
+						<button onclick="location.href='/post/${post.id}/update'">게시글 수정</button>
+						<button>게시글 삭제</button>
+						<button onclick="closePopup('.modal-info')">취소</button>
+					</div>
+				</div>
+	
+	
+	
+	`;
 	return item;
 }
+
+function popup(obj) {
+	$(obj).css("display", "flex");
+}
+
+function closePopup(obj) {
+	$(obj).css("display", "none");
+}
+
+function modalInfo() {
+	$(".modal-info").css("display", "none");
+}
+
 
 // (3) 하트, 하트X
 function toggleInterest(postId) {

@@ -23,6 +23,7 @@ import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.Post.Post;
 import rummage.RummageMarket.Domain.Post.PostRepository;
 import rummage.RummageMarket.Handler.Ex.CustomException;
+import rummage.RummageMarket.Handler.Ex.CustomValidationApiException;
 import rummage.RummageMarket.Web.Dto.Post.PostUploadDto;
 
 @Service
@@ -64,6 +65,55 @@ public class PostService {
         postRepository.save(post);
     }
 
+    // 게시글 수정
+    @Transactional
+    public Post update(int postid, MultipartFile file, PostUploadDto postUploadDto,
+            @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        Post post = postRepository.findById(postid).orElseThrow(() -> {
+            throw new CustomValidationApiException("찾을 수 없는 게시글입니다.");
+        });
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(file.getContentType());
+        objectMetadata.setContentLength(file.getSize());
+
+        String originalFilename = file.getOriginalFilename();// 김영광.jpg
+        int index = originalFilename.lastIndexOf(".");// '.'이라는 문자가 발견되는 위치에 해당하는 index값(위치값) = 3
+        String ext = originalFilename.substring(index + 1);// index + 1 = 4 -> jpg
+
+        String storeFileName = UUID.randomUUID() + "." + ext;// uuid.jpg
+        String key = "upload/" + storeFileName;
+
+        try (InputStream inputStream = file.getInputStream()) {
+            amazonS3Client.putObject(new PutObjectRequest(bucket, key, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String storeFileUrl = amazonS3Client.getUrl(bucket, key).toString();
+
+        if (ext.isEmpty()) {
+            post.setImageUrl(post.getImageUrl());
+        } else {
+            String originalKey = post.getImageUrl().substring(54);
+            amazonS3Client.deleteObject(bucket, originalKey);
+            post.setImageUrl(storeFileUrl);
+        }
+
+        post.setUser(principalDetails.getUser());
+        post.setTitle(postUploadDto.getTitle());
+        post.setContent(postUploadDto.getContent());
+        post.setAddress1(postUploadDto.getAddress1());
+        post.setAddress2(postUploadDto.getAddress2());
+        post.setPlace(postUploadDto.getPlace());
+        post.setItem(postUploadDto.getItem());
+        post.setPrice(postUploadDto.getPrice());
+
+        return post;
+    }
+
     @Transactional(readOnly = true)
     public Page<Post> postList(Pageable pageable, int principalId) {
 
@@ -101,9 +151,6 @@ public class PostService {
             throw new CustomException("해당 게시글은 없는 게시글입니다.");
         });
 
-        System.out.println("service 호출 됨");
-        System.out.println(post.getId());
-
         post.setInterestCount(post.getInterest().size());
 
         post.getInterest().forEach((interest) -> {
@@ -112,6 +159,12 @@ public class PostService {
             }
         });
 
+        return post;
+    }
+
+    @Transactional(readOnly = true)
+    public Post findByPostId(int postId) {
+        Post post = postRepository.findById(postId).orElseThrow(null);
         return post;
     }
 
