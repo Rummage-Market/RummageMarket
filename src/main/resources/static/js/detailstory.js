@@ -110,7 +110,7 @@ function getStoryItem(post) {
 	<div class="modal-info" onclick="modalInfo()">
 					<div class="modal">
 						<button onclick="location.href='/post/${post.id}/update'">게시글 수정</button>
-						<button>게시글 삭제</button>
+						<button onclick="deletePost(${post.id}, ${principalId})">게시글 삭제</button>
 						<button onclick="closePopup('.modal-info')">취소</button>
 					</div>
 				</div>
@@ -239,6 +239,19 @@ function deleteComment(commentId) {
 	});
 }
 
+// post 삭제
+function deletePost(postId, userId) {
+	$.ajax({
+		type: "delete",
+		url: `/api/post/${postId}`,
+		dataType: "json"
+	}).done(res => {
+		console.log("성공", res);
+		location.href = `/user/${userId}`;
+	}).fail(error => {
+		console.log("오류", error);
+	});
+}
 
 
 
