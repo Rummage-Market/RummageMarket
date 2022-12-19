@@ -44,6 +44,12 @@ public class PostApiController {
         return new CMRespDto<>(1, "게시글수정 성공", post);
     }
 
+    @DeleteMapping("api/post/{postId}")
+    public ResponseEntity<?> postDelete(@PathVariable int postId, @AuthenticationPrincipal PrincipalDetails principalDetails){
+        postService.delete(postId, principalDetails.getUser().getId());
+        return new ResponseEntity<>(new CMRespDto<>(1, "게시글삭제 성공", null), HttpStatus.OK);
+    }
+    
     // 필터링 없이 제일 최신순의 게시글
     @GetMapping("/api/post")
     public ResponseEntity<?> postStory(@PageableDefault(size = 3) Pageable pageable,
