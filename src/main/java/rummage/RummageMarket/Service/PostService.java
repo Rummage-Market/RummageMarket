@@ -113,6 +113,21 @@ public class PostService {
 
         return post;
     }
+    
+    // 게시글 삭제
+    @Transactional
+    public void delete(int postId, int principalId) {
+        
+        Post post = postRepository.findById(postId).orElseThrow(() -> {
+            throw new CustomException("해당 게시글은 없는 게시글입니다.");
+        });
+        
+        if (post.getUser().getId() != principalId) {
+            throw new CustomException("해당 게시글은 삭제할 수 없습니다.");
+        } else {
+            postRepository.deleteById(postId);
+        }
+    }
 
     @Transactional(readOnly = true)
     public Page<Post> postList(Pageable pageable, int principalId) {

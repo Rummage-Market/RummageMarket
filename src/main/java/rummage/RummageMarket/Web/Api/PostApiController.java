@@ -44,6 +44,7 @@ public class PostApiController {
         return new CMRespDto<>(1, "게시글수정 성공", post);
     }
 
+    // 게시글 삭제
     @DeleteMapping("api/post/{postId}")
     public ResponseEntity<?> postDelete(@PathVariable int postId, @AuthenticationPrincipal PrincipalDetails principalDetails){
         postService.delete(postId, principalDetails.getUser().getId());
