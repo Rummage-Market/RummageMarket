@@ -64,16 +64,16 @@ public class PostService {
         Post post = postUploadDto.toEntity(storeFileUrl, principalDetails.getUser());
         postRepository.save(post);
     }
-    
+
     // 게시글 수정
     @Transactional
     public Post update(int postid, MultipartFile file, PostUploadDto postUploadDto,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        
+
         Post post = postRepository.findById(postid).orElseThrow(() -> {
             throw new CustomValidationApiException("찾을 수 없는 게시글입니다.");
         });
-                
+
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(file.getContentType());
         objectMetadata.setContentLength(file.getSize());
@@ -91,18 +91,18 @@ public class PostService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         String storeFileUrl = amazonS3Client.getUrl(bucket, key).toString();
-        
-        if(storeFileUrl != null) {  
+
+        if (ext.isEmpty()) {
+            post.setImageUrl(post.getImageUrl());
+        } else {
             String originalKey = post.getImageUrl().substring(54);
             amazonS3Client.deleteObject(bucket, originalKey);
-        }else if (storeFileUrl == null) {
-            storeFileUrl = post.getImageUrl();
+            post.setImageUrl(storeFileUrl);
         }
-        
+
         post.setUser(principalDetails.getUser());
-        post.setImageUrl(storeFileUrl);
         post.setTitle(postUploadDto.getTitle());
         post.setContent(postUploadDto.getContent());
         post.setAddress1(postUploadDto.getAddress1());
@@ -110,10 +110,10 @@ public class PostService {
         post.setPlace(postUploadDto.getPlace());
         post.setItem(postUploadDto.getItem());
         post.setPrice(postUploadDto.getPrice());
-        
+
         return post;
     }
-    
+
     @Transactional(readOnly = true)
     public Page<Post> postList(Pageable pageable, int principalId) {
 
@@ -151,9 +151,6 @@ public class PostService {
             throw new CustomException("해당 게시글은 없는 게시글입니다.");
         });
 
-        System.out.println("service 호출 됨");
-        System.out.println(post.getId());
-
         post.setInterestCount(post.getInterest().size());
 
         post.getInterest().forEach((interest) -> {
@@ -164,7 +161,7 @@ public class PostService {
 
         return post;
     }
-    
+
     @Transactional(readOnly = true)
     public Post findByPostId(int postId) {
         Post post = postRepository.findById(postId).orElseThrow(null);

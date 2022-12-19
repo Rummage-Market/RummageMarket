@@ -40,9 +40,6 @@ public class PostApiController {
     public CMRespDto<?> postUpdate(@PathVariable int postid,@RequestPart MultipartFile file,@Valid PostUploadDto postUploadDto, BindingResult bindingResult,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
-        if (postUploadDto.getFile().isEmpty()) {
-            throw new CustomValidationException("이미지는 반드시 첨부해주세요.", null);
-        }
         Post post = postService.update(postid,file,postUploadDto, principalDetails);
         return new CMRespDto<>(1, "게시글수정 성공", post);
     }
