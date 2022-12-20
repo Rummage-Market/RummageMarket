@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -40,8 +41,10 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties({ "posts" })
     private User user;
-
+    
+    @Column(name="image_url")
     private String imageUrl;
+    
     private String title;
     private String content;
     private String address1;

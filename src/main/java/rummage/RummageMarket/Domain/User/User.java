@@ -28,9 +28,6 @@ import rummage.RummageMarket.Domain.Post.Post;
 @Entity
 public class User {
 
-    // 전처리는 Validation(유효성 검사)을 체크
-    // 후처리는 exceptionhandler로 처리
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -46,7 +43,10 @@ public class User {
 
     private String bio;
     private String email;
+    
+    @Column(name="profile_image")
     private String profileImage;
+    
     private String role;
 
     @JsonIgnoreProperties({ "user" })
@@ -59,5 +59,4 @@ public class User {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
-
 }

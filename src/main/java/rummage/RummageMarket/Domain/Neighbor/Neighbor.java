@@ -29,11 +29,11 @@ public class Neighbor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JoinColumn(name = "fromUserId")
+    @JoinColumn(name = "from_user_id")
     @ManyToOne
     private User fromUser;
 
-    @JoinColumn(name = "toUserId")
+    @JoinColumn(name = "to_user_id")
     @ManyToOne
     private User toUser;
 
