@@ -34,7 +34,6 @@ public class PostUploadDto {
 				.content(content)
 				.address1(address1)
 				.address2(address2)
-				.place(place)
 				.item(item)
 				.price(price)
 				.imageUrl(postImageUrl)

@@ -107,7 +107,6 @@ public class PostService {
         post.setContent(postUploadDto.getContent());
         post.setAddress1(postUploadDto.getAddress1());
         post.setAddress2(postUploadDto.getAddress2());
-        post.setPlace(postUploadDto.getPlace());
         post.setItem(postUploadDto.getItem());
         post.setPrice(postUploadDto.getPrice());
 
