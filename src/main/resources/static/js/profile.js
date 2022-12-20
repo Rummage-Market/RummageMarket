@@ -162,3 +162,24 @@ function modalClose() {
 	$(".modal-subscribe").css("display", "none");
 	location.reload();
 }
+
+// (8) 회원탈퇴
+function userDelete(pageUserId, principalId){ 
+
+		if (pageUserId != principalId) {
+		alert("회원탈퇴를 할 수 없습니다.");
+		return;
+	}
+	
+	$.ajax({
+		type: "delete",
+		url: `/api/user/${pageUserId}`,
+		dataType: "json"
+	}).done(res => {
+		console.log("성공", res);
+		location.href = `/auth/signin`;
+	}).fail(error => {
+		console.log("오류", error);
+	});
+
+}

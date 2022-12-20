@@ -122,4 +122,15 @@ public class UserService {
     public boolean usernameCheck(String username) {
         return userRepository.existsByUsername(username);
     }
+    
+    @Transactional
+    public void deleteUser(int userId, int principalId) {
+        
+        if (userId != principalId) {
+            throw new CustomException("회원탈퇴를 할 수 없습니다.");
+        } else {
+            userRepository.deleteById(userId);
+        }
+        
+    }
 }

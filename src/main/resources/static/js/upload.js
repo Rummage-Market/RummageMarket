@@ -14,7 +14,7 @@ function update(postId, userId) {
 		dataType: "json"
 	}).done(res => {
 		console.log("update 성공", res)
-		location.href = `/user/1`;
+		location.href = `/user/${userId}`;
 		console.log("수정완료");
 	}).fail(error => {
 		console.log("오류", error);
