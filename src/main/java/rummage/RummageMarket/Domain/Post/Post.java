@@ -3,6 +3,7 @@ package rummage.RummageMarket.Domain.Post;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -51,7 +52,7 @@ public class Post {
     private int price;
 
     @JsonIgnoreProperties({ "post" })
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Interest> interest;
 
     @Transient
@@ -61,7 +62,7 @@ public class Post {
     private int interestCount;
 
     @JsonIgnoreProperties({ "post" })
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> Comments;
 
     @Transient
