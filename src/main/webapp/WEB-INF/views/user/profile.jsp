@@ -106,6 +106,7 @@
 	<div class="modal">
 		<button onclick="location.href='/user/${principal.user.id}/update'">회원정보
 			변경</button>
+		<button onclick="userDelete(${dto.user.id},${principal.user.id})">회원 탈퇴</button>
 		<button onclick="closePopup('.modal-info')">취소</button>
 	</div>
 </div>
