@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
@@ -47,7 +46,6 @@ public class Post {
     private String content;
     private String address1;
     private String address2;
-    private String place;
     private String item;
     private int price;
 

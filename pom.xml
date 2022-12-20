@@ -20,6 +20,8 @@
 	</properties>
 	<dependencies>
 
+
+
 		<!-- AWS S3 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

@@ -46,9 +46,7 @@ public class UserService {
     public UserProfileDto userprofile(int pageUserId, int principalId) {
         UserProfileDto dto = new UserProfileDto();
 
-        User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> {
-            throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
-        });
+        User userEntity = userRepository.findById(pageUserId).orElse(null);
 
         dto.setUser(userEntity);
         dto.setPageOwnerState(pageUserId == principalId);
