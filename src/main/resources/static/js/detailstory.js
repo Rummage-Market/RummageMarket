@@ -1,17 +1,9 @@
-/**
-	2. 스토리 페이지
-	(1) 스토리 로드하기
-	(2) 스토리 스크롤 페이징하기
-	(3) 하트, 하트X
-	(4) 댓글쓰기
-	(5) 댓글삭제
-	(6) 검색한 게시글 로드하기
- */
 
-// (0) 현재 로긴한 사용자 아이디
+// 현재 로긴한 사용자 아이디
 let principalId = $("#principalId").val();
+
+// 선택된 post id
 let postId = $("#postId").val();
-console.log("콘솔창" + postId);
 
 function storyLoad() {
 	$.ajax({
@@ -113,11 +105,7 @@ function getStoryItem(post) {
 						<button onclick="deletePost(${post.id}, ${principalId})">게시글 삭제</button>
 						<button onclick="closePopup('.modal-info')">취소</button>
 					</div>
-				</div>
-	
-	
-	
-	`;
+				</div>`;
 	return item;
 }
 
@@ -134,7 +122,7 @@ function modalInfo() {
 }
 
 
-// (3) 하트, 하트X
+// 관심,관심x
 function toggleInterest(postId) {
 	let interestIcon = $(`#storyInterestIcon-${postId}`);
 	if (interestIcon.hasClass("far")) {
@@ -156,9 +144,7 @@ function toggleInterest(postId) {
 		}).fail(error => {
 			console.log("오류", error);
 		});
-
 	} else {
-
 		$.ajax({
 			type: "delete",
 			url: `/api/post/${postId}/interest`,
@@ -176,10 +162,10 @@ function toggleInterest(postId) {
 		}).fail(error => {
 			console.log("오류", error);
 		});
-
 	}
 }
 
+// 댓글작성
 function addComment(postId) {
 
 	let commentInput = $(`#storyCommentInput-${postId}`);
@@ -190,10 +176,10 @@ function addComment(postId) {
 		content: commentInput.val()
 	}
 
-	/*if (data.content === "") {
+	if (data.content === "") {
 		alert("댓글을 작성해주세요!");
 		return;
-	}*/
+	}
 
 	$.ajax({
 		type: "post",
@@ -214,18 +200,16 @@ function addComment(postId) {
 			    </p>
 			    
 			    <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>		    
-			  </div>
-	`;
+			  </div>`;
 		commentList.append(content);
 	}).fail(error => {
 		console.log("오류", error.responseJSON.data.content);
 		alert(error.responseJSON.data.content)
 	});
-
 	commentInput.val("");
 }
 
-
+// 댓글삭제
 function deleteComment(commentId) {
 	$.ajax({
 		type: "delete",
@@ -252,6 +236,3 @@ function deletePost(postId, userId) {
 		console.log("오류", error);
 	});
 }
-
-
-

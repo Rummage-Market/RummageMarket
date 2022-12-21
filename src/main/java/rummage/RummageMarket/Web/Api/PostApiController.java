@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.Post.Post;
-import rummage.RummageMarket.Handler.Ex.CustomValidationException;
 import rummage.RummageMarket.Service.InterestService;
 import rummage.RummageMarket.Service.PostService;
 import rummage.RummageMarket.Web.Dto.CMRespDto;

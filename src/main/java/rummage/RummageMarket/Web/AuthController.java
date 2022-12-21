@@ -2,8 +2,7 @@ package rummage.RummageMarket.Web;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,11 +24,13 @@ import rummage.RummageMarket.Web.Dto.Auth.SignupDto;
 @Controller
 public class AuthController {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+    @Autowired
+    AuthService authService;
 
-    private final AuthService authService;
-    private final UserService userService;
+    @Autowired
+    UserService userService;
 
+    // 로그인 페이지 리턴
     @GetMapping("/auth/signin")
     public String signinForm(@RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "exception", required = false) String exception, Model model) {
@@ -38,20 +39,23 @@ public class AuthController {
         return "auth/signin";
     }
 
+    // 회원가입 페이지 리턴
     @GetMapping("/auth/signup")
     public String signupForm() {
         return "auth/signup";
     }
-
+    
+    // 회원가입 Insert
     @PostMapping("/auth/signup")
     public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {
 
         User user = signupDto.toEntity();
-        User userEntity = authService.signUp(user);
+        authService.signUp(user);
 
         return "auth/signin";
     }
 
+    //유저네임 중복확인 
     @PostMapping("/auth/usernameCheck")
     @ResponseBody
     public ResponseEntity<?> usernameCheck(@RequestParam("username") String username) {

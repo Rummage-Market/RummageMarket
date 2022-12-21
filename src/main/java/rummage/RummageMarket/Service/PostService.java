@@ -34,7 +34,8 @@ public class PostService {
 
     @Autowired
     AmazonS3Client amazonS3Client;
-
+    
+    // application.yml에 있는 경로 값을 String bucket에 담아줌
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
@@ -46,11 +47,11 @@ public class PostService {
         objectMetadata.setContentType(file.getContentType());
         objectMetadata.setContentLength(file.getSize());
 
-        String originalFilename = file.getOriginalFilename();// 김영광.jpg
-        int index = originalFilename.lastIndexOf(".");// '.'이라는 문자가 발견되는 위치에 해당하는 index값(위치값) = 3
-        String ext = originalFilename.substring(index + 1);// index + 1 = 4 -> jpg
+        String originalFilename = file.getOriginalFilename();
+        int index = originalFilename.lastIndexOf(".");
+        String ext = originalFilename.substring(index + 1);
 
-        String storeFileName = UUID.randomUUID() + "." + ext;// uuid.jpg
+        String storeFileName = UUID.randomUUID() + "." + ext;
         String key = "upload/" + storeFileName;
 
         try (InputStream inputStream = file.getInputStream()) {
@@ -128,6 +129,7 @@ public class PostService {
         }
     }
     
+    // 검색한 게시글리스트 & 페이징 처리
     @Transactional(readOnly = true)
     public Page<Post> searchPostList(Pageable pageable, int principalId, String address1, String address2,
             String item) {
@@ -148,6 +150,7 @@ public class PostService {
         return searchedPosts;
     }
 
+    // 검색하지 않은 전체 게시글리스트
     @Transactional(readOnly = true)
     public Page<Post> postList(Pageable pageable, int principalId) {
 
@@ -166,6 +169,7 @@ public class PostService {
         return posts;
     }
 
+    // 좋아요 순으로 정렬된 인기게시글
     @Transactional(readOnly = true)
     public List<Post> popularPost() {
 
@@ -178,6 +182,7 @@ public class PostService {
         return posts;
     }
 
+    // 하나의 게시글 보기
     @Transactional(readOnly = true)
     public Post detailpost(int principalId, int postId) {
 
@@ -196,6 +201,7 @@ public class PostService {
         return post;
     }
 
+    // @Pathvariable로 검색한 게시글객체 찾기
     @Transactional(readOnly = true)
     public Post findByPostId(int postId) {
         Post post = postRepository.findById(postId).orElseThrow(null);

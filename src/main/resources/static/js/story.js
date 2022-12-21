@@ -1,19 +1,10 @@
-/**
-	2. 스토리 페이지
-	(1) 스토리 로드하기
-	(2) 스토리 스크롤 페이징하기
-	(3) 하트, 하트X
-	(4) 댓글쓰기
-	(5) 댓글삭제
-	(6) 검색한 게시글 로드하기
- */
-
-// (0) 현재 로긴한 사용자 아이디
+// 현재 로긴한 사용자 아이디
 let principalId = $("#principalId").val();
 
-// (1) 스토리 로드하기
+// 페이지 초기화
 let page = 0;
 
+// 스토리페이지 load
 function storyLoad() {
 	$.ajax({
 		url: `/api/post?page=${page}`,
@@ -133,7 +124,7 @@ function modalInfo() {
 	$(".modal-info").css("display", "none");
 }
 
-// (3) 하트, 하트X
+// 관심,관심x
 function toggleInterest(postId) {
 	let interestIcon = $(`#storyInterestIcon-${postId}`);
 	if (interestIcon.hasClass("far")) {
@@ -179,6 +170,7 @@ function toggleInterest(postId) {
 	}
 }
 
+// 댓글작성
 function addComment(postId) {
 
 	let commentInput = $(`#storyCommentInput-${postId}`);
@@ -189,10 +181,10 @@ function addComment(postId) {
 		content: commentInput.val()
 	}
 
-	/*if (data.content === "") {
+	if (data.content === "") {
 		alert("댓글을 작성해주세요!");
 		return;
-	}*/
+	}
 
 	$.ajax({
 		type: "post",
@@ -224,7 +216,7 @@ function addComment(postId) {
 	commentInput.val("");
 }
 
-
+// 댓글삭제
 function deleteComment(commentId) {
 	$.ajax({
 		type: "delete",
@@ -239,8 +231,7 @@ function deleteComment(commentId) {
 }
 
 
-// (6) 검색한 게시글 로드하기
-
+//검색한 게시글 로드하기
 function searchPostLoad(address1, address2, item) {
 	console.log(address1);
 
@@ -259,8 +250,7 @@ function searchPostLoad(address1, address2, item) {
 	});
 }
 
-// regionselectbox
-
+// 지역선택 드롭박스
 $('document').ready(function() {
 	var area0 = ["서울특별시", "인천광역시", "대전광역시", "광주광역시", "대구광역시", "울산광역시", "부산광역시", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주도"];
 	var area1 = ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"];
@@ -281,7 +271,6 @@ $('document').ready(function() {
 	var area16 = ["서귀포시", "제주시"];
 
 	// 시/도 선택 박스 초기화
-
 	$("select[name^=address1]").each(function() {
 		$seladdress1 = $(this);
 		$seladdress1.append("<option value=''>시/도 선택</option>");
@@ -293,7 +282,6 @@ $('document').ready(function() {
 
 
 	// 시/도 선택시 구/군 설정
-
 	$("select[name^=address1]").change(function() {
 		var area = "area" + $("option", $(this)).index($("option:selected", $(this))); // 선택지역의 구군 Array
 		var $address2 = $(this).next(); // 선택영역 군구 객체

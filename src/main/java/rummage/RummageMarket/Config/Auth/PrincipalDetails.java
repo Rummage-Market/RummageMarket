@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import lombok.Data;
 import rummage.RummageMarket.Domain.User.User;
 
+
 // 세션
 @Data
 public class PrincipalDetails implements UserDetails, OAuth2User {
