@@ -15,12 +15,14 @@ import rummage.RummageMarket.Config.Auth.PrincipalDetails;
 import rummage.RummageMarket.Domain.User.User;
 import rummage.RummageMarket.Domain.User.UserRepository;
 
+// 소셜로그인(페이스북) 진행
 @RequiredArgsConstructor
 @Service
 public class OAuth2DetailsService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
 
+    // username으로 확인, OAuth2User타입을 세션 생성
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
@@ -28,9 +30,13 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
 
         Map<String, Object> userInfo = oAuth2User.getAttributes();
 
+        // 페이스북 소셜로그인시 유저네임
         String username = "facebook_" + (String) userInfo.get("id");
+        // 패스워드
         String password = new BCryptPasswordEncoder().encode(UUID.randomUUID().toString());
+        // 이메일
         String email = (String) userInfo.get("email");
+        // 최초로그인시 닉네임은 이름으로 함.
         String nickname = (String) userInfo.get("name");
 
         User userEntity = userRepository.findByUsername(username);
@@ -48,7 +54,9 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService {
             return new PrincipalDetails(userRepository.save(user), oAuth2User.getAttributes());
 
         } else {
+            
             return new PrincipalDetails(userEntity);
+            
         }
 
     }

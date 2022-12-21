@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import rummage.RummageMarket.Config.Auth.PrincipalDetailsService;
 import rummage.RummageMarket.Config.Oauth.OAuth2DetailsService;
 
+// 시큐리티 설정
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 특정 주소로 접근하면 권한 및 인증을 미리 체크하겠다는 뜻
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -25,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PrincipalDetailsService principalDetailService;
 
+    // 비밀번호 암호화
     @Bean
     public BCryptPasswordEncoder encode() {
         return new BCryptPasswordEncoder();
@@ -34,22 +36,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
-        http.rememberMe()
+        http.rememberMe() // 로그인 유지
                 .rememberMeParameter("remember-me")
                 .tokenValiditySeconds(86400 * 30)
                 .alwaysRemember(false)
                 .userDetailsService(principalDetailService);
-        http.authorizeRequests()
+        http.authorizeRequests() // 사용자 권한에 따른 URI 접근 제어
                 .antMatchers("/", "/api/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
+                .formLogin() // 로그인
                 .loginPage("/auth/signin")
-                .loginProcessingUrl("/auth/signin") // 로그인 요청인지 아닌지 판단 -> 로그인 요청이면 UserDetailsService가 낚아챔.
+                .loginProcessingUrl("/auth/signin")
                 .defaultSuccessUrl("/")
                 .failureHandler(customAuthFailureHandler)
                 .and()
-                .oauth2Login()
+                .oauth2Login() // 소셜로그인
                 .userInfoEndpoint()
                 .userService(oAuth2DetailsService);
     }
