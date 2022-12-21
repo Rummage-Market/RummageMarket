@@ -35,15 +35,16 @@ public class Comment {
     @Column(length = 100, nullable = false)
     private String content;
 
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties({ "posts" })
     private User user;
 
-    @JoinColumn(name = "postId")
+    @JoinColumn(name = "post_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
 
+    @Column(name="create_date")
     private LocalDateTime createDate;
 
     @PrePersist

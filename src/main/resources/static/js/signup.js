@@ -1,3 +1,4 @@
+// 중복 유저네임 체크
 function checkUsername() {
 	let username = $('#username').val();
 	$.ajax({

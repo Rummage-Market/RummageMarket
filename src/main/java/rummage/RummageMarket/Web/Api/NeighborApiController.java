@@ -18,6 +18,7 @@ public class NeighborApiController {
     @Autowired
     NeighborService neighborService;
 
+    // 이웃맺기
     @PostMapping("/api/neighbor/{toUserId}")
     public ResponseEntity<?> neighbor(@AuthenticationPrincipal PrincipalDetails principalDetails,
             @PathVariable int toUserId) {
@@ -25,6 +26,7 @@ public class NeighborApiController {
         return new ResponseEntity<>(new CMRespDto<>(1, "이웃맺기 성공", null), HttpStatus.OK);
     }
 
+    // 이웃취소
     @DeleteMapping("/api/neighbor/{toUserId}")
     public ResponseEntity<?> unNeighbor(@AuthenticationPrincipal PrincipalDetails principalDetails,
             @PathVariable int toUserId) {

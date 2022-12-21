@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface NeighborRepository extends JpaRepository<Neighbor, Integer> {
 
     @Modifying
-    @Query(value = "INSERT INTO neighbor(from_user_id,to_user_id,createDate) VALUES(:fromUserId,:toUserId,now())", nativeQuery = true)
+    @Query(value = "INSERT INTO neighbor(from_user_id,to_user_id,create_date) VALUES(:fromUserId,:toUserId,now())", nativeQuery = true)
     void neighbor(int fromUserId, int toUserId);
 
     @Modifying

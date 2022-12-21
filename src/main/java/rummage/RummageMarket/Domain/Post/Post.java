@@ -72,6 +72,7 @@ public class Post {
     @Transient
     private int commentCount;
 
+    @Column(name="create_date")
     private LocalDateTime createDate;
 
     @PrePersist

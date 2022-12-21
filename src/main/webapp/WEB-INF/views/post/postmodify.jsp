@@ -3,9 +3,9 @@
 
 <%@ include file="../layout/header.jsp"%>
 
-<!--사진 업로드페이지 중앙배치-->
+<!--수정페이지 중앙배치-->
 <main class="uploadContainer">
-	<!--사진업로드 박스-->
+	<!--수정 박스-->
 	<section class="upload">
 
 		<!--사진업로드 로고-->
@@ -16,14 +16,15 @@
 		</div>
 		<!--사진업로드 로고 end-->
 		<br>
-		<!--사진업로드 Form-->
+		<!--수정 Form-->
 		<form id="postUpdateForm" class="upload-form" onsubmit="update(${post.id},${post.user.id})">
+			<!--사진 업로드-->
 			<input type="file" name="file" onchange="imageChoose(this)" />
 			<div class="upload-img">
 				<img src="${post.imageUrl}" alt="" id="imageUploadPreview" />
 			</div>
 
-			<!--사진설명 + 업로드버튼-->
+			<!--중고품 설명 + 수정버튼-->
 			<div class="upload-form-detail">
 				<input type="text" placeholder="제목" value="${post.title}"name="title" required="required"><input
 					type="text" placeholder="상품명" value="${post.item}" name="item" required="required"> <input
@@ -41,12 +42,12 @@
 			<div class="upload-form-detail">
 				<button class="ctas">게시글 수정</button>
 			</div>
-			<!--사진설명end-->
+			<!--중고품 설명 end-->
 
 		</form>
-		<!--사진업로드 Form-->
+		<!--수정 Form-->
 	</section>
-	<!--사진업로드 박스 end-->
+	<!--수정 박스 end-->
 </main>
 <br />
 <br />

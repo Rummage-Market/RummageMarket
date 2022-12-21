@@ -1,17 +1,16 @@
-// (0) 현재 로긴한 사용자 아이디
+
+// 현재 로그인한 사용자 아이디
 let principalId = $("#principalId").val();
 
-// (1) 스토리 로드하기
+// 전역변수
 let initpage = 0;
-
 let page
 let city;
 let vilage;
 let tem;
-
 let totalPages;
 
-// (2) 게시글 검색 첫 페이지로드
+// 게시글 검색 첫 페이지로드
 function searchPostLoad(address1, address2, item) {
 
 	city = address1;
@@ -28,8 +27,6 @@ function searchPostLoad(address1, address2, item) {
 
 		$("#storyList").empty();
 
-		console.log(res.data)
-
 		if (res.data.content.length == 0) {
 			$("#storyList").append(noSerch);
 		}
@@ -45,7 +42,7 @@ function searchPostLoad(address1, address2, item) {
 	});
 }
 
-// (2) 게시글 검색 이후 페이지로드
+// 게시글 검색 이후 페이지로드
 function aftersearchPostLoad(city, vilage, tem) {
 	$.ajax({
 		url: `/api/post/search?page=${page}&address1=${city}&address2=${vilage}&item=${tem}`,
@@ -61,18 +58,17 @@ function aftersearchPostLoad(city, vilage, tem) {
 	});
 }
 
-// (2) 스토리 스크롤 페이징하기
+// 게시글 스크롤 페이징하기
 $(window).scroll(() => {
 
 	let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
 	if (checkNum < 1 && checkNum > -1 && page < totalPages) {
 		page++;
-		console.log("페이지상태")
-		console.log(page)
 		aftersearchPostLoad(city, vilage, tem)
 	}
 });
 
+// 게시글 렌더링
 function getStoryItem(post) {
 	let item = `<div class="story-list__item">
 		<div class="sl__item__header">
@@ -145,7 +141,7 @@ function getStoryItem(post) {
 }
 
 
-// (3) 하트, 하트X
+// 관심, 관심X
 function toggleInterest(postId) {
 	let interestIcon = $(`#storyInterestIcon-${postId}`);
 	if (interestIcon.hasClass("far")) {
@@ -191,6 +187,7 @@ function toggleInterest(postId) {
 	}
 }
 
+// 댓글 추가
 function addComment(postId) {
 
 	let commentInput = $(`#storyCommentInput-${postId}`);
@@ -236,7 +233,7 @@ function addComment(postId) {
 	commentInput.val("");
 }
 
-
+// 댓글 삭제
 function deleteComment(commentId) {
 	$.ajax({
 		type: "delete",
@@ -250,8 +247,7 @@ function deleteComment(commentId) {
 	});
 }
 
-// regionselectbox
-
+// 지역선택 드롭박스
 $('document').ready(function() {
 	var area0 = ["서울특별시", "인천광역시", "대전광역시", "광주광역시", "대구광역시", "울산광역시", "부산광역시", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주도"];
 	var area1 = ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"];
@@ -272,7 +268,6 @@ $('document').ready(function() {
 	var area16 = ["서귀포시", "제주시"];
 
 	// 시/도 선택 박스 초기화
-
 	$("select[name^=address1]").each(function() {
 		$seladdress1 = $(this);
 		$seladdress1.append("<option value=''>시/도 선택</option>");
@@ -284,7 +279,6 @@ $('document').ready(function() {
 
 
 	// 시/도 선택시 구/군 설정
-
 	$("select[name^=address1]").change(function() {
 		var area = "area" + $("option", $(this)).index($("option:selected", $(this))); // 선택지역의 구군 Array
 		var $address2 = $(this).next(); // 선택영역 군구 객체

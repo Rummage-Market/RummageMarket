@@ -32,25 +32,35 @@
 					<div class="login__form">
 
 						<h1>RummageMarket</h1>
-
+						
+						<!--로그인 form-->	
 						<form class="login__input" action="/auth/signin" method="POST">
-							<input type="text" name="username" placeholder="유저네임"
-								required="required" /> <input type="password" id="password"
-								name="password" placeholder="비밀번호" required="required"
-								class="loginPasswordInput" /> <span> <c:if
-									test="${error}">
+						
+							<input type="text" name="username" placeholder="유저네임" required="required" />
+							<input type="password" id="password" name="password" placeholder="비밀번호" required="required" class="loginPasswordInput" />
+							
+							<!--로그인 오류시 메시지-->
+							<span> 
+								<c:if test="${error}">
 									<p id="valid" class="alert-danger">${exception}</p>
 								</c:if>
 							</span>
+							<!--로그인 오류시 메시지 end-->
+							
+							<!--로그인 유지-->
 							<div class="checks-remember-me">
 								<input type="checkbox" id="remember-me" name="remember-me"
 									class="rememberMe" /> <label for="remember-me"
 									class=rememberMeLabel>로그인 유지</label>
 							</div>
+							<!--로그인 유지 end-->
+							
 							<button>
 								<div>로그인</div>
 							</button>
 						</form>
+						
+						<!--로그인 form end-->	
 
 						<div class="login__horizon">
 							<div class="br"></div>
@@ -58,20 +68,24 @@
 							<div class="br"></div>
 						</div>
 
+						<!--소셜로그인(페이스북)-->	
 						<div class="login__facebook">
 							<button
 								onclick="javascript:location.href='/oauth2/authorization/facebook'">
-								<i class="fab fa-facebook-square"></i> <span>Facebook으로	로그인</span>
+								<i class="fab fa-facebook-square"></i> <span>Facebook으로 로그인</span>
 							</button>
 						</div>
-
+						<!--소셜로그인(페이스북) end-->	
+						
 					</div>
 
+					<!--회원가입-->	
 					<div class="login__register">
 						<span>계정이 없으신가요?</span> 
 						<a href="/auth/signup">회원가입</a>
 					</div>
-
+					<!--회원가입 end-->	
+					
 				</article>
 			</section>
 		</main>

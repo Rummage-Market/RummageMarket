@@ -3,6 +3,7 @@
 
 <%@ include file="../layout/header.jsp"%>
 
+<!--소개-->
 <section class="introduce">
 	<div class="title">
 		<h1>RummageMarket</h1>
@@ -23,8 +24,9 @@
 		</div>
 	</div>
 </section>
+<!--소개 end-->
 
-
+<!--인기 게시물-->
 <section class="popular">
 	<div class="popular-post-logo">
 		<div class="text">
@@ -62,6 +64,7 @@
 		</div>
 	</div>
 </section>
+<!--인기 게시물  end-->
 
 <script src="/js/main.js"></script>
 

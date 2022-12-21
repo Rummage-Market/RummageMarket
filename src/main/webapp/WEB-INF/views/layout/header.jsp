@@ -28,7 +28,6 @@
 <link rel="stylesheet" href="/css/upload.css">
 <link rel="stylesheet" href="/css/update.css">
 <link rel="stylesheet" href="/css/main.css">
-<link rel="shortcut icon" href="/images/insta.svg">
 
 <!-- Fontawesome -->
 <link rel="stylesheet"
@@ -51,11 +50,14 @@
 
 	<header class="header">
 		<div class="container">
-
+			
+			<!-- 로고 -->
 			<a href="/" class="logo">
-
 				<h1>RummageMarket</h1>
 			</a>
+			<!-- 로고 end-->
+			
+			<!-- 네비 -->
 			<nav class="navi">
 				<ul class="navi-list">
 					<li class="navi-item"><a href="/post/story"> <i
@@ -72,5 +74,6 @@
 					</a></li>
 				</ul>
 			</nav>
+			<!-- 네비 end-->
 		</div>
 	</header>

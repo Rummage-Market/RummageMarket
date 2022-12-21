@@ -28,25 +28,28 @@
 
                         <h1>RummageMarket</h1>
 
-
+						<!--회원가입 form-->
                         <form class="login__input" action="/auth/signup" method="post">
                             <input type="text" name="username" id="username" placeholder="유저네임" required="required" onchange="checkUsername()"/>
-                            <!-- id ajax 중복체크 -->
+                            <!-- id 중복체크 -->
 								<span class="username_ok" id="usernameOk">사용 가능한 유저네임입니다.</span>
 								<span class="username_already" id="usernameAlready">누군가 이 유저네임을 사용하고 있어요.</span>
+							<!-- id 중복체크 end -->
                             <input type="password" name="password" placeholder="패스워드" required="required" />
                             <input type="text" name="nickname" placeholder="닉네임" required="required" />
                             <button>
                             	<div>가입</div>
                             </button>
                         </form>
-                        
+                        <!--회원가입 form end-->
                     </div>
-
+					
+					<!--로그인-->
                     <div class="login__register">
                         <span>계정이 있으신가요?</span>
                         <a href="/auth/signin">로그인</a>
                     </div>
+                    <!--로그인 end-->
                     
                 </article>
             </section>

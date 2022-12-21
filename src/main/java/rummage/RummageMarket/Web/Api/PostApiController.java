@@ -79,6 +79,7 @@ public class PostApiController {
         return new ResponseEntity<>(new CMRespDto<>(1, "게시글 불러오기 성공", post), HttpStatus.OK);
     }
 
+    // 관심주기
     @PostMapping("/api/post/{postId}/interest")
     public ResponseEntity<?> interest(@AuthenticationPrincipal PrincipalDetails principalDetails,
             @PathVariable int postId) {
@@ -86,6 +87,7 @@ public class PostApiController {
         return new ResponseEntity<>(new CMRespDto<>(1, "interest 성공", null), HttpStatus.OK);
     }
 
+    // 관심취소
     @DeleteMapping("/api/post/{postId}/interest")
     public ResponseEntity<?> disinterest(@AuthenticationPrincipal PrincipalDetails principalDetails,
             @PathVariable int postId) {

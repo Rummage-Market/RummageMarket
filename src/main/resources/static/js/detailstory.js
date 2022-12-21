@@ -1,10 +1,11 @@
 
-// 현재 로긴한 사용자 아이디
+// 현재 로그인한 사용자 아이디
 let principalId = $("#principalId").val();
 
 // 선택된 post id
 let postId = $("#postId").val();
 
+// 게시글 로드
 function storyLoad() {
 	$.ajax({
 		url: `/api/post/${postId}`,
@@ -109,6 +110,7 @@ function getStoryItem(post) {
 	return item;
 }
 
+// 메뉴 열기 닫기
 function popup(obj) {
 	$(obj).css("display", "flex");
 }
@@ -122,7 +124,7 @@ function modalInfo() {
 }
 
 
-// 관심,관심x
+// 관심, 관심X
 function toggleInterest(postId) {
 	let interestIcon = $(`#storyInterestIcon-${postId}`);
 	if (interestIcon.hasClass("far")) {
@@ -165,7 +167,7 @@ function toggleInterest(postId) {
 	}
 }
 
-// 댓글작성
+// 댓글 작성
 function addComment(postId) {
 
 	let commentInput = $(`#storyCommentInput-${postId}`);
@@ -209,7 +211,7 @@ function addComment(postId) {
 	commentInput.val("");
 }
 
-// 댓글삭제
+// 댓글 삭제
 function deleteComment(commentId) {
 	$.ajax({
 		type: "delete",

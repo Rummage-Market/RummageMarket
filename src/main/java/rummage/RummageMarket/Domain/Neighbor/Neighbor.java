@@ -2,6 +2,7 @@ package rummage.RummageMarket.Domain.Neighbor;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,6 +38,7 @@ public class Neighbor {
     @ManyToOne
     private User toUser;
 
+    @Column(name="create_date")
     private LocalDateTime createDate;
 
     @PrePersist

@@ -1,16 +1,5 @@
-/**
-  1. 유저 프로파일 페이지
-  (1) 유저 프로파일 페이지 이웃맺기, 이웃취소
-  (2) 구독자 정보 모달 보기
-  (3) 구독자 정보 모달에서 이웃맺기, 이웃취소
-  (4) 유저 프로필 사진 변경
-  (5) 사용자 정보 메뉴 열기 닫기
-  (6) 사용자 정보(회원정보, 로그아웃, 닫기) 모달
-  (7) 사용자 프로파일 이미지 메뉴(사진업로드, 취소) 모달 
-  (8) 구독자 정보 모달 닫기
- */
 
-// (1) 유저 프로파일 페이지 이웃맺기, 이웃취소
+// 유저 프로파일 페이지 이웃맺기, 이웃취소
 function toggleSubscribe(toUserId, obj) {
 	if ($(obj).text() === "이웃취소") {
 
@@ -38,7 +27,7 @@ function toggleSubscribe(toUserId, obj) {
 	}
 }
 
-// (2) 구독자 정보  모달 보기
+// 구독자 정보 모달 보기
 function subscribeInfoModalOpen(pageUserId) {
 	$(".modal-subscribe").css("display", "flex");
 
@@ -57,6 +46,7 @@ function subscribeInfoModalOpen(pageUserId) {
 	});
 }
 
+// 구독자 정보 나타내기
 function getSubscribeModalItem(u) {
 
 	let item = `<div class="subscribe__item" id="subscribeModalItem-${u.id}">
@@ -85,7 +75,7 @@ function getSubscribeModalItem(u) {
 	return item;
 }
 
-// (3) 유저 프로파일 사진 변경 (완)
+// 유저 프로파일 사진 변경
 function profileImageUpload(pageUserId, principalId) {
 
 	// console.log("pageUserId",pageUserId);
@@ -137,7 +127,7 @@ function profileImageUpload(pageUserId, principalId) {
 }
 
 
-// (4) 사용자 정보 메뉴 열기 닫기
+// 메뉴 열기 닫기
 function popup(obj) {
 	$(obj).css("display", "flex");
 }
@@ -147,23 +137,23 @@ function closePopup(obj) {
 }
 
 
-// (5) 사용자 정보(회원정보, 로그아웃, 닫기) 모달
+// 사용자 정보(회원정보, 로그아웃, 닫기) 모달
 function modalInfo() {
 	$(".modal-info").css("display", "none");
 }
 
-// (6) 사용자 프로파일 이미지 메뉴(사진업로드, 취소) 모달
+// 사용자 프로파일 이미지 메뉴(사진업로드, 취소) 모달
 function modalImage() {
 	$(".modal-image").css("display", "none");
 }
 
-// (7) 구독자 정보 모달 닫기
+// 구독자 정보 모달 닫기
 function modalClose() {
 	$(".modal-subscribe").css("display", "none");
 	location.reload();
 }
 
-// (8) 회원탈퇴
+// 회원탈퇴
 function userDelete(pageUserId, principalId){ 
 
 		if (pageUserId != principalId) {

@@ -3,16 +3,12 @@
 <footer>
 	<div class="container">
 		<ul>
-			<li><a href="#a">소개</a></li>
-			<li><a href="#a">블로그</a></li>
-			<li><a href="#a">채용 정보</a></li>
-			<li><a href="#a">도움말</a></li>
-			<li><a href="#a">API</a></li>
-			<li><a href="#a">개인정보처리방침</a></li>
-			<li><a href="#a">약관</a></li>
-			<li><a href="#a">인기 계정</a></li>
-			<li><a href="#a">해시태그</a></li>
-			<li><a href="#a">위치</a></li>
+			<li><a href="/">introduce</a></li>
+			<li><a href="https://velog.io/@woodybuzz">YW blog</a></li>
+			<li><a href="https://www.notion.so/86f034ac153b48da8f4480c481bd856e">YK blog</a></li>
+			<li><a href="https://github.com/woodybuzz02">YW github</a></li>
+			<li><a href="https://github.com/95Glory">YK github</a></li>
+			<li><a href="https://github.com/Rummage-Market/RummageMarket">project github</a></li>
 		</ul>
 		<div class="copy">
 			<p>© 2022 Yewon & Youngkwang</p>

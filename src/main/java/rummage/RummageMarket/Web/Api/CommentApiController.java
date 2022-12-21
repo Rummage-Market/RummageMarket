@@ -27,6 +27,7 @@ public class CommentApiController {
     @Autowired
     CommentService commentService;
 
+    // 댓글작성
     @PostMapping("/api/comment")
     public ResponseEntity<?> commentSave(@Valid @RequestBody CommentDto commentDto, BindingResult bindingResult,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -36,6 +37,7 @@ public class CommentApiController {
         return new ResponseEntity<>(new CMRespDto<>(1, "댓글쓰기 성공", comment), HttpStatus.CREATED);
     }
 
+    // 댓글삭제
     @DeleteMapping("/api/comment/{id}")
     public ResponseEntity<?> commentDelete(@PathVariable int id) {
         commentService.commentDelete(id);

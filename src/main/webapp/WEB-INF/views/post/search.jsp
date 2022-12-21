@@ -6,6 +6,7 @@
 				
 	<section class="container">
 	
+	<!--검색-->
 	<div class="searchPost">
 		<select	name="address1" id="address1"></select> 
 		<select name="address2" id="address2"></select>
@@ -15,7 +16,7 @@
 	
 		<!--전체 리스트 시작-->
 		<article class="story-list" id="storyList">
-		<h2 class="noSearch">검색된 결과가 없습니다.</h2>
+			<h2 class="noSearch">검색된 결과가 없습니다.</h2>
 		</article>
 	</section>
 </main>

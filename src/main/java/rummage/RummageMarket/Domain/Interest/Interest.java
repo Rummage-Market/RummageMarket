@@ -2,6 +2,7 @@ package rummage.RummageMarket.Domain.Interest;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ import rummage.RummageMarket.Domain.User.User;
 @Data
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(name = "interest_uk", columnNames = { "postId", "userId" })
+        @UniqueConstraint(name = "interest_uk", columnNames = { "post_id", "user_id" })
 })
 public class Interest {
 
@@ -37,14 +38,15 @@ public class Interest {
     private int id;
 
     @JsonIgnoreProperties({ "posts" })
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @JoinColumn(name = "postId")
+    @JoinColumn(name = "post_id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
 
+    @Column(name="create_date")
     private LocalDateTime createDate;
 
     @PrePersist
