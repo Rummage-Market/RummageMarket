@@ -48,12 +48,12 @@ public class NeighborService {
 
         // 쿼리준비
         StringBuffer sb = new StringBuffer();
-        sb.append("SELECT u.id, u.nickname, u.profileImage, ");
-        sb.append("if ((SELECT 1 FROM neighbor WHERE fromUserId = ? AND toUserId = u.id), 1, 0) neighborState, ");
+        sb.append("SELECT u.id, u.nickname, u.profile_image, ");
+        sb.append("if ((SELECT 1 FROM neighbor WHERE from_user_id = ? AND to_user_id = u.id), 1, 0) neighborState, ");
         sb.append("if ((?=u.id), 1, 0) equalUserState ");
         sb.append("FROM user u INNER JOIN neighbor s ");
-        sb.append("ON u.id = s.toUserId ");
-        sb.append("WHERE s.fromUserId = ?");// 세미콜론 첨부하면 안됨
+        sb.append("ON u.id = s.to_user_id ");
+        sb.append("WHERE s.from_user_id = ?");// 세미콜론 첨부하면 안됨
 
         // 쿼리 파라민터 설정
         Query query = em.createNativeQuery(sb.toString())
