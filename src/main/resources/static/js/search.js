@@ -2,22 +2,56 @@
 let principalId = $("#principalId").val();
 
 // (1) 스토리 로드하기
-let page = 0;
+let initpage = 0;
+
+let page
 let city;
 let vilage;
 let tem;
 
-// (2) 게시글 검색로드
+let totalPages;
+
+// (2) 게시글 검색 첫 페이지로드
 function searchPostLoad(address1, address2, item) {
 
 	city = address1;
 	vilage = address2;
 	tem = item;
 
+	let noSerch = `<h2 class="noSearch">검색된 결과가 없습니다.</h2>`
+
 	$.ajax({
-		url: `/api/post/search?page=${page}&address1=${address1}&address2=${address2}&item=${item}`,
+		url: `/api/post/search?page=${initpage}&address1=${address1}&address2=${address2}&item=${item}`,
 		dataType: "json"
 	}).done(res => {
+		totalPages = res.data.totalPages;
+
+		$("#storyList").empty();
+
+		console.log(res.data)
+
+		if (res.data.content.length == 0) {
+			$("#storyList").append(noSerch);
+		}
+		res.data.content.forEach((post) => {
+			let storyItem = getStoryItem(post);
+			$("#storyList").append(storyItem);
+		});
+
+		page = 0;
+
+	}).fail(error => {
+		console.log("오류", error);
+	});
+}
+
+// (2) 게시글 검색 이후 페이지로드
+function aftersearchPostLoad(city, vilage, tem) {
+	$.ajax({
+		url: `/api/post/search?page=${page}&address1=${city}&address2=${vilage}&item=${tem}`,
+		dataType: "json"
+	}).done(res => {
+
 		res.data.content.forEach((post) => {
 			let storyItem = getStoryItem(post);
 			$("#storyList").append(storyItem);
@@ -26,6 +60,18 @@ function searchPostLoad(address1, address2, item) {
 		console.log("오류", error);
 	});
 }
+
+// (2) 스토리 스크롤 페이징하기
+$(window).scroll(() => {
+
+	let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
+	if (checkNum < 1 && checkNum > -1 && page < totalPages) {
+		page++;
+		console.log("페이지상태")
+		console.log(page)
+		aftersearchPostLoad(city, vilage, tem)
+	}
+});
 
 function getStoryItem(post) {
 	let item = `<div class="story-list__item">
@@ -98,16 +144,6 @@ function getStoryItem(post) {
 	return item;
 }
 
-// (2) 스토리 스크롤 페이징하기
-$(window).scroll(() => {
-
-	let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
-	console.log(checkNum);
-	if (checkNum < 1 && checkNum > -2) {
-		page++;
-		searchPostLoad(city, vilage, tem)
-	}
-});
 
 // (3) 하트, 하트X
 function toggleInterest(postId) {
@@ -165,10 +201,10 @@ function addComment(postId) {
 		content: commentInput.val()
 	}
 
-	/*if (data.content === "") {
+	if (data.content === "") {
 		alert("댓글을 작성해주세요!");
 		return;
-	}*/
+	}
 
 	$.ajax({
 		type: "post",
