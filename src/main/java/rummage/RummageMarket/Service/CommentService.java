@@ -22,6 +22,7 @@ public class CommentService {
     @Autowired
     UserRepository userRepository;
 
+    // 댓글쓰기
     @Transactional
     public Comment commentSave(String content, int postId, int UserId) {
 
@@ -40,6 +41,7 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
+    // 댓글삭제
     public void commentDelete(int id) {
         commentRepository.deleteById(id);
     }

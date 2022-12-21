@@ -1,3 +1,4 @@
+// 게시글 수정
 function update(postId, userId) {
 	event.preventDefault();
 	
@@ -24,7 +25,7 @@ function update(postId, userId) {
 }
 
 
-// (1) 스토리 이미지 업로드를 위한 사진 선택 로직
+// 스토리 이미지 업로드를 위한 사진 선택 로직
 function imageChoose(obj) {
 	let f = obj.files[0];
 
@@ -40,6 +41,7 @@ function imageChoose(obj) {
 	reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
 }
 
+// 지역선택 드롭박스
 $(function() {
 	areaSelectMaker("select[name=addressRegion]");
 });

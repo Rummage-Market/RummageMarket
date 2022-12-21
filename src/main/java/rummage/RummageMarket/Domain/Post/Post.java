@@ -41,10 +41,10 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties({ "posts" })
     private User user;
-    
-    @Column(name="image_url")
+
+    @Column(name = "image_url")
     private String imageUrl;
-    
+
     private String title;
     private String content;
     private String address1;
@@ -56,9 +56,11 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Interest> interest;
 
+    // Database Column 생성x
     @Transient
     private boolean interestState;
 
+    // Database Column 생성x
     @Transient
     private int interestCount;
 
@@ -66,6 +68,7 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> Comments;
 
+    // Database Column 생성x
     @Transient
     private int commentCount;
 

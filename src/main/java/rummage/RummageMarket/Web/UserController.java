@@ -19,6 +19,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    //프로필페이지 리턴함
     @GetMapping("/user/{pageUserId}")
     public String profile(@PathVariable int pageUserId, Model model,
             @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -27,6 +28,7 @@ public class UserController {
         return "user/profile";
     }
 
+    //회원수정페이지 리턴함
     @GetMapping("/user/{pageUserId}/update")
     public String update(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         return "user/update";

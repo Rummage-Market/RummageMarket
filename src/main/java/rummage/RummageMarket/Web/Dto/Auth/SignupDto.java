@@ -12,8 +12,10 @@ public class SignupDto {
     @Size(min = 2, max = 30, message = "유저네임은 2자 이상 30자 이하로 입력해주세요.")
     @NotBlank(message = "유저네임을 입력해주세요.")
     private String username;
+    
     @NotBlank(message = "패스워드를 입력해주세요.")
     private String password;
+    
     @NotBlank(message = "닉네임을 입력해주세요.")
     private String nickname;
 

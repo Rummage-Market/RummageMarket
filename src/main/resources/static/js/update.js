@@ -1,3 +1,4 @@
+// 회원수정
 function update(userId) {
 	event.preventDefault();
 	let data = $("#profileUpdate").serialize();

@@ -18,12 +18,14 @@ public class PostUploadDto {
 	@NotBlank
 	private String content;
 	
+    // '서울특별시 강남구' 중 '서울특별시'를 뜻한다.
 	@NotBlank
 	private String address1;
 	
+    // '서울특별시 강남구' 중 '강남구'를 뜻한다.
 	@NotBlank
 	private String address2; 
-	private String place; 
+	
 	private String item; 
 	private int price; 
 	

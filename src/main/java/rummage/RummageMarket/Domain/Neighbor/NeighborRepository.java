@@ -19,5 +19,4 @@ public interface NeighborRepository extends JpaRepository<Neighbor, Integer> {
 
     @Query(value = "SELECT COUNT(*) FROM neighbor WHERE from_user_id = :pageUserId", nativeQuery = true)
     int neighborCount(int pageUserId);
-
 }

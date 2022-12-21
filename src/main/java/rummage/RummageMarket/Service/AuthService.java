@@ -15,6 +15,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    // 회원가입
     @Transactional
     public User signUp(User user) {
         String rawPassword = user.getPassword();
