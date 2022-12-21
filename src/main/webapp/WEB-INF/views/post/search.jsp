@@ -15,11 +15,6 @@
 	
 		<!--전체 리스트 시작-->
 		<article class="story-list" id="storyList">
-			<h2 class=noSearch>검색결과가 없습니다.</h2>
-			
-			
-
-
 		</article>
 	</section>
 </main>

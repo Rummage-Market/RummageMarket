@@ -127,6 +127,26 @@ public class PostService {
             postRepository.deleteById(postId);
         }
     }
+    
+    @Transactional(readOnly = true)
+    public Page<Post> searchPostList(Pageable pageable, int principalId, String address1, String address2,
+            String item) {
+
+        Page<Post> searchedPosts = postRepository.searchPostList(pageable, address1, address2, item);
+
+        searchedPosts.forEach((post) -> {
+
+            post.setInterestCount(post.getInterest().size());
+
+            post.getInterest().forEach((interest) -> {
+                if (interest.getUser().getId() == principalId) {
+                    post.setInterestState(true);
+                }
+            });
+        });
+
+        return searchedPosts;
+    }
 
     @Transactional(readOnly = true)
     public Page<Post> postList(Pageable pageable, int principalId) {
@@ -180,25 +200,5 @@ public class PostService {
     public Post findByPostId(int postId) {
         Post post = postRepository.findById(postId).orElseThrow(null);
         return post;
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Post> searchPostList(Pageable pageable, int principalId, String address1, String address2,
-            String item) {
-
-        Page<Post> searchedPosts = postRepository.searchPostList(pageable, address1, address2, item);
-
-        searchedPosts.forEach((post) -> {
-
-            post.setInterestCount(post.getInterest().size());
-
-            post.getInterest().forEach((interest) -> {
-                if (interest.getUser().getId() == principalId) {
-                    post.setInterestState(true);
-                }
-            });
-        });
-
-        return searchedPosts;
     }
 }

@@ -1,18 +1,31 @@
-/**
-	2. 스토리 페이지
-	(1) 스토리 로드하기
-	(2) 스토리 스크롤 페이징하기
-	(3) 하트, 하트X
-	(4) 댓글쓰기
-	(5) 댓글삭제
-	(6) 검색한 게시글 로드하기
- */
-
 // (0) 현재 로긴한 사용자 아이디
 let principalId = $("#principalId").val();
 
 // (1) 스토리 로드하기
 let page = 0;
+let city;
+let vilage;
+let tem;
+
+// (2) 게시글 검색로드
+function searchPostLoad(address1, address2, item) {
+
+	city = address1;
+	vilage = address2;
+	tem = item;
+
+	$.ajax({
+		url: `/api/post/search?page=${page}&address1=${address1}&address2=${address2}&item=${item}`,
+		dataType: "json"
+	}).done(res => {
+		res.data.content.forEach((post) => {
+			let storyItem = getStoryItem(post);
+			$("#storyList").append(storyItem);
+		});
+	}).fail(error => {
+		console.log("오류", error);
+	});
+}
 
 function getStoryItem(post) {
 	let item = `<div class="story-list__item">
@@ -84,6 +97,17 @@ function getStoryItem(post) {
 	</div>`;
 	return item;
 }
+
+// (2) 스토리 스크롤 페이징하기
+$(window).scroll(() => {
+
+	let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
+	console.log(checkNum);
+	if (checkNum < 1 && checkNum > -2) {
+		page++;
+		searchPostLoad(city, vilage, tem)
+	}
+});
 
 // (3) 하트, 하트X
 function toggleInterest(postId) {
@@ -185,37 +209,6 @@ function deleteComment(commentId) {
 	}).done(res => {
 		console.log("성공", res);
 		$(`#storyCommentItem-${commentId}`).remove();
-	}).fail(error => {
-		console.log("오류", error);
-	});
-}
-
-
-// (6) 검색한 게시글 로드하기
-
-function searchPostLoad(address1, address2, item) {
-	console.log(address1);
-	
-	
-	let noSearch = `
-			  <h2 class=noSearch>검색결과가 없습니다.</h2>
-	`;
-
-	$.ajax({
-		url: `/api/post/search? + encodeURIComponent(page=${page}&address1=${address1}&address2=${address2}&item=${item}`,
-		dataType: "json"
-	}).done(res => {
-		console.log(res);
-		if (res.data.content.length > 0){
-			$("#storyList").empty();
-			res.data.content.forEach((post) => {
-				let storyItem = getStoryItem(post);
-				$("#storyList").append(storyItem);
-			});
-		}else{
-			$("#storyList").empty();
-			$("#storyList").append(noSearch);
-		}
 	}).fail(error => {
 		console.log("오류", error);
 	});

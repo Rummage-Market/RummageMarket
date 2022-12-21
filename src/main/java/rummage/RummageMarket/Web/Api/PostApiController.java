@@ -51,6 +51,19 @@ public class PostApiController {
         return new ResponseEntity<>(new CMRespDto<>(1, "게시글삭제 성공", null), HttpStatus.OK);
     }
     
+    //필터링한 게시글
+    @GetMapping("/api/post/search")
+    public ResponseEntity<?> searchPost(
+            @PageableDefault(size = 3) Pageable pageable,
+            @AuthenticationPrincipal PrincipalDetails principalDetails,
+            String address1,
+            String address2,
+            String item) {
+        Page<Post> searchedposts = postService.searchPostList(pageable, principalDetails.getUser().getId(), address1,
+                address2, item);
+        return new ResponseEntity<>(new CMRespDto<>(1, "검색된 게시글 불러오기 성공", searchedposts), HttpStatus.OK);
+    }
+    
     // 필터링 없이 제일 최신순의 게시글
     @GetMapping("/api/post")
     public ResponseEntity<?> postStory(@PageableDefault(size = 3) Pageable pageable,
@@ -81,15 +94,5 @@ public class PostApiController {
         return new ResponseEntity<>(new CMRespDto<>(1, "disinterest 성공", null), HttpStatus.OK);
     }
 
-    @GetMapping("/api/post/search")
-    public ResponseEntity<?> searchPost(
-            @PageableDefault(size = 100) Pageable pageable,
-            @AuthenticationPrincipal PrincipalDetails principalDetails,
-            String address1,
-            String address2,
-            String item) {
-        Page<Post> searchedposts = postService.searchPostList(pageable, principalDetails.getUser().getId(), address1,
-                address2, item);
-        return new ResponseEntity<>(new CMRespDto<>(1, "검색된 게시글 불러오기 성공", searchedposts), HttpStatus.OK);
-    }
+    
 }
