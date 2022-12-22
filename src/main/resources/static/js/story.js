@@ -30,15 +30,7 @@ function getStoryItem(post) {
 				<img class="profile-image" src="${post.user.profileImage}"
 					onerror="this.src='/images/person.jpeg'" />
 			</div>
-			<div OnClick="location.href ='/user/${post.user.id}'" style="cursor:pointer">${post.user.nickname}</div>`
-
-	if (principalId == post.user.id) {
-		item += `<button class="update" onclick="popup('.modal-info')">
-					<i class="fas fa-cog"></i>
-				</button>`
-	}
-
-	item += `	
+			<div OnClick="location.href ='/user/${post.user.id}'" style="cursor:pointer">${post.user.nickname}</div>	
 		</div>
 
 		<div class="sl__item__img">
