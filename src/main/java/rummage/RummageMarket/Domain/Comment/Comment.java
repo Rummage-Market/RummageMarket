@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -38,6 +41,7 @@ public class Comment {
     @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties({ "posts" })
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @JoinColumn(name = "post_id")

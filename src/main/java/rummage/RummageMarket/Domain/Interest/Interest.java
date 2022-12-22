@@ -14,6 +14,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -40,6 +43,7 @@ public class Interest {
     @JsonIgnoreProperties({ "posts" })
     @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @JoinColumn(name = "post_id")
