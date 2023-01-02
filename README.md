@@ -122,7 +122,7 @@ Branch에 Merge 할 시, **Pull Request**를 활용하여 **팀원과의 코드�
 
 **주요기능 + Figma**를 통해 조금 더 정교하고 **효과적인 ERD를 작성하는데 큰 도움이 되었습니다.**
 
-![Untitled (5)](https://user-images.githubusercontent.com/102516088/205916056-920deadc-f4bc-4cc2-957b-7cb42992f077.png)
+![rummagemarketERD](https://user-images.githubusercontent.com/102306268/210201593-9ef5d4c7-3d05-4612-a6b6-b833f06dbace.png)
 
 # 10. 포지션 별 참고링크
 
