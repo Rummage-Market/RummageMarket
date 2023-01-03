@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RummageMarketApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RummageMarketApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(RummageMarketApplication.class, args);
+    }
 }
