@@ -65,7 +65,7 @@ public class Post {
     private int interestCount;
 
     @JsonIgnoreProperties({ "post" })
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> Comments;
 
     // Database Column 생성x

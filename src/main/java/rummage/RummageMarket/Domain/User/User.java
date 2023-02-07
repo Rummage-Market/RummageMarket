@@ -50,7 +50,7 @@ public class User {
     private String role;
 
     @JsonIgnoreProperties({ "user" })
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
 
     @Column(name="create_date")
