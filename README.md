@@ -4,7 +4,7 @@
 
 ### 👨 [김영광](https://github.com/95Glory) : 백엔드 구현 / AOP / AWS S3 / AWS EC2 배포
 
-### 🧒 [서예원](https://github.com/woodybuzz02) : 백엔드 구현 / Security / Oauth2 / AWS RDS
+### 🧒 [서예원](https://github.com/woodybuzz02) : 백엔드 구현 / Security / Oauth2 / AWS RDS / AWS EC2 배포
 
 
 # 02. 프로젝트 주제
@@ -156,13 +156,13 @@ Branch에 Merge 할 시, **Pull Request**를 활용하여 **팀원과의 코드�
     
 # 11. 아키텍쳐
 
-![아키텍처 수정](https://user-images.githubusercontent.com/102306268/206428253-14403394-8722-4e4b-a091-a1c043fcbe7b.JPG)
+![아키텍처러미지스토어](https://user-images.githubusercontent.com/102306268/218382099-54dfa6f2-52ad-4438-91e6-9513e2225e94.JPG)
 
 # 12. 시연영상
 
 - [🚨 시연영상](https://www.youtube.com/watch?v=eK0QM0AJMwg)
 
-- [🚩 배포주소](https://www.rummagemarket.tk)
+- [🚩 배포주소](https://rummagemarket.store)
 
 
 # 13. Rummage Market 최종회고
